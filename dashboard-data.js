@@ -41,7 +41,7 @@ const journal = [
   {date:"2026-06-21", day:"02", ms:"M0", result:"winget 装好 Cocos 3.8.8 + 建好 SpotOn 项目，M0 达成 ✅；首次直面引擎界面", link:"01_learning-journal/2026-06-21_entry-02.md"},
   {date:"2026-06-22", day:"03", ms:"M1", result:"写出第一段能跑的代码 Game.ts，连过 20 关、修好三轮界面 bug，M1 达成 ✅", link:"01_learning-journal/2026-06-22_entry-03.md"},
   {date:"2026-06-24", day:"04", ms:"M2", result:"加倒计时+时间到动画+结算页+一键重来；攻克多设备自适应(720×1280)，M2 达成 ✅；产出 M2 录屏+演示脚本", link:"01_learning-journal/2026-06-24_entry-04.md"},
-  {date:"2026-06-24", day:"04", ms:"M2", result:"像产品负责人一样筹备上线：字幕版录屏(学会Clipchamp AI字幕)+可视化playbook+8步上线路线图+备案runbook；定上线timeline，优先级转向作品集", link:"01_learning-journal/2026-06-24_entry-05.md"},
+  {date:"2026-06-24", day:"04（续）", ms:"M2", result:"像产品负责人一样筹备上线：字幕版录屏(学会Clipchamp AI字幕)+可视化playbook+8步上线路线图+备案runbook；定上线timeline，优先级转向作品集", link:"01_learning-journal/2026-06-24_entry-05.md"},
   {date:"2026-06-25 ~ 07-01", day:"—", ms:"—", result:"✈️ 预定外出行程，项目暂停一周——以上全部进度实际只用了 4 个净工作日", pause:true},
   {date:"2026-07-03", day:"05", ms:"M2→M3", result:"Fable 5 项目体检+爆款研究（IAA公式：广告织进玩法+段位进度感）；优先级重排；作品集升格为母项目（Apple风格双语主页）", link:"01_learning-journal/2026-07-03_entry-06.md"},
   {date:"2026-07-04", day:"06", ms:"M3筹备", result:"游戏 V3 优化：30关大师门槛+段位+纪录+连击+复活广告位+点错惩罚；首次 CLI 构建网页版(3.3MB)接入作品集，浏览器实测可玩 ✅", link:"01_learning-journal/2026-07-04_entry-07.md"},

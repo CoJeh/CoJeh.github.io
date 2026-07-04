@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spot On! · Replicable Playbook — Build & Launch a WeChat Mini-Game with AI</title>
+<style>
+  :root{
+    --bg:#0f1226; --card:#1a1f3a; --ink:#e8ebff; --muted:#9aa3c7;
+    --done:#3ddc97; --doing:#ffce54; --todo:#3a4170; --accent:#7c83ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);padding:28px;line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px}
+  h1{font-size:25px;margin-bottom:4px}
+  .motto{color:var(--accent);font-style:italic;font-size:14px;margin-bottom:6px}
+  .sub{color:var(--muted);margin-bottom:22px;font-size:13px;max-width:760px}
+  .backlink{font-size:13px;color:var(--muted);border:1px solid #2a3056;border-radius:99px;padding:6px 14px;white-space:nowrap}
+  .backlink:hover{border-color:var(--accent);text-decoration:none}
+  .grid{display:grid;gap:18px}
+  .card{background:var(--card);border-radius:16px;padding:20px 22px;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+  .card h2{font-size:16px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .lead{font-size:13.5px;color:var(--muted)}
+  .lead b{color:var(--ink)}
+  /* how-to two-col */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .mini{background:var(--todo);border-radius:12px;padding:14px 16px}
+  .mini .t{font-weight:700;margin-bottom:4px;font-size:14px}
+  .mini .d{font-size:12.5px;color:var(--muted)}
+  /* stage pipeline */
+  .stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .stage{background:var(--todo);border-radius:14px;padding:16px;border:2px solid transparent;position:relative}
+  .stage.done{border-color:var(--done);background:rgba(61,220,151,.10)}
+  .stage.doing{border-color:var(--doing);background:rgba(255,206,84,.10)}
+  .stage .head{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+  .stage .ic{font-size:22px}
+  .stage .nm{font-weight:700;font-size:14.5px;line-height:1.25}
+  .stage .badge{position:absolute;top:14px;right:14px;font-size:10px;font-weight:700;letter-spacing:.4px;padding:2px 9px;border-radius:99px;border:1px solid var(--muted);color:var(--muted)}
+  .stage.done .badge{border-color:var(--done);color:var(--done)}
+  .stage.doing .badge{border-color:var(--doing);color:var(--doing)}
+  .stage ul{margin:6px 0 0 16px;padding:0}
+  .stage li{font-size:12.5px;color:var(--muted);margin:3px 0}
+  /* roadmap timeline */
+  .road{display:flex;flex-direction:column;gap:0}
+  .step{display:flex;gap:14px;align-items:flex-start;position:relative;padding:0 0 16px 0}
+  .step:not(:last-child)::before{content:"";position:absolute;left:15px;top:30px;bottom:-2px;width:2px;background:#2a3056}
+  .step .num{flex:0 0 auto;width:32px;height:32px;border-radius:99px;background:var(--todo);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;border:2px solid #2a3056;z-index:1}
+  .step.done .num{background:rgba(61,220,151,.2);border-color:var(--done);color:var(--done)}
+  .step.doing .num{background:rgba(255,206,84,.2);border-color:var(--doing);color:var(--doing)}
+  .step .body{flex:1;padding-top:3px}
+  .step .st{font-weight:700;font-size:14px}
+  .step .cap{font-size:12.5px;color:var(--muted)}
+  .step .time{font-size:11.5px;color:var(--accent);margin-top:2px}
+  .step .here{font-size:10px;font-weight:700;color:var(--doing);border:1px solid var(--doing);border-radius:99px;padding:1px 8px;margin-left:8px}
+  /* callouts */
+  .callouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:4px}
+  .callout{background:var(--todo);border-radius:12px;padding:14px 16px;border-left:3px solid var(--accent)}
+  .callout.good{border-left-color:var(--done)}
+  .callout .t{font-weight:700;font-size:13.5px;margin-bottom:3px}
+  .callout .d{font-size:12.5px;color:var(--muted)}
+  /* checklist */
+  .check li{font-size:13px;color:var(--muted);margin:5px 0;list-style:none}
+  .check li::before{content:"☐";margin-right:8px;color:var(--accent)}
+  .foot{color:var(--muted);font-size:12px;margin-top:22px;text-align:center}
+  .legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:12px;flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .chip{width:11px;height:11px;border-radius:99px;display:inline-block}
+</style>
+</head>
+<body>
+  <div class="top">
+    <div>
+      <h1>📘 Spot On! · The Replicable Playbook</h1>
+      <div class="motto">Build &amp; launch a WeChat mini-game with AI — from zero code.</div>
+    </div>
+    <a class="backlink" href="index.html">← Back to Portfolio</a>
+  </div>
+  <div class="sub">
+    A step-by-step recipe distilled from a real project: a humanities-background, non-technical founder building and shipping an ad-monetized (IAA) WeChat mini-game with AI tools (Claude, ChatGPT). Reusable — anyone can follow this to build their own.
+  </div>
+
+  <div class="grid">
+
+    <!-- How to use -->
+    <div class="card">
+      <h2>🧭 How to use this handbook</h2>
+      <div class="lead" style="margin-bottom:12px">Two records work together. Don't confuse them:</div>
+      <div class="twocol">
+        <div class="mini"><div class="t">📓 Learning Journal = a <i>diary</i></div><div class="d">What happened <b>today</b> — dated, with the story and the feelings. One entry per work day.</div></div>
+        <div class="mini"><div class="t">📘 Playbook = a <i>recipe</i></div><div class="d">What to <b>do next time</b> — timeless, de-personalized steps, organized by stage. This page.</div></div>
+      </div>
+      <div class="lead" style="margin-top:12px">
+        You don't read the playbook daily. You <b>add</b> to it whenever you crack a repeatable step, and you <b>use</b> it when: ① building a second game, ② showing your method to an employer, ③ teaching someone else.
+      </div>
+    </div>
+
+    <!-- Stage pipeline -->
+    <div class="card" id="six-stages">
+      <h2>🪜 The 6 Stages (Pick → Operate)</h2>
+      <div class="lead" style="margin-bottom:14px" id="hereNote"></div>
+      <div class="stages" id="stages"></div>
+      <div class="legend">
+        <span><i class="chip" style="background:var(--done)"></i>Done</span>
+        <span><i class="chip" style="background:var(--doing)"></i>In progress</span>
+        <span><i class="chip" style="background:var(--todo)"></i>To do</span>
+      </div>
+    </div>
+
+    <!-- Launch roadmap -->
+    <div class="card">
+      <h2>🚀 Launch Roadmap — from build to published &amp; earning</h2>
+      <div class="lead" style="margin-bottom:16px">The 8-step path to getting a mini-game live on WeChat (ad-only / individual entity).</div>
+      <div class="road" id="road"></div>
+      <div class="callouts">
+        <div class="callout good"><div class="t">✅ No game license (版号) needed</div><div class="d">Required only for in-app-purchase games. Ad-only (IAA) skips the hardest, slowest gate.</div></div>
+        <div class="callout"><div class="t">💰 Cost is small &amp; fixed</div><div class="d">WeChat verification ≈ ¥300/yr; government filing is free; a server is needed only if you self-host a backend. Players cost you nothing — ads earn you money.</div></div>
+        <div class="callout"><div class="t">🗄️ No backend required</div><div class="d">A simple casual game stores progress locally + WeChat login + WeChat's friend-leaderboard data domain. Add serverless "WeChat CloudBase" later only if you need global ranks.</div></div>
+      </div>
+    </div>
+
+    <!-- Reusable assets -->
+    <div class="card">
+      <h2>🧰 Reusable assets (build these once, reuse forever)</h2>
+      <ul class="check" id="assets"></ul>
+    </div>
+
+  </div>
+
+  <div class="foot">A living document — to update, edit the small data arrays in the &lt;script&gt; below (cheap, no image regeneration). Open this file in any browser. · Spot On! 找对了</div>
+
+<script>
+/* ====== Edit the data below; the page re-renders itself ====== */
+
+// status: "done" | "doing" | "todo"
+const stages = [
+  {ic:"🎯", nm:"Stage 0 · Pick &amp; Charter", status:"done", steps:[
+    "Pick an IAA-friendly, low-effort casual genre (spot-the-difference / quiz / idle).",
+    "Decide monetization (ad-only IAA) and entity (individual vs company).",
+    "Set up a 3-pillar record folder: learning journal · deliverables · playbook."
+  ]},
+  {ic:"🧱", nm:"Stage 1 · Setup &amp; Account", status:"done", steps:[
+    "Install Cocos Dashboard (via winget) + the editor (Cocos Creator 3.8 LTS).",
+    "Register a Cocos account; create a new Empty(2D) project (English-only path).",
+    "⚙️ Set Design Resolution + Fit per target device (phone portrait = 720×1280, both Fits checked = no stretch).",
+    "Register a WeChat mini-game account + install WeChat DevTools."
+  ]},
+  {ic:"🛠️", nm:"Stage 2 · Build", status:"done", steps:[
+    "Have AI write the core gameplay script into /assets; attach it to the Canvas node; press ▶.",
+    "Drive difficulty by a rule, not by hand (one formula = infinite levels).",
+    "Make layout responsive (uniform scale / SHOW_ALL) so text never stretches.",
+    "Debug by finding which LAYER the bug is in (engine settings vs your code)."
+  ]},
+  {ic:"📺", nm:"Stage 3 · Monetize (IAA)", status:"todo", steps:[
+    "Ad-only + individual entity → no game license (版号) needed.",
+    "Become a 'traffic owner' and add the WeChat ad plugin (rewarded video / interstitial).",
+    "Design ad placements: hint / revive / unlock-level.",
+    "No backend required for a simple game."
+  ]},
+  {ic:"📋", nm:"Stage 4 · Compliance &amp; Launch", status:"todo", steps:[
+    "Get the software copyright certificate (~10–15 days, can expedite).",
+    "Complete the mandatory government filing (free, ~7–20 working days).",
+    "Submit for review in WeChat DevTools (first review ~1–2 working days).",
+    "Cost reminder: WeChat verification ≈ ¥300/yr."
+  ]},
+  {ic:"📈", nm:"Stage 5 · Operate", status:"todo", steps:[
+    "Publish, watch the data, iterate.",
+    "Spot-the-difference grows by swapping images — keep a content pipeline.",
+    "Optional art styles: pixel / landscape / portrait / perler-bead puzzles."
+  ]}
+];
+
+// Project-specific status note for the stage section
+const hereNote = "📍 <b>You are here:</b> Stages 0–2 done ✓ (playable game with timer + win/lose). Next: real-image puzzles, then Stage 3 (ads).";
+
+// Launch roadmap (8 steps). status: done | doing | todo ; here:true marks current
+const roadmap = [
+  {st:"Build the Game", cap:"Design gameplay, place ad slots.", time:"Ongoing", status:"doing", here:true},
+  {st:"Account &amp; Entity", cap:"Register WeChat mini-game (individual entity).", time:"Done", status:"done"},
+  {st:"Software Copyright", cap:"Obtain the software copyright certificate.", time:"≈ 10–15 days", status:"todo"},
+  {st:"Government Filing", cap:"Mandatory filing (ICP-style), platform-submitted.", time:"Free · ≈ 7–20 working days", status:"todo"},
+  {st:"Integrate Ads", cap:"Become traffic owner + add WeChat ad plugin.", time:"A few days", status:"todo"},
+  {st:"Submit for Review", cap:"Upload via WeChat DevTools, wait for approval.", time:"≈ 1–2 working days", status:"todo"},
+  {st:"Go Live", cap:"Publish to players.", time:"Instant", status:"todo"},
+  {st:"Operate", cap:"Track data, refresh images, earn ad revenue.", time:"Ongoing", status:"todo"}
+];
+
+const assets = [
+  "A library of good AI prompt templates",
+  "A project-folder structure template (3 pillars)",
+  "A submission / filing materials checklist",
+  "A pitfalls quick-reference (the bugs you already solved)"
+];
+
+/* ====== Renderers ====== */
+document.getElementById("hereNote").innerHTML = hereNote;
+
+document.getElementById("stages").innerHTML = stages.map(s=>`
+  <div class="stage ${s.status}">
+    <div class="badge">${s.status==="done"?"DONE":s.status==="doing"?"NOW":"TO DO"}</div>
+    <div class="head"><span class="ic">${s.ic}</span><span class="nm">${s.nm}</span></div>
+    <ul>${s.steps.map(t=>`<li>${t}</li>`).join("")}</ul>
+  </div>`).join("");
+
+document.getElementById("road").innerHTML = roadmap.map((r,i)=>`
+  <div class="step ${r.status}">
+    <div class="num">${i+1}</div>
+    <div class="body">
+      <div class="st">${r.st}${r.here?'<span class="here">YOU ARE HERE</span>':''}</div>
+      <div class="cap">${r.cap}</div>
+      <div class="time">${r.time}</div>
+    </div>
+  </div>`).join("");
+
+document.getElementById("assets").innerHTML = assets.map(a=>`<li>${a}</li>`).join("");
+</script>
+</body>
+</html>

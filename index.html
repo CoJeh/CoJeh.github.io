@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<!--
+  ⚠️ BILINGUAL PAIR — English version.
+  Keep content in sync with its Chinese twin: index.zh.html
+  Any structural/content change here must be mirrored there (and vice-versa).
+
+  Design system (huashu-design pass, 2026-07):
+  · Motif: Technology × Humanity — serif display (the storyteller) × mono labels (the builder)
+  · Color: warm paper + ink + cobalt (tech) + one sparse vermilion (human seal)
+  · No gradients, no emoji-as-icons (inline Lucide SVG instead), modular type scale
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Corrine Chen — account management leader turned AI builder. 8+ years driving enterprise client success; now shipping real products by orchestrating AI.">
+<link rel="alternate" hreflang="zh" href="index.zh.html">
+<link rel="alternate" hreflang="en" href="index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&display=swap" rel="stylesheet">
+<title>Corrine Chen · AI Builder & Client Success Leader</title>
+<style>
+  :root{
+    --ink:#1c1b18; --muted:#6e6a61; --bg:#fdfcfa; --alt:#f5f3ed;
+    --line:#e7e3da; --blue:#1d4fd7; --blue-deep:#173fae; --verm:#c0402b;
+    --radius:16px;
+    --serif:"Newsreader","Noto Serif SC",Georgia,"Songti SC","SimSun",serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Consolas,"JetBrains Mono",monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{text-wrap:balance}
+  p{text-wrap:pretty}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  .narrow{max-width:760px;margin:0 auto;padding:0 24px}
+  .ic{width:1em;height:1em;vertical-align:-0.12em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  /* seal — the human signature */
+  .seal{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--verm);color:#fff;font-family:var(--serif);font-weight:700;font-size:15px;border-radius:5px;vertical-align:-7px;margin-left:6px;user-select:none}
+
+  /* nav — frosted glass */
+  nav{position:sticky;top:0;z-index:50;background:rgba(253,252,250,.78);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+  nav .bar{max-width:1040px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  nav .logo{font-family:var(--serif);font-weight:700;font-size:17px;color:var(--ink);white-space:nowrap}
+  nav .logo:hover{text-decoration:none}
+  nav .links{display:flex;align-items:center;gap:24px;font-size:14px}
+  nav .sec{color:var(--ink);opacity:.72;white-space:nowrap}
+  nav .sec:hover{opacity:1;text-decoration:none}
+  nav .actions{display:flex;align-items:center;gap:10px}
+  nav .lang{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:6px 13px;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap}
+  nav .lang:hover{background:var(--alt);text-decoration:none}
+  nav .cta{display:inline-flex;align-items:center;gap:7px;background:var(--blue);color:#fff;border-radius:99px;padding:7px 16px;font-weight:600;white-space:nowrap}
+  nav .cta:hover{background:var(--blue-deep);text-decoration:none}
+  @media(max-width:760px){nav .sec{display:none}}
+  @media(max-width:420px){nav .lang{display:none}}
+
+  /* hero */
+  .hero{text-align:center;padding:76px 0 88px}
+  .portrait{width:136px;height:136px;border-radius:50%;object-fit:cover;object-position:center 22%;display:block;margin:0 auto 28px;border:4px solid #fff;box-shadow:0 10px 34px rgba(28,27,24,.16);outline:1px solid var(--line)}
+  .hero .hello{font-size:17px;color:var(--muted);font-weight:600;letter-spacing:.3px}
+  .hero h1{font-family:var(--serif);font-size:clamp(40px,6.2vw,66px);font-weight:700;letter-spacing:-.015em;line-height:1.08;margin:16px 0 20px}
+  .hero h1 .acc{color:var(--blue)}
+  .hero .sub{font-size:clamp(18px,2.4vw,22px);color:var(--muted);max-width:700px;margin:0 auto;font-weight:500}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:16px;padding:13px 26px;border-radius:99px;transition:.2s}
+  .btn.solid{background:var(--blue);color:#fff}
+  .btn.solid:hover{transform:scale(1.04);text-decoration:none;background:var(--blue-deep)}
+  .btn.soft{background:var(--alt);color:var(--ink)}
+  .btn.soft:hover{transform:scale(1.04);text-decoration:none}
+
+  /* sections */
+  section{padding:96px 0}
+  section.alt{background:var(--alt)}
+  .kicker{display:flex;align-items:center;justify-content:center;gap:9px;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+  .kicker::before{content:"";width:8px;height:8px;background:var(--verm);border-radius:2px;flex:0 0 auto}
+  h2{text-align:center;font-family:var(--serif);font-size:clamp(30px,4.6vw,46px);font-weight:700;letter-spacing:-.01em;line-height:1.14;margin-bottom:14px}
+  .lede{text-align:center;font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:680px;margin:0 auto 48px}
+
+  /* story — set in serif: the human voice */
+  .story{font-family:var(--serif);font-size:clamp(18px,2.2vw,21px);line-height:1.78;color:#3c3a34}
+  .story p{margin-bottom:24px}
+  .story b{color:var(--ink);font-weight:700}
+  .story .pull{font-size:clamp(22px,2.9vw,28px);font-weight:600;color:var(--ink);letter-spacing:-.005em;line-height:1.5;border-left:3px solid var(--verm);padding-left:24px;margin:36px 0}
+
+  /* stats — sharp bordered cards, serif numerals, mono labels */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 16px;text-align:center}
+  .stat b{display:block;font-family:var(--serif);font-variant-numeric:tabular-nums;font-size:clamp(32px,4vw,44px);font-weight:700;letter-spacing:-.01em;color:var(--ink);line-height:1.15;margin-bottom:6px}
+  .stat span{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--muted);font-weight:500;display:block;line-height:1.5}
+
+  /* featured */
+  .feature{background:#17150f;border-radius:24px;overflow:hidden;color:#fff;display:grid;grid-template-columns:1.15fr 1fr}
+  .feature .media{position:relative}
+  .feature video{width:100%;height:100%;object-fit:cover;display:block;background:#17150f}
+  .feature .info{padding:44px 40px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+  .feature .flag{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.18em;color:#ffd166;text-transform:uppercase}
+  .feature h3{font-family:var(--serif);font-size:clamp(24px,3vw,32px);font-weight:700;letter-spacing:-.01em;line-height:1.18}
+  .feature p{font-size:15.5px;color:#c9c5ba}
+  .feature .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .feature .btn.solid{background:#fff;color:#17150f}
+  .feature .btn.solid:hover{background:#f0ede4}
+  .feature .btn.line{border:1.5px solid rgba(255,255,255,.45);color:#fff}
+  .feature .btn.line:hover{background:rgba(255,255,255,.12);text-decoration:none}
+  .feature .mini{display:flex;gap:8px;margin-top:10px}
+  .feature .mini img{width:76px;border-radius:10px;border:1px solid rgba(255,255,255,.2)}
+  .feature .note{font-size:12.5px;color:#8f8b80}
+  @media(max-width:820px){.feature{grid-template-columns:1fr}}
+
+  /* project grid — mono index numbers, no icon slop */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .cardp{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px;transition:.25s;display:flex;flex-direction:column;gap:10px}
+  .cardp:hover{transform:translateY(-3px);border-color:#c9c2b2;box-shadow:0 12px 28px rgba(28,27,24,.08)}
+  .cardp .num{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--muted)}
+  .cardp .num .tag{color:var(--verm);font-weight:700}
+  .cardp h3{font-family:var(--serif);font-size:21px;font-weight:700;letter-spacing:-.005em}
+  .cardp p{font-size:14.5px;color:var(--muted);flex:1}
+  .cardp .meta{font-family:var(--mono);font-size:12px;color:var(--blue);font-weight:500}
+
+  /* career — LinkedIn-grade timeline with real logos */
+  .timeline{max-width:760px;margin:0 auto;display:flex;flex-direction:column}
+  .trow{display:grid;grid-template-columns:130px 1fr;gap:22px;padding:28px 0;border-bottom:1px solid var(--line)}
+  .trow:last-child{border-bottom:none}
+  .trow .when{font-family:var(--mono);font-size:13px;color:var(--muted);font-weight:500;padding-top:4px}
+  .trow h3{font-family:var(--serif);font-size:20px;font-weight:700}
+  .trow .org{display:flex;align-items:center;gap:8px;color:var(--blue);font-weight:600;font-size:14.5px;margin:4px 0 8px}
+  .trow .org img{height:18px;width:auto;border-radius:3px;flex:0 0 auto}
+  .trow p{font-size:14.5px;color:var(--muted)}
+  @media(max-width:600px){.trow{grid-template-columns:1fr;gap:4px}}
+
+  /* skills */
+  .chips{display:flex;gap:11px;flex-wrap:wrap;justify-content:center;max-width:820px;margin:0 auto}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:99px;padding:10px 18px;font-size:14px;font-weight:600;color:#3c3a34}
+  section:not(.alt) .chip{background:var(--alt);border-color:transparent}
+
+  /* contact */
+  .contact{text-align:center}
+  .contact h2{margin-bottom:10px}
+  .contact .big{font-size:clamp(17px,2.4vw,21px);font-weight:600;margin:18px 0 30px;display:flex;gap:26px;justify-content:center;flex-wrap:wrap;align-items:center}
+  .contact .big a{display:inline-flex;align-items:center;gap:8px}
+  footer{padding:34px 0 46px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+  footer .seal{width:22px;height:22px;font-size:12px;vertical-align:-6px;margin:0 4px 0 0}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.on{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="bar">
+    <a class="logo" href="index.html">Corrine Chen</a>
+    <div class="links">
+      <a class="sec" href="#story">Story</a>
+      <a class="sec" href="#work">Projects</a>
+      <a class="sec" href="#career">Career</a>
+      <a class="sec" href="#contact">Contact</a>
+      <span class="actions">
+        <a class="lang" href="index.zh.html" title="切换到中文"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>中文</a>
+        <a class="cta" href="play/index.html"><svg class="ic" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>Play my game</a>
+      </span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <img class="portrait" src="assets/corrine-headshot.jpg" alt="Corrine Chen" onerror="this.remove()">
+    <div class="hello">Hi, I'm Corrine<span class="seal" title="Chen — my family name, in seal script tradition">陳</span></div>
+    <h1>I make ideas <span class="acc">ship</span>.<br>With business sense — and AI.</h1>
+    <p class="sub">Client-success leader with 8+ years in enterprise digital solutions, turned AI builder. I don't write code — I orchestrate AI to build real, working products.</p>
+    <div class="cta-row">
+      <a class="btn solid" href="play/index.html"><svg class="ic" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>Play the game I built</a>
+      <a class="btn soft" href="#story">Read my story</a>
+    </div>
+  </div>
+</header>
+
+<!-- STORY — right up front -->
+<section id="story" class="alt">
+  <div class="narrow reveal">
+    <div class="kicker">My Story</div>
+    <h2>From literature, to Microsoft,<br>to building with AI.</h2>
+    <div class="story" style="margin-top:38px">
+      <p>I started in words, not code — a double degree in <b>Chinese Literature and International Business</b>, then a Master's in <b>Social & Public Communication at the LSE</b>. What that really trained me to do: understand people, and translate between worlds.</p>
+      <p>For <b>8+ years</b> I did exactly that in the tech industry — most recently at <b>Microsoft</b>, as a Customer Success Account Manager trusted by C-level stakeholders, managing a <b>US$8M+ portfolio</b> with a <b>100% renewal rate</b> and <b>75% YoY growth</b>. I learned how enterprises adopt technology: not because of features, but because someone connects the tech to what the business actually needs.</p>
+      <p class="pull">Then I took a gap year — and made a bet: in the AI era, the scarce skill isn't writing code. It's knowing what to build, and directing AI to build it.</p>
+      <p>So I tested it, publicly. With zero hand-written code, I <b>designed, built, and shipped a playable WeChat mini-game</b> — plus the dashboards, automation pipelines, and AI agents that run my work. Every step documented, every method distilled into a <b>replicable playbook</b>.</p>
+      <p>This page is the proof. I'm the person who can sit with your customers in the morning, and ship with AI in the afternoon.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section>
+  <div class="wrap reveal">
+    <div class="kicker">At a glance</div>
+    <h2>The numbers behind the story.</h2>
+    <p class="lede">Enterprise track record on the left half of my career. Builder proof on the right.</p>
+    <div class="stats">
+      <div class="stat"><b>8+</b><span>years in client success & digital solutions</span></div>
+      <div class="stat"><b>$8M+</b><span>enterprise portfolio managed at Microsoft</span></div>
+      <div class="stat"><b>100%</b><span>renewal rate · 75% YoY growth</span></div>
+      <div class="stat"><b>0</b><span>lines of code hand-written</span></div>
+      <div class="stat"><b>5+</b><span>AI-built projects shipped</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="alt" id="work">
+  <div class="wrap reveal">
+    <div class="kicker">Featured Build</div>
+    <h2>Spot On! — a WeChat mini-game.<br>Built by directing AI.</h2>
+    <p class="lede">A timed spot-the-difference game with a full game loop — difficulty curve, countdown, win/lose, replay — heading for WeChat launch with an ad-based (IAA) business model.</p>
+    <div class="feature">
+      <div class="media">
+        <video controls poster="assets/v2-screenshot.png">
+          <source src="assets/v2-demo.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="info">
+        <div class="flag">Flagship · Game</div>
+        <h3>Idea → playable product, in 4 work-days.</h3>
+        <p>Find the odd-colored tile before the clock runs out. Levels get harder, the timer gets shorter. Responsive across phone, tablet and desktop.</p>
+        <div class="btns">
+          <a class="btn solid" href="play/index.html"><svg class="ic" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>Play it now</a>
+          <a class="btn line" href="playbook.html#six-stages"><svg class="ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>How it was built</a>
+        </div>
+        <div class="mini">
+          <img src="assets/v1-screenshot.png" alt="v1 prototype">
+          <img src="assets/v2-screenshot.png" alt="v2 full game loop">
+        </div>
+        <p class="note">Built in visible iterations — every version preserved.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section>
+  <div class="wrap reveal">
+    <div class="kicker">Projects & Achievements</div>
+    <h2>Everything here started as<br>"I don't know how to do this."</h2>
+    <p class="lede">And ended as a working thing you can see, click, or play.</p>
+    <div class="grid">
+      <div class="cardp">
+        <div class="num">01 <span class="tag">/ FLAGSHIP</span></div>
+        <h3>Spot On! — WeChat mini-game</h3>
+        <p>Playable spot-the-difference game with a complete game loop. Researched the IAA ad model, China compliance path, and launch pipeline like a product owner.</p>
+        <div class="meta">Cocos Creator · Claude Code · TypeScript (AI-written)</div>
+      </div>
+      <div class="cardp">
+        <div class="num">02</div>
+        <h3>Self-built dashboard system</h3>
+        <p>Data-driven HTML dashboards tracking milestones, deliverables, daily logs and social content — with clickable status workflows, auto-updated by my AI partner at every wrap-up.</p>
+        <div class="meta">Single-file HTML/JS · localStorage · zero frameworks</div>
+      </div>
+      <div class="cardp">
+        <div class="num">03</div>
+        <h3>Capture → publish automation</h3>
+        <p>A personal pipeline connecting flomo (voice & idea capture) to my project docs via MCP: auto-fetch new notes, file them into diaries, mine them into social-ready posts, write summaries back.</p>
+        <div class="meta">flomo · MCP · Claude Code automations</div>
+      </div>
+      <div class="cardp">
+        <div class="num">04</div>
+        <h3>Webinar Checker — GPT agent</h3>
+        <p>A self-built GPT agent that quizzes you on webinars you watched — turning passive watching into verified learning.</p>
+        <div class="meta">ChatGPT custom agent</div>
+      </div>
+      <div class="cardp">
+        <div class="num">05</div>
+        <h3>Personal AI agent system</h3>
+        <p>A multi-agent personal growth system: different AI tools in different roles, coordinated around one personal knowledge base.</p>
+        <div class="meta">Claude · ChatGPT · Codex · orchestration</div>
+      </div>
+      <div class="cardp">
+        <div class="num">06</div>
+        <h3>The Replicable Playbook</h3>
+        <p>I don't just build once — I systematize. A step-by-step method covering idea → build → compliance → launch, so anyone can replicate it.</p>
+        <div class="meta"><a href="playbook.html#six-stages">Read the playbook →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER -->
+<section class="alt" id="career">
+  <div class="wrap reveal">
+    <div class="kicker">Career Highlights</div>
+    <h2>The enterprise half of me.</h2>
+    <p class="lede">Before I built products, I helped enterprises succeed with them.</p>
+    <div class="timeline">
+      <div class="trow">
+        <div class="when">2022 – 2025</div>
+        <div>
+          <h3>Customer Success Account Manager</h3>
+          <div class="org"><img src="assets/logos/microsoft-mark.svg" alt="Microsoft logo">Microsoft · Guangzhou</div>
+          <p>C-level trusted advisor for enterprise accounts across finance, public sector and SaaS. US$8M+ portfolio, 100% renewal, 75% YoY growth; contributed to a net-new US$3.25M deal; first cloud-enablement case for Macau's regulated public sector; 6× internal awards; Delivery Excellence champion coaching 20+ peers.</p>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="when">2018 – 2021</div>
+        <div>
+          <h3>Account Manager</h3>
+          <div class="org"><img src="assets/logos/sinorbis.png" alt="Sinorbis logo">Sinorbis · Shanghai</div>
+          <p>Strategic advisor to 30+ international clients entering the Chinese market via B2B SaaS digital marketing — owning the full client lifecycle from onboarding to renewal and upsell.</p>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="when">2017 – 2018</div>
+        <div>
+          <h3>Client Success Manager</h3>
+          <div class="org"><img src="assets/logos/meltwater.png" alt="Meltwater logo">Meltwater · Shanghai</div>
+          <p>Delivered 120%+ of monthly KPI targets advising senior stakeholders on media intelligence, competitor and brand insights.</p>
+        </div>
+      </div>
+      <div class="trow">
+        <div class="when">2014 – 2015</div>
+        <div>
+          <h3>MSc, Social & Public Communication</h3>
+          <div class="org"><img src="assets/logos/lse.png" alt="LSE logo">London School of Economics (LSE)</div>
+          <p>Preceded by a double BA in Chinese Literature & International Business at Shanghai University.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section>
+  <div class="wrap reveal">
+    <div class="kicker">Capabilities</div>
+    <h2>What I bring to a team.</h2>
+    <p class="lede">A rare combination: enterprise client success + hands-on AI building.</p>
+    <div class="chips">
+      <span class="chip">AI orchestration (Claude · ChatGPT · Codex)</span>
+      <span class="chip">Client success & account management</span>
+      <span class="chip">C-level stakeholder communication</span>
+      <span class="chip">Product thinking — scoping & timelines</span>
+      <span class="chip">Self-directed learning (0 → shipped)</span>
+      <span class="chip">Process & compliance navigation</span>
+      <span class="chip">Build-in-public & personal branding</span>
+      <span class="chip">PMP certified</span>
+      <span class="chip">Azure / AI / Security fundamentals (AZ-900 · AI-900 · SC-900)</span>
+      <span class="chip">EN · 普通话 · 粤语</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="alt contact" id="contact">
+  <div class="narrow reveal">
+    <div class="kicker">Contact</div>
+    <h2>Let's build something.</h2>
+    <div class="big">
+      <a href="mailto:corrine_ms@outlook.com"><svg class="ic" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>corrine_ms@outlook.com</a>
+      <a href="https://www.linkedin.com/in/corrinechan/" target="_blank"><svg class="ic" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>linkedin.com/in/corrinechan</a>
+    </div>
+    <a class="btn solid" href="https://www.linkedin.com/in/corrinechan/" target="_blank">Connect on LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <span class="seal">陳</span>Corrine Chen · AI Builder & Client Success Leader — this portfolio is itself AI-orchestrated, of course.
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

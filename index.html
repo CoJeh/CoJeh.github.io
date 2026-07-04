@@ -23,7 +23,7 @@
 <style>
   :root{
     --ink:#1c1b18; --muted:#6e6a61; --bg:#fdfcfa; --alt:#f5f3ed;
-    --line:#e7e3da; --blue:#1d4fd7; --blue-deep:#173fae; --verm:#c0402b;
+    --line:#e7e3da; --blue:#1d4fd7; --blue-deep:#173fae; --verm:#c0402b; --gold:#b0842b;
     --radius:16px;
     --serif:"Newsreader","Noto Serif SC",Georgia,"Songti SC","SimSun",serif;
     --mono:ui-monospace,"SF Mono","Cascadia Code",Consolas,"JetBrains Mono",monospace;
@@ -59,8 +59,15 @@
   @media(max-width:760px){nav .sec{display:none}}
   @media(max-width:420px){nav .lang{display:none}}
 
-  /* hero */
-  .hero{text-align:center;padding:76px 0 88px}
+  /* hero — subtle portrait behind, veiled in paper white */
+  .hero{position:relative;text-align:center;padding:76px 0 88px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0 -9% 0 18%;background:url("assets/corrine-photo.jpg") center 30%/cover no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 46%);mask-image:linear-gradient(90deg,transparent 0,#000 46%)}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(253,252,250,0) 62%,var(--bg) 100%),linear-gradient(90deg,rgba(253,252,250,.92) 0%,rgba(253,252,250,.88) 42%,rgba(253,252,250,.62) 68%,rgba(253,252,250,.34) 100%)}
+  @media(max-width:760px){
+    .hero::before{inset:0;-webkit-mask-image:none;mask-image:none;background-position:75% 30%}
+    .hero::after{background:linear-gradient(180deg,rgba(253,252,250,.93) 0%,rgba(253,252,250,.87) 45%,var(--bg) 100%)}
+  }
+  .hero .wrap{position:relative;z-index:1}
   .portrait{width:136px;height:136px;border-radius:50%;object-fit:cover;object-position:center 22%;display:block;margin:0 auto 28px;border:4px solid #fff;box-shadow:0 10px 34px rgba(28,27,24,.16);outline:1px solid var(--line)}
   .hero .hello{font-size:17px;color:var(--muted);font-weight:600;letter-spacing:.3px}
   .hero h1{font-family:var(--serif);font-size:clamp(40px,6.2vw,66px);font-weight:700;letter-spacing:-.015em;line-height:1.08;margin:16px 0 20px}
@@ -106,8 +113,12 @@
   .feature .btn.solid:hover{background:#f0ede4}
   .feature .btn.line{border:1.5px solid rgba(255,255,255,.45);color:#fff}
   .feature .btn.line:hover{background:rgba(255,255,255,.12);text-decoration:none}
-  .feature .mini{display:flex;gap:8px;margin-top:10px}
-  .feature .mini img{width:76px;border-radius:10px;border:1px solid rgba(255,255,255,.2)}
+  .feature .mini{display:flex;gap:10px;margin-top:10px}
+  .feature .mini a{display:flex;flex-direction:column;gap:5px}
+  .feature .mini a:hover{text-decoration:none}
+  .feature .mini img{height:96px;width:auto;border-radius:10px;border:1px solid rgba(255,255,255,.2);display:block;margin:0 auto;transition:.2s}
+  .feature .mini a:hover img{border-color:rgba(255,255,255,.6);transform:translateY(-2px)}
+  .feature .mini span{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:#8f8b80;text-align:center}
   .feature .note{font-size:12.5px;color:#8f8b80}
   @media(max-width:820px){.feature{grid-template-columns:1fr}}
 
@@ -131,11 +142,28 @@
   .trow .org img{height:18px;width:auto;border-radius:3px;flex:0 0 auto}
   .trow p{font-size:14.5px;color:var(--muted)}
   @media(max-width:600px){.trow{grid-template-columns:1fr;gap:4px}}
+  /* awards under an experience — gold medal badges */
+  .awards{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+  .awards-h{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:11px}
+  .awards-h .ic{width:15px;height:15px}
+  .award-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:9px 18px}
+  .award-list li{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#43413a;line-height:1.45}
+  .award-list .ic{width:16px;height:16px;flex:0 0 auto;margin-top:1px;color:var(--gold);stroke-width:1.8}
+  .award-list .medallion{width:26px;height:26px;object-fit:contain;flex:0 0 auto;margin:-4px 0 0 -5px}
+  .award-list b{font-family:var(--mono);font-weight:700;color:var(--blue);font-size:11px;letter-spacing:.02em}
+  .award-list em{color:var(--muted);font-style:normal}
 
-  /* skills */
-  .chips{display:flex;gap:11px;flex-wrap:wrap;justify-content:center;max-width:820px;margin:0 auto}
+  /* skills — two groups: strengths vs credentials */
+  .skillgroup{max-width:860px;margin:0 auto}
+  .skillgroup + .skillgroup{margin-top:30px}
+  .sg-label{display:flex;align-items:center;justify-content:center;gap:9px;font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .sg-label::before,.sg-label::after{content:"";height:1px;width:34px;background:var(--line)}
+  .chips{display:flex;gap:11px;flex-wrap:wrap;justify-content:center}
   .chip{background:#fff;border:1px solid var(--line);border-radius:99px;padding:10px 18px;font-size:14px;font-weight:600;color:#3c3a34}
   section:not(.alt) .chip{background:var(--alt);border-color:transparent}
+  .chip.cert{display:inline-flex;align-items:center;gap:7px;background:rgba(29,79,215,.055);border:1px solid rgba(29,79,215,.32);color:var(--blue-deep)}
+  section:not(.alt) .chip.cert{background:rgba(29,79,215,.055);border-color:rgba(29,79,215,.32)}
+  .chip.cert .ic{width:15px;height:15px;color:var(--blue);flex:0 0 auto}
 
   /* contact */
   .contact{text-align:center}
@@ -163,7 +191,7 @@
       <a class="sec" href="#contact">Contact</a>
       <span class="actions">
         <a class="lang" href="index.zh.html" title="切换到中文"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>中文</a>
-        <a class="cta" href="play/index.html"><svg class="ic" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>Play my game</a>
+        <a class="cta" href="play/index.html" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>Play my game</a>
       </span>
     </div>
   </div>
@@ -177,7 +205,7 @@
     <h1>I make ideas <span class="acc">ship</span>.<br>With business sense — and AI.</h1>
     <p class="sub">Client-success leader with 8+ years in enterprise digital solutions, turned AI builder. I don't write code — I orchestrate AI to build real, working products.</p>
     <div class="cta-row">
-      <a class="btn solid" href="play/index.html"><svg class="ic" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>Play the game I built</a>
+      <a class="btn solid" href="play/index.html" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>Play the game I built</a>
       <a class="btn soft" href="#story">Read my story</a>
     </div>
   </div>
@@ -231,12 +259,12 @@
         <h3>Idea → playable product, in 4 work-days.</h3>
         <p>Find the odd-colored tile before the clock runs out. Levels get harder, the timer gets shorter. Responsive across phone, tablet and desktop.</p>
         <div class="btns">
-          <a class="btn solid" href="play/index.html"><svg class="ic" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>Play it now</a>
-          <a class="btn line" href="playbook.html#six-stages"><svg class="ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>How it was built</a>
+          <a class="btn solid" href="play/index.html" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>Play it now</a>
+          <a class="btn line" href="dashboard.html" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>How it was built</a>
         </div>
         <div class="mini">
-          <img src="assets/v1-screenshot.png" alt="v1 prototype">
-          <img src="assets/v2-screenshot.png" alt="v2 full game loop">
+          <a href="assets/v1-screenshot.png" target="_blank" rel="noopener" title="View v1 screenshot full-size"><img src="assets/v1-screenshot.png" alt="v1 prototype screenshot"><span>v1 · prototype</span></a>
+          <a href="assets/v2-screenshot.png" target="_blank" rel="noopener" title="View v2 screenshot full-size"><img src="assets/v2-screenshot.png" alt="v2 full game loop screenshot"><span>v2 · full loop</span></a>
         </div>
         <p class="note">Built in visible iterations — every version preserved.</p>
       </div>
@@ -285,7 +313,7 @@
         <div class="num">06</div>
         <h3>The Replicable Playbook</h3>
         <p>I don't just build once — I systematize. A step-by-step method covering idea → build → compliance → launch, so anyone can replicate it.</p>
-        <div class="meta"><a href="playbook.html#six-stages">Read the playbook →</a></div>
+        <div class="meta"><a href="playbook.html#six-stages" target="_blank" rel="noopener">Read the playbook →</a></div>
       </div>
     </div>
   </div>
@@ -303,7 +331,18 @@
         <div>
           <h3>Customer Success Account Manager</h3>
           <div class="org"><img src="assets/logos/microsoft-mark.svg" alt="Microsoft logo">Microsoft · Guangzhou</div>
-          <p>C-level trusted advisor for enterprise accounts across finance, public sector and SaaS. US$8M+ portfolio, 100% renewal, 75% YoY growth; contributed to a net-new US$3.25M deal; first cloud-enablement case for Macau's regulated public sector; 6× internal awards; Delivery Excellence champion coaching 20+ peers.</p>
+          <p>C-level trusted advisor for enterprise accounts across finance, public sector and SaaS. US$8M+ portfolio, 100% renewal, 75% YoY growth; contributed to a net-new US$3.25M deal; first cloud-enablement case for Macau's regulated public sector; Delivery Excellence champion coaching 20+ peers.</p>
+          <div class="awards">
+            <div class="awards-h"><svg class="ic" viewBox="0 0 24 24"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>6× Recognition Awards · FY23–FY24</div>
+            <ul class="award-list">
+              <li><img class="medallion" src="assets/awards/csu-recognition-badge.png" alt="Customer Success recognition ribbon badge"><span><b>FY23 H1</b> Customer Success Recognition — Collaborators Team</span></li>
+              <li><svg class="ic" viewBox="0 0 24 24"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg><span><b>FY23</b> Most Enthusiastic Award</span></li>
+              <li><svg class="ic" viewBox="0 0 24 24"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg><span><b>FY23 Q4</b> Unified “Lead with Proactive” Award</span></li>
+              <li><img class="medallion" src="assets/awards/gcs-first-year-medallion.png" alt="Global Customer Success First Year Award medallion"><span><b>FY24 Q1</b> Global Customer Success — First Year Award</span></li>
+              <li><img class="medallion" src="assets/awards/cdse-team-badge.png" alt="CDSE Team Award badge"><span><b>FY24 Q1</b> CDSE Team Winner Award</span></li>
+              <li><svg class="ic" viewBox="0 0 24 24"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg><span><b>FY24 Q4</b> Execution Exemplar Award</span></li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="trow">
@@ -340,17 +379,29 @@
     <div class="kicker">Capabilities</div>
     <h2>What I bring to a team.</h2>
     <p class="lede">A rare combination: enterprise client success + hands-on AI building.</p>
-    <div class="chips">
-      <span class="chip">AI orchestration (Claude · ChatGPT · Codex)</span>
-      <span class="chip">Client success & account management</span>
-      <span class="chip">C-level stakeholder communication</span>
-      <span class="chip">Product thinking — scoping & timelines</span>
-      <span class="chip">Self-directed learning (0 → shipped)</span>
-      <span class="chip">Process & compliance navigation</span>
-      <span class="chip">Build-in-public & personal branding</span>
-      <span class="chip">PMP certified</span>
-      <span class="chip">Azure / AI / Security fundamentals (AZ-900 · AI-900 · SC-900)</span>
-      <span class="chip">EN · 普通话 · 粤语</span>
+    <div class="skillgroup">
+      <div class="sg-label">Strengths</div>
+      <div class="chips">
+        <span class="chip">AI orchestration (Claude · ChatGPT · Codex)</span>
+        <span class="chip">Client success & account management</span>
+        <span class="chip">C-level stakeholder communication</span>
+        <span class="chip">Product thinking — scoping & timelines</span>
+        <span class="chip">Self-directed learning (0 → shipped)</span>
+        <span class="chip">Process & compliance navigation</span>
+        <span class="chip">Build-in-public & personal branding</span>
+        <span class="chip">EN · 普通话 · 粤语</span>
+      </div>
+    </div>
+    <div class="skillgroup">
+      <div class="sg-label">Certifications &amp; Qualifications</div>
+      <div class="chips">
+        <span class="chip cert"><svg class="ic" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>PMP — Project Management Professional</span>
+        <span class="chip cert"><svg class="ic" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Systems Integration Project Management Engineer (Intermediate)</span>
+        <span class="chip cert"><svg class="ic" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>National Junior Economist</span>
+        <span class="chip cert"><svg class="ic" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Microsoft Azure Fundamentals (AZ-900)</span>
+        <span class="chip cert"><svg class="ic" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Microsoft AI Fundamentals (AI-900)</span>
+        <span class="chip cert"><svg class="ic" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Security, Compliance &amp; Identity Fundamentals (SC-900)</span>
+      </div>
     </div>
   </div>
 </section>
@@ -361,10 +412,10 @@
     <div class="kicker">Contact</div>
     <h2>Let's build something.</h2>
     <div class="big">
-      <a href="mailto:corrine_ms@outlook.com"><svg class="ic" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>corrine_ms@outlook.com</a>
-      <a href="https://www.linkedin.com/in/corrinechan/" target="_blank"><svg class="ic" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>linkedin.com/in/corrinechan</a>
+      <a href="mailto:chen-chuting@hotmail.com"><svg class="ic" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>chen-chuting@hotmail.com</a>
+      <a href="https://www.linkedin.com/in/corrinechan/" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>linkedin.com/in/corrinechan</a>
     </div>
-    <a class="btn solid" href="https://www.linkedin.com/in/corrinechan/" target="_blank">Connect on LinkedIn</a>
+    <a class="btn solid" href="https://www.linkedin.com/in/corrinechan/" target="_blank" rel="noopener">Connect on LinkedIn</a>
   </div>
 </section>
 

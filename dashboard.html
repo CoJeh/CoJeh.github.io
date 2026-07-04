@@ -128,7 +128,7 @@
       <h2>💼 项目亮点</h2>
       <div class="statgrid">
         <div class="statpill"><b>0</b><span>行手写代码</span></div>
-        <div class="statpill"><b>4</b><span>个工作日</span></div>
+        <div class="statpill"><b id="workdays">—</b><span>个工作日</span></div>
         <div class="statpill"><b>0→1</b><span>想法变可玩游戏</span></div>
         <div class="statpill"><b>5+</b><span>AI 工具编排</span></div>
         <div class="statpill"><b>¥0</b><span>起步成本</span></div>
@@ -242,6 +242,9 @@ const score = milestones.reduce((s,m)=>s+(m.status==="done"?1:m.status==="doing"
 const pct = Math.round(score/milestones.length*100);
 document.getElementById("pct").textContent = pct+"%";
 document.getElementById("barfill").style.width = pct+"%";
+
+// 工作日数：从共享 journal 数据自动统计（Day 号去重、排除暂停行）——不再手写，加日志自动 +1
+document.getElementById("workdays").textContent = new Set(journal.map(j=>(j.day||"").replace(/\D/g,"")).filter(d=>d)).size;
 
 // 渲染里程碑
 document.getElementById("pipe").innerHTML = milestones.map(m=>`

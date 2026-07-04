@@ -45,5 +45,5 @@ const journal = [
   {date:"2026-06-25 ~ 07-01", day:"—", ms:"—", result:"✈️ 预定外出行程，项目暂停一周——以上全部进度实际只用了 4 个净工作日", pause:true},
   {date:"2026-07-03", day:"05", ms:"M2→M3", result:"Fable 5 项目体检+爆款研究（IAA公式：广告织进玩法+段位进度感）；优先级重排；作品集升格为母项目（Apple风格双语主页）", link:"01_learning-journal/2026-07-03_entry-06.md"},
   {date:"2026-07-04", day:"06", ms:"M3筹备", result:"游戏 V3 优化：30关大师门槛+段位+纪录+连击+复活广告位+点错惩罚；首次 CLI 构建网页版(3.3MB)接入作品集，浏览器实测可玩 ✅", link:"01_learning-journal/2026-07-04_entry-07.md"},
-  {date:"2026-07-04", day:"06", ms:"M4", result:"下午续篇：作品集上线 GitHub Pages 🌐；注册微信小游戏「找对了大师」；备案首交被驳回（名称不一致）当天修复重交 ✅——官方审核时钟开始走", link:"01_learning-journal/2026-07-04_entry-07.md"},
+  {date:"2026-07-04", day:"06（续）", ms:"M4", result:"作品集上线 https://cojeh.github.io 🌐；注册微信小游戏《找对了大师》；备案首交被驳回（名称不一致）当天修复重交 ✅——官方审核时钟开始走", link:"01_learning-journal/2026-07-04_entry-08.md"},
 ];

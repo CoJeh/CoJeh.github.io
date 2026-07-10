@@ -271,7 +271,8 @@
   .journal-scroll{padding-bottom:0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .journal-scroll::-webkit-scrollbar{display:none}
   .journal-scroll-top{display:none}
-  .journal-scroll-track{height:1px}
+  .journal-scroll-track{position:absolute;inset:0;border-radius:999px;background:rgba(154,163,199,.22)}
+  .journal-scroll-thumb{position:absolute;left:0;top:0;height:100%;min-width:42px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--done));box-shadow:0 0 0 2px rgba(124,131,255,.16);touch-action:none}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
   .foot{color:var(--muted);font-size:12px;margin-top:22px;text-align:center}
@@ -385,10 +386,7 @@
     .journal-head-table,.journal-body-table{min-width:760px;font-size:12.5px;line-height:1.55}
     .journal-head-table th,.journal-body-table td{font-size:12.5px!important;line-height:1.55}
     .journal-body-table td{vertical-align:middle}
-    .journal-scroll-top{display:block;max-width:100%;height:16px;margin:0 0 8px;overflow-x:auto;overflow-y:hidden;border-radius:999px;scrollbar-width:auto;scrollbar-color:var(--accent) rgba(154,163,199,.22)}
-    .journal-scroll-top::-webkit-scrollbar{height:10px}
-    .journal-scroll-top::-webkit-scrollbar-track{background:rgba(154,163,199,.22);border-radius:999px}
-    .journal-scroll-top::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--accent),var(--done));border-radius:999px}
+    .journal-scroll-top{display:block;position:relative;max-width:100%;height:12px;margin:0 0 9px;border-radius:999px;overflow:hidden;touch-action:none;cursor:pointer}
     .journal-scroll{overflow-x:auto}
     .journal-col-date{width:126px}
     .journal-col-day{width:72px}
@@ -677,7 +675,7 @@
           <thead><tr><th>日期</th><th>Day</th><th>里程碑</th><th>当天成果</th></tr></thead>
         </table>
       </div>
-      <div class="journal-scroll-top" aria-label="左右滚动查看完整每日工作记录"><div class="journal-scroll-track"></div></div>
+      <div class="journal-scroll-top" aria-label="左右滚动查看完整每日工作记录"><div class="journal-scroll-track"><span class="journal-scroll-thumb"></span></div></div>
       <div class="journal-scroll">
         <table class="journal-body-table">
           <colgroup>
@@ -822,10 +820,17 @@ const journalScroll = document.querySelector(".journal-scroll");
 const journalScrollTop = document.querySelector(".journal-scroll-top");
 const journalHeadScroll = document.querySelector(".journal-head-scroll");
 if(journalScroll && journalScrollTop && journalHeadScroll){
-  const journalScrollTrack = journalScrollTop.querySelector(".journal-scroll-track");
+  const journalScrollThumb = journalScrollTop.querySelector(".journal-scroll-thumb");
   let isSyncingJournalScroll = false;
-  function sizeJournalScrollTrack(){
-    journalScrollTrack.style.width = `${journalScroll.scrollWidth}px`;
+  let isDraggingJournalThumb = false;
+  function updateJournalThumb(){
+    const maxScroll = Math.max(1, journalScroll.scrollWidth - journalScroll.clientWidth);
+    const trackWidth = journalScrollTop.clientWidth;
+    const thumbWidth = Math.max(42, Math.round(trackWidth * journalScroll.clientWidth / journalScroll.scrollWidth));
+    const maxThumbLeft = Math.max(0, trackWidth - thumbWidth);
+    const thumbLeft = Math.round((journalScroll.scrollLeft / maxScroll) * maxThumbLeft);
+    journalScrollThumb.style.width = `${thumbWidth}px`;
+    journalScrollThumb.style.transform = `translateX(${thumbLeft}px)`;
   }
   function syncJournalScroll(source){
     if(isSyncingJournalScroll) return;
@@ -833,13 +838,34 @@ if(journalScroll && journalScrollTop && journalHeadScroll){
     journalScroll.scrollLeft = source.scrollLeft;
     journalScrollTop.scrollLeft = source.scrollLeft;
     journalHeadScroll.scrollLeft = source.scrollLeft;
+    updateJournalThumb();
     requestAnimationFrame(()=>{ isSyncingJournalScroll = false; });
+  }
+  function setJournalScrollFromPointer(clientX){
+    const rect = journalScrollTop.getBoundingClientRect();
+    const trackWidth = journalScrollTop.clientWidth;
+    const thumbWidth = journalScrollThumb.offsetWidth || 42;
+    const maxThumbLeft = Math.max(1, trackWidth - thumbWidth);
+    const thumbLeft = Math.min(maxThumbLeft, Math.max(0, clientX - rect.left - thumbWidth / 2));
+    const maxScroll = journalScroll.scrollWidth - journalScroll.clientWidth;
+    journalScroll.scrollLeft = (thumbLeft / maxThumbLeft) * maxScroll;
+    syncJournalScroll(journalScroll);
   }
   journalScrollTop.addEventListener("scroll", ()=>syncJournalScroll(journalScrollTop), {passive:true});
   journalScroll.addEventListener("scroll", ()=>syncJournalScroll(journalScroll), {passive:true});
-  window.addEventListener("resize", sizeJournalScrollTrack);
-  sizeJournalScrollTrack();
-  requestAnimationFrame(sizeJournalScrollTrack);
+  journalScrollTop.addEventListener("pointerdown", event=>{
+    isDraggingJournalThumb = true;
+    journalScrollTop.setPointerCapture?.(event.pointerId);
+    setJournalScrollFromPointer(event.clientX);
+  });
+  journalScrollTop.addEventListener("pointermove", event=>{
+    if(isDraggingJournalThumb) setJournalScrollFromPointer(event.clientX);
+  });
+  journalScrollTop.addEventListener("pointerup", ()=>{ isDraggingJournalThumb = false; });
+  journalScrollTop.addEventListener("pointercancel", ()=>{ isDraggingJournalThumb = false; });
+  window.addEventListener("resize", updateJournalThumb);
+  updateJournalThumb();
+  requestAnimationFrame(updateJournalThumb);
 }
 
 document.querySelectorAll("[data-carousel]").forEach(carousel=>{

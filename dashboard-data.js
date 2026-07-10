@@ -69,7 +69,7 @@ const publishedPosts = [
     description:"从能玩到有输赢：SpotOn V2 加上倒计时、结算页和一键重来，也让我第一次摸到“工程脑”。",
     descriptionEn:"SpotOn V2 moved from merely playable to a real win-or-lose loop with a countdown, results screen, and one-tap restart. It was also the first time I felt my product brain turn into an engineering brain.",
     url:"https://mp.weixin.qq.com/s/AuUFtHHXnGKRmTZCQp14MA",
-    coverImage:"assets/wechat/spoton-m2-timer-cover.png",
+    coverImage:"assets/wechat/spoton-m2-timer-cover.card.webp",
     coverAlt:"Cover image for the second published SpotOn WeChat post"
   },
   {
@@ -82,7 +82,7 @@ const publishedPosts = [
     description:"Hi 大家，我的公众号终于正式启动啦！这篇记录了 Corrine 作为一个零代码背景的大纯文科生如何跟 AI 搭档，把第一个可玩的 SpotOn小游戏从灵感做成 MVP，在天马行空的脑宇宙中解锁了AI新手村的第一块小地图~",
     descriptionEn:"Hi everyone, my WeChat Official Account is officially live. This post documents how Corrine, a humanities graduate with no coding background, partnered with AI to turn her first playable Spot On!找对了大师 mini-game from an idea into an MVP.",
     url:"https://mp.weixin.qq.com/s/C52zmMGwODzMX6DIZVT7jg",
-    coverImage:"assets/wechat/spoton-first-wechat-cover-card.png",
+    coverImage:"assets/wechat/spoton-first-wechat-cover.card.webp",
     coverAlt:"Cover image for the first published SpotOn WeChat post"
   },
 ];

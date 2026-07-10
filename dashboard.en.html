@@ -754,7 +754,7 @@ if(publishedPostsNode){
   publishedPostsNode.innerHTML = publicPosts.length ? publicPosts.map(post=>{
     const href = safeWechatUrl(post.url);
     const cover = post.coverImage
-      ? `<div class="post-cover"><img src="${escapeHtml(post.coverImage)}" alt="${escapeHtml(post.coverAlt || post.title)}" loading="lazy"></div>`
+      ? `<div class="post-cover"><img src="${escapeHtml(post.coverImage)}" alt="${escapeHtml(post.coverAlt || post.title)}" loading="lazy" decoding="async"></div>`
       : "";
     const link = href
       ? `<a class="post-link" href="${href}" target="_blank" rel="noopener">Open the WeChat article →</a>`

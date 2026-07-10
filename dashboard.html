@@ -345,7 +345,7 @@
   .deliverable-copy{flex:1;min-width:200px}
   .deliverable-copy h3{font-size:14px;line-height:1.4;margin-bottom:4px}
   .newtag{color:var(--esther-ink);background:var(--esther-yellow);font-size:11px;font-weight:800;margin-left:6px;border-radius:99px;padding:2px 9px}
-  .deliverable-carousel{position:relative;flex:0 0 200px;width:200px;max-width:200px;min-width:0;overflow:hidden;contain:layout paint}
+  .deliverable-carousel{position:relative;flex:0 0 200px;width:200px;max-width:200px;min-width:0;margin-left:36px;margin-right:36px;overflow:visible;contain:layout}
   .carousel-viewport{overflow:hidden;border-radius:14px;min-width:0}
   .carousel-track{display:flex;transition:transform .32s ease}
   .carousel-card{flex:0 0 100%;min-width:0;background:var(--esther-cream);color:var(--esther-ink);border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);border:1px solid #2a3056}
@@ -354,9 +354,9 @@
   .carousel-card figcaption{padding:8px 9px 10px;border-top:5px solid var(--esther-yellow)}
   .carousel-card b{display:block;font-family:"Microsoft YaHei","Segoe UI",sans-serif;font-size:12px;line-height:1.35}
   .carousel-card span{display:block;font-size:11px;color:#4A4A5A;line-height:1.4;margin-top:2px}
-  .carousel-btn{position:absolute;top:108px;z-index:2;width:26px;height:44px;border:1px solid #2a3056;border-radius:10px;background:rgba(36,44,84,.88);color:var(--ink);font-size:22px;line-height:1;cursor:pointer;transition:transform .15s ease,border-color .15s ease,background .15s ease}
-  .carousel-btn[data-carousel-prev]{left:6px}
-  .carousel-btn[data-carousel-next]{right:6px}
+  .carousel-btn{position:absolute;top:108px;z-index:2;width:30px;height:46px;border:1px solid #2a3056;border-radius:10px;background:#242c54;color:var(--ink);font-size:24px;line-height:1;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.22);transition:transform .15s ease,border-color .15s ease,background .15s ease}
+  .carousel-btn[data-carousel-prev]{left:-38px}
+  .carousel-btn[data-carousel-next]{right:-38px}
   .carousel-btn:hover{transform:translateY(-2px);border-color:var(--esther-yellow);background:#2b3566}
   .carousel-dots{display:flex;gap:6px;justify-content:center;margin-top:7px}
   .carousel-dots button{width:6px;height:6px;border-radius:99px;border:0;background:#4b557f;cursor:pointer;transition:width .2s ease,background .2s ease}
@@ -379,7 +379,10 @@
       column-gap:0;
       row-gap:8px;
     }
-    .deliverable-carousel{flex-basis:200px;width:200px;max-width:200px}
+    .deliverable-carousel{flex-basis:200px;width:200px;max-width:calc(100% - 72px)}
+    .carousel-btn{top:104px;width:34px;height:54px;border-radius:12px;font-size:26px;background:#20284b}
+    .carousel-btn[data-carousel-prev]{left:-40px}
+    .carousel-btn[data-carousel-next]{right:-40px}
     .carousel-card img{height:245px}
     table{display:table;max-width:none;overflow-x:visible}
     .journal-head-scroll{overflow:hidden}

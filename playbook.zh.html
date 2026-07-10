@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +7,14 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/co-red-star-favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/co-red-star-favicon-180.png">
 <link rel="shortcut icon" href="assets/favicon/favicon.ico">
-<title>The Replicable Playbook · born from Spot On!</title>
+<title>可复制手册 · 来自 Spot On!</title>
 <style>
   :root{
     --bg:#0f1226; --card:#1a1f3a; --ink:#e8ebff; --muted:#9aa3c7;
     --done:#3ddc97; --doing:#ffce54; --todo:#3a4170; --accent:#7c83ff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);padding:28px;line-height:1.6}
+  body{font-family:"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);padding:28px;line-height:1.75}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
   .top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px}
@@ -22,7 +22,7 @@
   .hero-title{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .hero-logo{width:34px;height:34px;border-radius:9px;flex:0 0 auto}
   .motto{color:var(--accent);font-style:italic;font-size:14px;margin-bottom:6px}
-  .sub{color:var(--muted);margin-bottom:22px;font-size:13px;max-width:760px}
+  .sub{color:var(--muted);margin-bottom:22px;font-size:13px;max-width:800px}
   .backlink{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(90deg,var(--accent),var(--done));color:#0f1226;font-weight:700;font-size:13.5px;padding:10px 20px;border-radius:99px;text-decoration:none;box-shadow:0 3px 14px rgba(124,131,255,.4);white-space:nowrap;transition:.15s}
   .backlink:hover{text-decoration:none;transform:translateY(-1px);box-shadow:0 5px 18px rgba(124,131,255,.55)}
   .grid{display:grid;gap:18px}
@@ -30,12 +30,10 @@
   .card h2{font-size:16px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
   .lead{font-size:13.5px;color:var(--muted)}
   .lead b{color:var(--ink)}
-  /* how-to two-col */
   .twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .mini{background:var(--todo);border-radius:12px;padding:14px 16px}
   .mini .t{font-weight:700;margin-bottom:4px;font-size:14px}
   .mini .d{font-size:12.5px;color:var(--muted)}
-  /* stage pipeline */
   .stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
   .stage{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(45,53,96,.82),rgba(26,31,58,.96));border-radius:16px;padding:16px 16px 18px;border:1px solid rgba(124,131,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
   .stage::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:rgba(124,131,255,.5)}
@@ -45,7 +43,6 @@
   .stage .summary{font-size:12.8px;color:var(--ink);line-height:1.65;margin-bottom:12px}
   .stage .points{display:flex;flex-wrap:wrap;gap:8px}
   .stage .points span{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;background:rgba(124,131,255,.10);border:1px solid rgba(124,131,255,.22);font-size:11.5px;color:var(--muted);line-height:1.35}
-  /* launch section */
   .launch-card{position:relative;overflow:hidden;background:
     radial-gradient(circle at top right,rgba(124,131,255,.16),transparent 34%),
     linear-gradient(180deg,rgba(26,31,58,.98),rgba(13,16,33,.98))}
@@ -67,6 +64,13 @@
   .launch-note p{font-size:12.8px;color:var(--muted);line-height:1.7}
   .launch-note .price{display:none}
   .launch-note strong{color:var(--ink)}
+  .check li{font-size:13px;color:var(--muted);margin:5px 0;list-style:none}
+  .check li::before{content:"☐";margin-right:8px;color:var(--accent)}
+  .foot{color:var(--muted);font-size:12px;margin-top:22px;text-align:center}
+  @media(max-width:720px){
+    body{padding:18px}
+    .twocol{grid-template-columns:1fr}
+  }
   @media(max-width:980px){
     .road{grid-template-columns:repeat(2,minmax(0,1fr))}
     .launch-notes{grid-template-columns:1fr}
@@ -74,145 +78,133 @@
   @media(max-width:560px){
     .road{grid-template-columns:1fr}
   }
-  /* checklist */
-  .check li{font-size:13px;color:var(--muted);margin:5px 0;list-style:none}
-  .check li::before{content:"☐";margin-right:8px;color:var(--accent)}
-  .foot{color:var(--muted);font-size:12px;margin-top:22px;text-align:center}
 </style>
 </head>
 <body>
   <div class="top">
     <div>
       <div class="hero-title">
-        <h1>📘 The Replicable Playbook · born from Spot On!</h1>
+        <h1>📘 可复制手册 · 来自 Spot On!</h1>
         <img class="hero-logo" src="assets/brand/spoton-icon-B-cobalt.png" alt="Spot On official logo">
       </div>
-      <div class="motto">Build &amp; launch a WeChat mini-game with AI — from zero code.</div>
+      <div class="motto">用 AI 从零代码搭建并上线微信小游戏。</div>
     </div>
-    <a class="backlink" href="index.html">← Back to Portfolio Home</a>
+    <a class="backlink" href="index.zh.html">← 返回作品集主页</a>
   </div>
   <div class="sub">
-    A step-by-step recipe distilled from a real project: a humanities-background, non-technical founder building and shipping an ad-monetized (IAA) WeChat mini-game with AI tools (Claude, ChatGPT). Reusable — anyone can follow this to build their own.
+    这是一份从真实项目中提炼出来的分步配方：一位文科背景、非技术创作者，借助 AI 工具（Claude、ChatGPT）搭建并上线一款广告变现（IAA）微信小游戏。它是可复用的，任何人都可以照着这套方法搭建自己的项目。
   </div>
 
   <div class="grid">
 
-    <!-- How to use -->
     <div class="card">
-      <h2>🧭 How to use this handbook</h2>
-      <div class="lead" style="margin-bottom:12px">Two records work together. Don't confuse them:</div>
+      <h2>🧭 如何使用这份手册</h2>
+      <div class="lead" style="margin-bottom:12px">有两类记录需要配合使用，不要混在一起：</div>
       <div class="twocol">
-        <div class="mini"><div class="t">📓 Learning Journal = a <i>diary</i></div><div class="d">What happened <b>today</b> — dated, with the story and the feelings. One entry per work day.</div></div>
-        <div class="mini"><div class="t">📘 Playbook = a <i>recipe</i></div><div class="d">What to <b>do next time</b> — timeless, de-personalized steps, organized by stage. This page.</div></div>
+        <div class="mini"><div class="t">📓 学习日志 = <i>日记</i></div><div class="d">记录<b>今天</b>发生了什么，有日期、有故事、有情绪。每个工作日一条。</div></div>
+        <div class="mini"><div class="t">📘 Playbook = <i>菜谱</i></div><div class="d">记录<b>下次怎么做</b>，不依赖具体日期，去个人化，按阶段整理。这一页就是 Playbook。</div></div>
       </div>
       <div class="lead" style="margin-top:12px">
-        You don't read the playbook daily. You <b>add</b> to it whenever you crack a repeatable step, and you <b>use</b> it when: ① building a second game, ② showing your method to an employer, ③ teaching someone else.
+        你不需要每天阅读 playbook。每当你破解了一个可重复的步骤，就把它<b>补充</b>进来；当你要做第二款游戏、向雇主展示方法论、或者教别人复刻时，再拿出来<b>使用</b>。
       </div>
     </div>
 
-    <!-- Stage pipeline -->
     <div class="card" id="six-stages">
-      <h2>🪜 The 6 Stages (Pick → Operate)</h2>
+      <h2>🪜 6 个阶段（选题 → 运营）</h2>
       <div class="stages" id="stages"></div>
     </div>
 
-    <!-- Launch roadmap -->
     <div class="card launch-card">
-      <h2>🚀 Launch Roadmap — from build to published &amp; earning</h2>
-      <div class="lead" style="margin-bottom:16px">The 8-step path to getting a mini-game live on WeChat (ad-only / individual entity).</div>
+      <h2>🚀 上线路线图：从搭建到发布与变现</h2>
+      <div class="lead" style="margin-bottom:16px">一款微信小游戏上线的 8 步路径（纯广告变现 / 个人主体）。</div>
       <div class="roadwrap"><div class="road" id="road"></div></div>
     </div>
 
     <div class="launch-notes">
       <div class="launch-note">
-        <div class="meta">Policy</div>
-        <h3>No game license needed</h3>
-        <p>That gate is mainly for in-app-purchase games. Ad-only IAA keeps the launch path much lighter, so this model is structurally easier to ship as an individual builder.</p>
+        <div class="meta">政策</div>
+        <h3>不需要游戏版号</h3>
+        <p>版号主要卡在内购游戏。纯广告变现 IAA 的上线门槛更轻，个人主体也更容易把整条路径先跑通。</p>
       </div>
       <div class="launch-note">
-        <div class="meta">Cost</div>
+        <div class="meta">成本</div>
         <div class="price">¥30</div>
-        <h3>Annual verification renewal</h3>
-        <p>WeChat verification is a 30 RMB annual renewal fee for individual mini-program entities. Government filing is free, so the fixed cost at launch still stays relatively controlled.</p>
+        <h3>年度认证费</h3>
+        <p>微信认证对个人主体小程序来说是 30 RMB 的年审费用，政府备案免费，所以前期固定成本相对可控，也更适合先小步上线验证。</p>
       </div>
       <div class="launch-note">
-        <div class="meta">Architecture</div>
-        <h3>No backend at first</h3>
-        <p><strong>Local progress + WeChat login + friend leaderboard data</strong> is enough for a simple casual game. Add CloudBase or your own backend only when the product actually needs global state.</p>
+        <div class="meta">架构</div>
+        <h3>一开始不用后端</h3>
+        <p><strong>本地进度 + 微信登录 + 好友排行榜数据域</strong>，已经足够支撑一个轻量休闲小游戏。只有真的需要全局数据时，再补 CloudBase 或自建后端。</p>
       </div>
     </div>
 
-    <!-- Reusable assets -->
     <div class="card">
-      <h2>🧰 Reusable Systems Built From This Project</h2>
-      <div class="lead" style="margin-bottom:14px">This project did not end as a single isolated experiment. It produced reusable systems I can apply to future AI-built products, making the next project faster, cleaner, and easier to manage.</div>
+      <h2>🧰 这个项目沉淀出的可复用系统</h2>
+      <div class="lead" style="margin-bottom:14px">这个项目不是孤立的项目尝试。它沉淀出了一套我之后可以继续复用的工作系统，让下一个 AI 产品项目更快、更清晰，也更容易管理。</div>
       <ul class="check" id="assets"></ul>
     </div>
 
   </div>
 
-  <div class="foot">A living document — to update, edit the small data arrays in the &lt;script&gt; below (cheap, no image regeneration). Open this file in any browser. · Spot On! 找对了</div>
+  <div class="foot">这是一份持续更新的 living document。需要更新时，编辑下方 &lt;script&gt; 里的小数据数组即可；成本低，不需要重新生成图片。· Spot On! 找对了</div>
 
 <script>
-/* ====== Edit the data below; the page re-renders itself ====== */
-
 const stages = [
-  {ic:"🎯", nm:"Stage 0 · Pick &amp; Charter", steps:[
-    "Pick an IAA-friendly, low-effort casual genre (spot-the-difference / quiz / idle).",
-    "Decide monetization (ad-only IAA) and entity (individual vs company).",
-    "Set up a 3-pillar record folder: learning journal · deliverables · playbook."
+  {ic:"🎯", nm:"Stage 0 · 选题与项目章程", steps:[
+    "选择适合 IAA 的低制作成本休闲品类（找不同 / 答题 / 放置类等）。",
+    "确定变现方式（纯广告 IAA）和主体类型（个人或公司）。",
+    "搭建三支柱记录文件夹：学习日志 · 可交付物 · playbook。"
   ]},
-  {ic:"🧱", nm:"Stage 1 · Setup &amp; Account", steps:[
-    "Install Cocos Dashboard (via winget) + the editor (Cocos Creator 3.8 LTS).",
-    "Register a Cocos account; create a new Empty(2D) project (English-only path).",
-    "⚙️ Set Design Resolution + Fit per target device (phone portrait = 720×1280, both Fits checked = no stretch).",
-    "Register a WeChat mini-game account + install WeChat DevTools."
+  {ic:"🧱", nm:"Stage 1 · 环境与账号", steps:[
+    "安装 Cocos Dashboard（可用 winget）和编辑器（Cocos Creator 3.8 LTS）。",
+    "注册 Cocos 账号；创建新的 Empty(2D) 项目，路径尽量使用英文。",
+    "设置 Design Resolution + Fit：竖屏手机可用 720×1280，两个 Fit 都勾选，避免拉伸。",
+    "注册微信小游戏账号，并安装微信开发者工具。"
   ]},
-  {ic:"🛠️", nm:"Stage 2 · Build", steps:[
-    "Have AI write the core gameplay script into /assets; attach it to the Canvas node; press ▶.",
-    "Drive difficulty by a rule, not by hand (one formula = infinite levels).",
-    "Make layout responsive (uniform scale / SHOW_ALL) so text never stretches.",
-    "Debug by finding which LAYER the bug is in (engine settings vs your code)."
+  {ic:"🛠️", nm:"Stage 2 · 搭建游戏", steps:[
+    "让 AI 把核心玩法脚本写进 /assets；把脚本挂到 Canvas 节点；点击运行。",
+    "用规则驱动难度，而不是手工调每一关：一个公式可以生成无限关卡。",
+    "用 uniform scale / SHOW_ALL 做响应式布局，避免文字和画面被拉伸。",
+    "调 bug 时先判断是哪一层出了问题：引擎设置层，还是自己的代码层。"
   ]},
-  {ic:"📺", nm:"Stage 3 · Monetize (IAA)", steps:[
-    "Ad-only + individual entity → no game license (版号) needed.",
-    "Become a 'traffic owner' and add the WeChat ad plugin (rewarded video / interstitial).",
-    "Design ad placements: hint / revive / unlock-level.",
-    "No backend required for a simple game."
+  {ic:"📺", nm:"Stage 3 · 广告变现（IAA）", steps:[
+    "纯广告 + 个人主体通常不需要游戏版号。",
+    "开通流量主，并接入微信广告插件（激励视频 / 插屏广告）。",
+    "设计广告点位：提示、复活、解锁关卡等。",
+    "简单游戏先不做后端。"
   ]},
-  {ic:"📋", nm:"Stage 4 · Compliance &amp; Launch", steps:[
-    "Get the software copyright certificate (~10–15 days, can expedite).",
-    "Complete the mandatory government filing (free, ~7–20 working days).",
-    "Submit for review in WeChat DevTools (first review ~1–2 working days).",
-    "Cost reminder: WeChat verification for an individual mini-program entity is a 30 RMB annual renewal fee."
+  {ic:"📋", nm:"Stage 4 · 合规与上线", steps:[
+    "办理软件著作权证书（约 10–15 天，可加急）。",
+    "完成政府备案（免费，约 7–20 个工作日）。",
+    "在微信开发者工具里提交审核（首次审核约 1–2 个工作日）。",
+    "成本提醒：个人主体小程序的微信认证是 30 RMB 的年审费用。"
   ]},
-  {ic:"📈", nm:"Stage 5 · Operate", steps:[
-    "Publish, watch the data, iterate.",
-    "Spot-the-difference grows by swapping images — keep a content pipeline.",
-    "Optional art styles: pixel / landscape / portrait / perler-bead puzzles."
+  {ic:"📈", nm:"Stage 5 · 运营", steps:[
+    "发布后看数据，持续迭代。",
+    "找不同游戏可以靠换图持续扩展内容，要保留内容生产流水线。",
+    "可选美术方向：像素、风景、人物、拼豆风谜题等。"
   ]}
 ];
 
-// Launch roadmap: a reusable sequence from build to operation.
 const roadmap = [
-  {st:"Build the Game", cap:"Design gameplay, place ad slots.", time:"Scope + implementation"},
-  {st:"Account &amp; Entity", cap:"Register WeChat mini-game (individual entity).", time:"Registration step"},
-  {st:"Software Copyright", cap:"Obtain the software copyright certificate.", time:"≈ 10–15 days"},
-  {st:"Government Filing", cap:"Mandatory filing (ICP-style), platform-submitted.", time:"Free · ≈ 7–20 working days"},
-  {st:"Integrate Ads", cap:"Become traffic owner + add WeChat ad plugin.", time:"A few days"},
-  {st:"Submit for Review", cap:"Upload via WeChat DevTools, wait for approval.", time:"≈ 1–2 working days"},
-  {st:"Go Live", cap:"Publish to players.", time:"Release step"},
-  {st:"Operate", cap:"Track data, refresh images, earn ad revenue.", time:"Continuous iteration"}
+  {st:"做游戏", cap:"设计玩法，预留广告位。", time:"范围与实现"},
+  {st:"账号 & 主体", cap:"注册微信小游戏（个人主体）。", time:"注册步骤"},
+  {st:"软件著作权", cap:"办理软件著作权证书。", time:"约 10–15 天"},
+  {st:"政府备案", cap:"强制备案，通常由平台提交。", time:"免费 · 约 7–20 个工作日"},
+  {st:"接入广告", cap:"开通流量主 + 接入微信广告插件。", time:"几天"},
+  {st:"提交审核", cap:"通过微信开发者工具上传并等待审核。", time:"约 1–2 个工作日"},
+  {st:"正式上线", cap:"发布给玩家。", time:"发布步骤"},
+  {st:"运营", cap:"看数据、换图、赚取广告收入。", time:"持续迭代"}
 ];
 
 const assets = [
-  "Prompt patterns for turning product ideas into playable features",
-  "A project folder structure for tracking learning, deliverables, and launch work",
-  "A launch checklist for account setup, filing, review, and monetization",
-  "A bug-resolution log that turns solved problems into future shortcuts"
+  "把产品想法转成可玩功能的提示词模式",
+  "用于管理学习记录、交付物和上线工作的项目文件结构",
+  "覆盖账号、备案、审核和变现的上线检查清单",
+  "把已解决问题沉淀为未来捷径的 bug 复盘记录"
 ];
 
-/* ====== Renderers ====== */
 document.getElementById("stages").innerHTML = stages.map(s=>`
   <div class="stage">
     <div class="head"><span class="ic">${s.ic}</span><span class="nm">${s.nm}</span></div>

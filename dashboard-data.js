@@ -51,14 +51,27 @@ const roadmap = [
 ];
 
 const pillars = [
-  {icon:"📓", title:"① AI 学习日志", titleEn:"① AI Learning Journal", desc:"主线 · 文科生靠AI解决技术问题", descEn:"Mainline · humanities background solving technical problems with AI", stat:"8 个工作日 · 最新：首篇公众号发布 + 内容工作流固化 + 求职叙事强化", statEn:"8 workdays · Latest: first WeChat article published + content workflow codified + career narrative strengthened"},
-  {icon:"🎮", title:"② 作品交付", titleEn:"② Shipped Proof", desc:"上线游戏 + 简历素材", descEn:"Shipped game + resume material", stat:"V3《找对了大师》：30关大师区+段位+复活广告位；网页版已入作品集，微信正式包就绪", statEn:"V3 Spot On!找对了大师: 30 Master-tier levels + ranks + revive ad placement; web build now in portfolio, WeChat package ready"},
-  {icon:"📘", title:"③ 可复制SOP", titleEn:"③ Replicable SOP", desc:"整套流程方法论", descEn:"End-to-end operating method", stat:"新增：Flomo → 日志 → 社媒草稿 → 微信审阅稿 → 公开文章记录的 wrap-up 闭环", statEn:"Added: Flomo → journal → social draft → WeChat review copy → public article record wrap-up loop"},
+  {icon:"📓", title:"① AI 学习日志", titleEn:"① AI Learning Journal", desc:"主线 · 文科生靠AI解决技术问题", descEn:"Mainline · humanities background solving technical problems with AI", stat:"10 个工作日 · 最新：第三篇公众号发布 + V3 产品故事公开化", statEn:"10 workdays · Latest: third WeChat article published + V3 product story made public"},
+  {icon:"🎮", title:"② 作品交付", titleEn:"② Shipped Proof", desc:"上线游戏 + 简历素材", descEn:"Shipped game + resume material", stat:"V3 字幕 Demo + 第三篇正式微信文章已公开；30关大师区+段位+连击+复活广告位", statEn:"V3 captioned demo and third published WeChat article are now public; includes a 30-level Master Zone, ranks, combos, and a revive ad placement"},
+  {icon:"📘", title:"③ 可复制SOP", titleEn:"③ Replicable SOP", desc:"整套流程方法论", descEn:"End-to-end operating method", stat:"新增：API-first 微信发布流程 + 备案预填清单 + Flomo 到公开证据的 wrap-up 闭环", statEn:"Added: API-first WeChat publishing, a prefilled filing checklist, and the Flomo-to-public-evidence wrap-up loop"},
 ];
 
 // Published public content evidence. Use official published-page metadata,
 // not internal dashboard draft titles or local review links.
 const publishedPosts = [
+  {
+    id:"wechat-20260714-spoton-v3-master-zone",
+    date:"2026-07-14",
+    title:"SpotOn V3 首次亮相：第31关后，游戏才算正式开始",
+    titleEn:"SpotOn V3 debuts: the real game begins after Level 31",
+    platform:"微信公众号",
+    platformEn:"WeChat Official Account",
+    description:"从简单原型到 V3 完整版本：我用 AI 做市场研究、设计升级方向、调度开发和上线流程，把一个 idea一步步推向正式发布。距离微信正式上线，又近了一步。",
+    descriptionEn:"From a simple prototype to a complete V3: I used AI for market research, feature direction, development orchestration, and launch preparation, moving the idea one step closer to its official WeChat release.",
+    url:"https://mp.weixin.qq.com/s/MyX_hqhz-AR60JOz-oqu3Q",
+    coverImage:"assets/wechat/spoton-v3-master-zone-cover.card.webp",
+    coverAlt:"Cover image for the third published SpotOn WeChat post about the V3 Master Zone"
+  },
   {
     id:"wechat-20260709-spoton-m2-timer",
     date:"2026-07-09",
@@ -79,7 +92,7 @@ const publishedPosts = [
     titleEn:"The first Spot On!找对了大师 mini-game is live",
     platform:"微信公众号",
     platformEn:"WeChat Official Account",
-    description:"Hi 大家，我的公众号终于正式启动啦！这篇记录了 Corrine 作为一个零代码背景的大纯文科生如何跟 AI 搭档，把第一个可玩的 SpotOn小游戏从灵感做成 MVP，在天马行空的脑宇宙中解锁了AI新手村的第一块小地图~",
+    description:"Hi 大家，我的公众号终于正式启动啦！这篇记录了阿Co作为一个零代码背景的大纯文科生如何跟 AI 搭档，把第一个可玩的 SpotOn小游戏从灵感做成 MVP，在天马行空的脑宇宙中解锁了AI新手村的第一块小地图~",
     descriptionEn:"Hi everyone, my WeChat Official Account is officially live. This post documents how Corrine, a humanities graduate with no coding background, partnered with AI to turn her first playable Spot On!找对了大师 mini-game from an idea into an MVP.",
     url:"https://mp.weixin.qq.com/s/C52zmMGwODzMX6DIZVT7jg",
     coverImage:"assets/wechat/spoton-first-wechat-cover.card.webp",
@@ -99,4 +112,6 @@ const journal = [
   {date:"2026-07-04", day:"06（续）", ms:"M4", result:"作品集上线 https://cojeh.github.io 🌐；注册微信小游戏《找对了大师》；备案首交被驳回（名称不一致）当天修复重交 ✅——官方审核时钟开始走", resultEn:"Portfolio live at https://cojeh.github.io; registered the WeChat mini-game Spot On!找对了大师; first filing submission rejected due to a name mismatch, fixed and resubmitted the same day. The official review clock is now running.", link:"01_learning-journal/2026-07-04_entry-08.md"},
   {date:"2026-07-06", day:"07", ms:"M4 等待期", result:"项目展示系统加固：明确内部/公开两套 dashboard，恢复 dashboard-data.js 单一数据源，并补齐 AGENTS/CLAUDE 规则", resultEn:"Hardened the project showcase system: separated internal and public dashboards, restored dashboard-data.js as the single source of truth, and completed the AGENTS/CLAUDE rules.", link:"01_learning-journal/2026-07-06_entry-09.md"},
   {date:"2026-07-07", day:"08", ms:"M4 等待期", result:"首篇 SpotOn 微信公众号文章正式发布；从 Flomo 纳入“项目经验”、内容工作流复用、AI 改动可逆备份等复盘，并生成新的微信审阅稿素材", resultEn:"Published the first Spot On!找对了大师 WeChat Official Account article; added project experience, reusable content workflow, and reversible AI change backups to the retrospective, and generated new review-copy assets.", link:"01_learning-journal/2026-07-07_entry-10.md"},
+  {date:"2026-07-08—13", day:"09", ms:"M4 等待期", result:"第二篇公众号正式发布；固化 API-first 内容流程；完成 V3 字幕 Demo、AI 工作流图、备案预填清单和 V3 微信审阅包", resultEn:"Published the second WeChat article, codified an API-first content workflow, and completed the V3 captioned demo, AI workflow diagrams, prefilled filing checklist, and V3 WeChat review package.", link:"01_learning-journal/2026-07-13_entry-11.md"},
+  {date:"2026-07-14", day:"10", ms:"M4 等待期", result:"第三篇 SpotOn 微信文章正式发布；V3 产品故事成为新的公开证据，并同步内部/公开 dashboard", resultEn:"Published the third SpotOn WeChat article, turning the V3 product story into new public evidence and syncing it across the internal and public dashboards.", link:"01_learning-journal/2026-07-14_entry-12.md"},
 ];

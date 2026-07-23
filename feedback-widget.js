@@ -7,7 +7,7 @@
    * Activation point: paste the Formspree endpoint between the quotes.
    * Example format: https://formspree.io/f/abcdefgh
    */
-  const FORM_ENDPOINT = "";
+  const FORM_ENDPOINT = "https://formspree.io/f/xykrdovb";
 
   const locale = document.documentElement.lang.toLowerCase().startsWith("zh")
     ? "zh"

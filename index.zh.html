@@ -23,6 +23,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&family=Noto+Serif+SC:wght@400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="feedback-widget.css">
+<script src="approved-comments-data.js" defer></script>
+<script src="feedback-widget.js" defer></script>
 <title>Corrine Chen · 客户成功与 AI 商业探索者</title>
 <style>
   :root{
@@ -530,6 +533,17 @@
         <span class="chip cert"><svg class="ic" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>安全、合规与身份基础认证（SC-900）</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- 精选访客留言 -->
+<section class="feedback-board-section" aria-labelledby="feedback-board-title">
+  <div class="wrap reveal">
+    <div class="feedback-board-heading">
+      <h2 id="feedback-board-title">精选访客留言</h2>
+      <p>仅展示访客授权公开、并经 Corrine 审核通过的精选反馈。</p>
+    </div>
+    <div data-feedback-board></div>
   </div>
 </section>
 

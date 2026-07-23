@@ -23,6 +23,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="feedback-widget.css">
+<script src="approved-comments-data.js" defer></script>
+<script src="feedback-widget.js" defer></script>
 <title>Corrine Chen · Client Success & AI Business Builder</title>
 <style>
   :root{
@@ -530,6 +533,17 @@
         <span class="chip cert"><svg class="ic" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Security, Compliance &amp; Identity Fundamentals (SC-900)</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- APPROVED VISITOR NOTES -->
+<section class="feedback-board-section" aria-labelledby="feedback-board-title">
+  <div class="wrap reveal">
+    <div class="feedback-board-heading">
+      <h2 id="feedback-board-title">Approved Visitor Notes</h2>
+      <p>Selected feedback shared with permission and published only after review.</p>
+    </div>
+    <div data-feedback-board></div>
   </div>
 </section>
 

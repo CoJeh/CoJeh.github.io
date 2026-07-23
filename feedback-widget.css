@@ -8,6 +8,10 @@
   --feedback-line: #dcd7cc;
   --feedback-danger: #a73424;
   --feedback-success: #17633c;
+  --feedback-launcher-bg: #c0402b;
+  --feedback-launcher-hover: #9f3022;
+  --feedback-launcher-text: #fff;
+  --feedback-launcher-ring: rgba(192, 64, 43, 0.62);
   --feedback-shadow: 0 24px 70px rgba(35, 42, 73, 0.24);
   --feedback-radius: 16px;
   --feedback-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
@@ -24,6 +28,10 @@ body.feedback-context-dark {
   --feedback-line: #3b4352;
   --feedback-danger: #ff9a8d;
   --feedback-success: #7ed9a8;
+  --feedback-launcher-bg: #f4d758;
+  --feedback-launcher-hover: #ffe781;
+  --feedback-launcher-text: #17150f;
+  --feedback-launcher-ring: rgba(244, 215, 88, 0.66);
   --feedback-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
 }
 
@@ -33,29 +41,41 @@ body.feedback-context-dark {
   bottom: max(20px, env(safe-area-inset-bottom));
   z-index: 80;
   display: inline-flex;
-  min-height: 52px;
+  min-height: 56px;
   align-items: center;
-  gap: 9px;
-  border: 1px solid color-mix(in srgb, var(--feedback-accent) 70%, transparent);
+  gap: 10px;
+  isolation: isolate;
+  border: 2px solid color-mix(in srgb, var(--feedback-launcher-text) 88%, transparent);
   border-radius: 999px;
-  padding: 0 18px 0 14px;
-  background: var(--feedback-accent);
-  color: #fff;
-  box-shadow: 0 12px 30px rgba(29, 79, 215, 0.28);
-  font: 700 14px/1 var(--feedback-font);
+  padding: 0 21px 0 15px;
+  background: var(--feedback-launcher-bg);
+  color: var(--feedback-launcher-text);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--feedback-launcher-bg) 24%, transparent),
+    0 16px 34px color-mix(in srgb, var(--feedback-launcher-bg) 38%, transparent);
+  font: 800 15px/1 var(--feedback-font);
+  letter-spacing: 0.01em;
   cursor: pointer;
   transition: transform 160ms ease, background-color 160ms ease,
     box-shadow 160ms ease;
 }
 
-body.feedback-context-dark .feedback-launcher {
-  color: #17150f;
-  box-shadow: 0 12px 30px rgba(244, 215, 88, 0.18);
+.feedback-launcher::before {
+  position: absolute;
+  z-index: -1;
+  inset: -2px;
+  border: 2px solid var(--feedback-launcher-ring);
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
 }
 
 .feedback-launcher:hover {
-  background: var(--feedback-accent-strong);
-  transform: translateY(-2px);
+  background: var(--feedback-launcher-hover);
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--feedback-launcher-bg) 28%, transparent),
+    0 20px 42px color-mix(in srgb, var(--feedback-launcher-bg) 46%, transparent);
 }
 
 .feedback-launcher:active {
@@ -73,16 +93,12 @@ body.feedback-context-dark .feedback-launcher {
 
 .feedback-launcher-icon {
   display: inline-grid;
-  width: 28px;
-  height: 28px;
+  width: 31px;
+  height: 31px;
   place-items: center;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  font-size: 17px;
-}
-
-body.feedback-context-dark .feedback-launcher-icon {
-  background: rgba(23, 21, 15, 0.12);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--feedback-launcher-text) 18%, transparent);
+  font-size: 18px;
 }
 
 .feedback-dialog {
@@ -410,6 +426,70 @@ body.feedback-context-dark .feedback-submit {
   color: var(--feedback-success);
 }
 
+.feedback-success-panel {
+  display: grid;
+  min-height: 330px;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  border: 1px solid color-mix(in srgb, var(--feedback-success) 28%, var(--feedback-line));
+  border-radius: var(--feedback-radius);
+  padding: 38px 24px;
+  background: color-mix(in srgb, var(--feedback-success) 7%, var(--feedback-surface));
+  text-align: center;
+}
+
+.feedback-success-panel[hidden] {
+  display: none;
+}
+
+.feedback-success-panel:focus {
+  outline: none;
+}
+
+.feedback-success-mark {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--feedback-success);
+  color: var(--feedback-surface);
+  font-size: 30px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.feedback-success-panel h3 {
+  margin: 4px 0 0;
+  color: var(--feedback-text);
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.feedback-success-panel p {
+  max-width: 36ch;
+  margin: 0;
+  color: var(--feedback-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.feedback-success-close {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  border: 1px solid var(--feedback-success);
+  border-radius: 999px;
+  padding: 0 22px;
+  background: var(--feedback-success);
+  color: var(--feedback-surface);
+  font: 750 13px/1 var(--feedback-font);
+  cursor: pointer;
+}
+
 .feedback-side-title {
   margin: 0 0 8px;
   color: var(--feedback-text);
@@ -558,25 +638,15 @@ body.feedback-modal-open {
 
 @media (max-width: 700px) {
   .feedback-launcher {
-    width: 54px;
-    height: 54px;
-    min-height: 54px;
-    justify-content: center;
-    padding: 0;
-  }
-
-  .feedback-launcher-label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
+    min-height: 52px;
+    padding: 0 17px 0 12px;
+    font-size: 13px;
   }
 
   .feedback-launcher-icon {
-    background: transparent;
-    font-size: 20px;
+    width: 29px;
+    height: 29px;
+    font-size: 17px;
   }
 
   .feedback-dialog {
@@ -638,10 +708,56 @@ body.feedback-modal-open {
 
 @media (prefers-reduced-motion: reduce) {
   .feedback-launcher,
+  .feedback-launcher::before,
+  .feedback-launcher-icon,
   .feedback-reaction-card,
   .feedback-submit,
   .feedback-email-fallback,
   .feedback-board-more {
     transition: none;
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .feedback-launcher::before {
+    animation: feedback-attention-ring 5.2s ease-out infinite;
+  }
+
+  .feedback-launcher-icon {
+    animation: feedback-icon-wave 5.2s ease-in-out infinite;
+  }
+}
+
+@keyframes feedback-attention-ring {
+  0%,
+  72%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  78% {
+    opacity: 0.7;
+  }
+  94% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+@keyframes feedback-icon-wave {
+  0%,
+  74%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  80% {
+    transform: rotate(-9deg) scale(1.08);
+  }
+  86% {
+    transform: rotate(8deg) scale(1.08);
+  }
+  92% {
+    transform: rotate(0deg) scale(1);
   }
 }

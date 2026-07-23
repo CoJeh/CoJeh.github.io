@@ -28,7 +28,7 @@
       name: "Name",
       optional: "Optional",
       anonymous: "Post as Anonymous",
-      namePlaceholder: "How should Corrine address you?",
+      namePlaceholder: "Hi Cool Beans, how may I address you?😉",
       email: "Reply email",
       emailPlaceholder: "you@example.com",
       comment: "Comment",
@@ -40,13 +40,15 @@
         "Private by default. Corrine can publish a note only when this permission is selected and she approves it.",
       submit: "Send privately",
       sending: "Sending...",
-      success: "Thank you. Your note was sent privately to Corrine.",
+      successTitle: "Message sent successfully",
+      success: "Thank you. Your private note has reached Corrine.",
+      successClose: "Done",
       notConfigured:
         "Online sending is not active yet. Please use the email option.",
       failed: "The message could not be sent. Please use the email option.",
       emailFallback: "Email instead",
       contactTitle: "Stay in touch",
-      contactCopy: "You can also email Corrine directly or follow her WeChat Official Account.",
+      contactCopy: "You can also follow Corrine's WeChat Official Account or email her directly.",
       qrAlt: "QR code for Corrine's WeChat Official Account",
       qrCaption: "Scan with WeChat to follow",
       required: "Please enter a comment.",
@@ -71,14 +73,14 @@
       approved: "Approved",
     },
     zh: {
-      launcher: "留下反馈",
+      launcher: "欢迎与我交流",
       title: "留下私密反馈",
       intro: "留言会私密发送给 Corrine 审核，不会自动公开。",
       close: "关闭反馈窗口",
       name: "姓名",
       optional: "选填",
       anonymous: "以 Anonymous 匿名提交",
-      namePlaceholder: "Corrine 应该如何称呼你？",
+      namePlaceholder: "大侠请留名🙇‍♀️",
       email: "回复邮箱",
       emailPlaceholder: "you@example.com",
       comment: "留言",
@@ -90,12 +92,14 @@
         "默认保持私密。只有你勾选公开许可，并经 Corrine 审核通过后，留言才可能公开。",
       submit: "私密发送",
       sending: "发送中...",
-      success: "谢谢，你的留言已私密发送给 Corrine。",
+      successTitle: "留言发送成功",
+      success: "谢谢，你的私密留言已成功发送给 Corrine。",
+      successClose: "完成",
       notConfigured: "在线发送尚未启用，请使用邮件选项。",
       failed: "留言未能发送，请使用邮件选项。",
       emailFallback: "改用邮件",
       contactTitle: "保持联系",
-      contactCopy: "你也可以直接发送邮件，或关注 Corrine 的微信公众号。",
+      contactCopy: "你也可以关注 Corrine 的微信公众号，或直接发送邮件。",
       qrAlt: "Corrine 微信公众号二维码",
       qrCaption: "微信扫码关注公众号",
       required: "请填写留言内容。",
@@ -181,6 +185,12 @@
             </div>
             <button class="feedback-dialog-close" type="button" aria-label="${t.close}">×</button>
           </div>
+          <div class="feedback-success-panel" role="status" aria-live="polite" tabindex="-1" hidden>
+            <div class="feedback-success-mark" aria-hidden="true">✓</div>
+            <h3>${t.successTitle}</h3>
+            <p>${t.success}</p>
+            <button class="feedback-success-close" type="button">${t.successClose}</button>
+          </div>
           <form class="feedback-form" novalidate>
             <div class="feedback-field">
               <div class="feedback-label-row">
@@ -256,7 +266,10 @@
     document.body.append(launcher, dialog);
 
     const form = dialog.querySelector(".feedback-form");
+    const dialogShell = dialog.querySelector(".feedback-dialog-shell");
     const close = dialog.querySelector(".feedback-dialog-close");
+    const successPanel = dialog.querySelector(".feedback-success-panel");
+    const successClose = dialog.querySelector(".feedback-success-close");
     const name = dialog.querySelector('[name="visitor_name"]');
     const anonymous = dialog.querySelector('[name="anonymous_selected"]');
     const comment = dialog.querySelector('[name="message"]');
@@ -272,6 +285,8 @@
 
     function openDialog() {
       setStatus("", "");
+      form.hidden = false;
+      successPanel.hidden = true;
       dialog.showModal();
       document.body.classList.add("feedback-modal-open");
       window.setTimeout(() => comment.focus(), 0);
@@ -380,7 +395,11 @@
         form.reset();
         syncAnonymousState();
         buildMailto();
-        setStatus(t.success, "success");
+        setStatus("", "");
+        form.hidden = true;
+        successPanel.hidden = false;
+        dialogShell.scrollTop = 0;
+        window.setTimeout(() => successPanel.focus(), 0);
       } catch (error) {
         console.warn("Feedback submission failed.", error);
         setStatus(t.failed, "error");
@@ -393,6 +412,7 @@
 
     launcher.addEventListener("click", openDialog);
     close.addEventListener("click", closeDialog);
+    successClose.addEventListener("click", closeDialog);
     anonymous.addEventListener("change", syncAnonymousState);
     form.addEventListener("input", buildMailto);
     form.addEventListener("change", buildMailto);

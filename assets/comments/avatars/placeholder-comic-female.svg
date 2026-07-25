@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Temporary comic female avatar placeholder</title>
+  <rect width="256" height="256" rx="128" fill="#FEFCF6"/>
+  <circle cx="128" cy="128" r="116" fill="#FAF6EB" stroke="#2B7FD8" stroke-width="8"/>
+  <path d="M70 218c9-41 30-62 58-62s49 21 58 62" fill="#2B7FD8"/>
+  <path d="M82 111c0-46 20-75 48-75 32 0 51 28 51 73v33c0 18 4 29 13 39-14 8-26 9-39 3H99c-14 6-27 5-40-3 12-13 18-29 18-49z" fill="#4A342E"/>
+  <path d="M91 104c0-37 14-58 38-58 27 0 42 22 42 57v20c0 32-17 54-43 54-23 0-37-21-37-53z" fill="#F4D7B8"/>
+  <path d="M91 104c2-38 17-62 42-62 20 0 34 13 39 38-18-1-34-10-44-24-9 20-21 37-37 48z" fill="#4A342E"/>
+  <path d="M106 120h8m29 0h8" stroke="#1A1A2E" stroke-width="6" stroke-linecap="round"/>
+  <path d="M117 146c7 6 15 6 22 0" fill="none" stroke="#C0402B" stroke-width="5" stroke-linecap="round"/>
+  <path d="M171 68l6 12 13 2-10 9 3 13-12-7-12 7 3-13-10-9 13-2z" fill="#F4D758"/>
+</svg>

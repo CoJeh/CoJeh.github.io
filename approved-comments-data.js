@@ -17,6 +17,10 @@ window.APPROVED_COMMENTS = Object.freeze([
     commentEn:
       "This is amazing, Co! I loved that my history was still there after I left and came back. The reactions should allow multiple selections because I wanted to choose them all, haha. The layout is great, and the lower-right contact area could feel more balanced, perhaps by centering the WeChat QR code. I also considered voice feedback, but text is probably better.",
     commentEnAI: true,
+    authorReply:
+      "欢迎第一位“沙发访客” Xinjie 见解满满的留言，给了 Corrine 很多新的灵感！必须全部满足，已经全面升级了留言板块。感谢每一位助力 Corrine 让这个空间变得更好的小伙伴～🙏🌸",
+    authorReplyEn:
+      "Welcome, Xinjie — our very first “front-row visitor”! Your insightful comment gave me new inspirations. All set! The Comments Board has now received a full upgrade. Thank you to everyone helping Corrine make this space better. 🙏🌸",
     avatarType: "initial",
     avatarKey: "",
     avatarSrc: "",

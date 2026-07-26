@@ -43,15 +43,15 @@ const roadmap = [
   {t:"做游戏", tEn:"Build the game", c:"设计玩法、留广告位", cEn:"Design gameplay and reserve ad slots", time:"进行中", timeEn:"Ongoing", status:"doing", here:true},
   {t:"账号 & 主体", tEn:"Account & entity", c:"微信小游戏「找对了大师」（个人）", cEn:"WeChat mini-game Spot On!找对了大师 (individual entity)", time:"2026-07-04 完成", timeEn:"Completed Jul 4, 2026", status:"done"},
   {t:"软著", tEn:"Software copyright", c:"办软件著作权证书", cEn:"Apply for the software copyright certificate", time:"约 10–15 天", timeEn:"Approx. 10–15 days", status:"doing", here:true},
-  {t:"备案", tEn:"Government filing", c:"资质+小游戏备案已提交，等待审核", cEn:"Qualifications + mini-game filing submitted; awaiting review", time:"约 10 个工作日", timeEn:"Approx. 10 business days", status:"doing", here:true},
+  {t:"备案", tEn:"Government filing", c:"前置审批与小程序 ICP 备案均已通过", cEn:"Pre-approval and mini-program ICP filing both approved", time:"2026-07-24 完成", timeEn:"Completed Jul 24, 2026", status:"done"},
   {t:"接广告", tEn:"Integrate ads", c:"流量主 + 微信广告插件", cEn:"Traffic owner + WeChat ad plugin", time:"几天", timeEn:"A few days", status:"todo"},
-  {t:"提审", tEn:"Submit for review", c:"开发者工具上传、等审核", cEn:"Upload via Developer Tools; wait for review", time:"约 1–2 工作日", timeEn:"Approx. 1–2 business days", status:"todo"},
+  {t:"提审", tEn:"Submit for review", c:"上传正式代码并提交微信审核", cEn:"Upload the production build and submit it for WeChat review", time:"当前下一步", timeEn:"Current next step", status:"doing", here:true},
   {t:"上线", tEn:"Launch", c:"正式发布给玩家", cEn:"Publish for players", time:"即时", timeEn:"Immediate", status:"todo"},
   {t:"运营", tEn:"Operate", c:"看数据 / 换图 / 广告收入", cEn:"Watch data / swap images / ad revenue", time:"持续", timeEn:"Ongoing", status:"todo"},
 ];
 
 const pillars = [
-  {icon:"📓", title:"① AI 学习日志", titleEn:"① AI Learning Journal", desc:"主线 · 文科生靠AI解决技术问题", descEn:"Mainline · humanities background solving technical problems with AI", stat:"10 个工作日 · 最新：第三篇公众号发布 + V3 产品故事公开化", statEn:"10 workdays · Latest: third WeChat article published + V3 product story made public"},
+  {icon:"📓", title:"① AI 学习日志", titleEn:"① AI Learning Journal", desc:"主线 · 文科生靠AI解决技术问题", descEn:"Mainline · humanities background solving technical problems with AI", stat:"13 个工作日 · 最新：小程序 ICP 备案通过，转入正式代码审核与发布", statEn:"13 workdays · Latest: mini-program ICP filing approved; moving into code review and release"},
   {icon:"🎮", title:"② 作品交付", titleEn:"② Shipped Proof", desc:"上线游戏 + 简历素材", descEn:"Shipped game + resume material", stat:"V3 字幕 Demo + 第三篇正式微信文章已公开；30关大师区+段位+连击+复活广告位", statEn:"V3 captioned demo and third published WeChat article are now public; includes a 30-level Master Zone, ranks, combos, and a revive ad placement"},
   {icon:"📘", title:"③ 可复制SOP", titleEn:"③ Replicable SOP", desc:"整套流程方法论", descEn:"End-to-end operating method", stat:"新增：API-first 微信发布流程 + 备案预填清单 + Flomo 到公开证据的 wrap-up 闭环", statEn:"Added: API-first WeChat publishing, a prefilled filing checklist, and the Flomo-to-public-evidence wrap-up loop"},
 ];
@@ -114,4 +114,7 @@ const journal = [
   {date:"2026-07-07", day:"08", ms:"M4 等待期", result:"首篇 SpotOn 微信公众号文章正式发布；从 Flomo 纳入“项目经验”、内容工作流复用、AI 改动可逆备份等复盘，并生成新的微信审阅稿素材", resultEn:"Published the first Spot On!找对了大师 WeChat Official Account article; added project experience, reusable content workflow, and reversible AI change backups to the retrospective, and generated new review-copy assets.", link:"01_learning-journal/2026-07-07_entry-10.md"},
   {date:"2026-07-08—13", day:"09", ms:"M4 等待期", result:"第二篇公众号正式发布；固化 API-first 内容流程；完成 V3 字幕 Demo、AI 工作流图、备案预填清单和 V3 微信审阅包", resultEn:"Published the second WeChat article, codified an API-first content workflow, and completed the V3 captioned demo, AI workflow diagrams, prefilled filing checklist, and V3 WeChat review package.", link:"01_learning-journal/2026-07-13_entry-11.md"},
   {date:"2026-07-14", day:"10", ms:"M4 等待期", result:"第三篇 SpotOn 微信文章正式发布；V3 产品故事成为新的公开证据，并同步内部/公开 dashboard", resultEn:"Published the third SpotOn WeChat article, turning the V3 product story into new public evidence and syncing it across the internal and public dashboards.", link:"01_learning-journal/2026-07-14_entry-12.md"},
+  {date:"2026-07-20", day:"11", ms:"M4 备案推进", result:"小游戏前置审批通过；完成承诺书签署并正式提交小程序备案，进入平台审核与 12381 短信核验阶段", resultEn:"Mini-game pre-approval passed; signed the service commitment and formally submitted the mini-program filing, entering platform review and the 12381 SMS verification stage.", link:"01_learning-journal/2026-07-20_entry-13.md"},
+  {date:"2026-07-22", day:"12", ms:"M4 备案推进", result:"小程序备案通过平台初审；7月21日错过首次短信后申请重发，7月22日完成工信部核验，等待后续审核", resultEn:"Mini-program filing passed platform review; after missing the first SMS on Jul 21, requested a resend and completed MIIT verification on Jul 22; awaiting further review.", link:"01_learning-journal/2026-07-22_entry-14.md"},
+  {date:"2026-07-24", day:"13", ms:"M4 提审 + 备案", result:"小程序 ICP 备案通过通信管理局审核；明确备案成功不等于上线，下一步转入正式代码上传、审核与发布", resultEn:"Mini-program ICP filing passed the communications authority review; clarified that filing approval is not launch, and moved to production upload, code review, and release.", link:"01_learning-journal/2026-07-24_entry-15.md"},
 ];

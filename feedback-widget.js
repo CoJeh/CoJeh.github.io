@@ -17,7 +17,7 @@
   const locale = document.documentElement.lang.toLowerCase().startsWith("zh")
     ? "zh"
     : "en";
-  const isDashboard = /dashboard(?:\.en)?\.html$/i.test(location.pathname);
+  const isDashboard = /dashboard(?:\.en|-standalone)?\.html$/i.test(location.pathname);
   const source = isDashboard ? "spoton-dashboard" : "portfolio";
 
   if (isDashboard) document.body.classList.add("feedback-context-dark");

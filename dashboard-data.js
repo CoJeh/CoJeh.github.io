@@ -51,14 +51,40 @@ const roadmap = [
 ];
 
 const pillars = [
-  {icon:"📓", title:"① AI 学习日志", titleEn:"① AI Learning Journal", desc:"主线 · 文科生靠AI解决技术问题", descEn:"Mainline · humanities background solving technical problems with AI", stat:"13 个工作日 · 最新：小程序 ICP 备案通过，转入正式代码审核与发布", statEn:"13 workdays · Latest: mini-program ICP filing approved; moving into code review and release"},
-  {icon:"🎮", title:"② 作品交付", titleEn:"② Shipped Proof", desc:"上线游戏 + 简历素材", descEn:"Shipped game + resume material", stat:"V3 字幕 Demo + 第三篇正式微信文章已公开；30关大师区+段位+连击+复活广告位", statEn:"V3 captioned demo and third published WeChat article are now public; includes a 30-level Master Zone, ranks, combos, and a revive ad placement"},
-  {icon:"📘", title:"③ 可复制SOP", titleEn:"③ Replicable SOP", desc:"整套流程方法论", descEn:"End-to-end operating method", stat:"新增：API-first 微信发布流程 + 备案预填清单 + Flomo 到公开证据的 wrap-up 闭环", statEn:"Added: API-first WeChat publishing, a prefilled filing checklist, and the Flomo-to-public-evidence wrap-up loop"},
+  {icon:"📓", title:"① AI 学习日志", titleEn:"① AI Learning Journal", desc:"主线 · 文科生靠AI解决技术问题", descEn:"Mainline · humanities background solving technical problems with AI", stat:"14 个工作日 · 最新：公平性升级完成本地 QA，同日发布两篇微信文章", statEn:"14 workdays · Latest: fairness upgrade passed local QA and two WeChat articles were published on the same day"},
+  {icon:"🎮", title:"② 作品交付", titleEn:"② Shipped Proof", desc:"上线游戏 + 简历素材", descEn:"Shipped game + resume material", stat:"V3 字幕 Demo + 共五篇正式微信文章已公开；公平性升级候选版本已构建、尚未发布", statEn:"V3 captioned demo and five official WeChat articles are public; the fairness upgrade candidate is built but not yet released"},
+  {icon:"📘", title:"③ 可复制SOP", titleEn:"③ Replicable SOP", desc:"整套流程方法论", descEn:"End-to-end operating method", stat:"新增：API-first 微信发布、发布稿对照复盘、备案预填清单与 Flomo 到公开证据的 wrap-up 闭环", statEn:"Added: API-first WeChat publishing, published-vs-source review, a prefilled filing checklist, and the Flomo-to-public-evidence wrap-up loop"},
 ];
 
 // Published public content evidence. Use official published-page metadata,
 // not internal dashboard draft titles or local review links.
 const publishedPosts = [
+  {
+    id:"wechat-20260726-ai-content-system",
+    date:"2026-07-26",
+    title:"为什么第二篇只花了 1 小时？因为第一篇的坑都被我写成了规则",
+    titleEn:"Why did the second post take only one hour? Because I turned every first-post pitfall into a rule",
+    platform:"微信公众号",
+    platformEn:"WeChat Official Account",
+    description:"第二篇变快，不只是因为模板，而是我把业务目标、Agent 分工、数据流、交付证据与反馈画成了一套可复用架构。",
+    descriptionEn:"The second post became faster not just because of a template, but because I turned business goals, Agent roles, data flow, delivery evidence, and feedback into a reusable architecture.",
+    url:"https://mp.weixin.qq.com/s/hWD_50z5dhfCm4Dk2DdvuA",
+    coverImage:"assets/wechat/spoton-ai-content-system-cover.card.webp",
+    coverAlt:"Cover image for the SpotOn WeChat post about turning content-production lessons into a reusable AI system"
+  },
+  {
+    id:"wechat-20260726-ai-last-mile",
+    date:"2026-07-26",
+    title:"AI 帮我做出小游戏后，我发现最难的根本不是技术",
+    titleEn:"After AI helped me build a mini-game, I realized the hardest part was never the technology",
+    platform:"微信公众号",
+    platformEn:"WeChat Official Account",
+    description:"从零代码小游戏、AI 工作流到备案与真实世界的检验：真正拉开差距的，是能不能把想法变成可靠、可交付、有结果的作品。",
+    descriptionEn:"From a no-code mini-game and AI workflows to filing and real-world validation, the real differentiator is whether an idea can become a reliable, deliverable work with tangible results.",
+    url:"https://mp.weixin.qq.com/s/4yS7CEJdKL-DHJHOTQXWeA",
+    coverImage:"assets/wechat/spoton-ai-last-mile-cover.card.webp",
+    coverAlt:"Cover image for the SpotOn WeChat post about moving an AI-built product through the last mile into the real world"
+  },
   {
     id:"wechat-20260714-spoton-v3-master-zone",
     date:"2026-07-14",
@@ -117,4 +143,5 @@ const journal = [
   {date:"2026-07-20", day:"11", ms:"M4 备案推进", result:"小游戏前置审批通过；完成承诺书签署并正式提交小程序备案，进入平台审核与 12381 短信核验阶段", resultEn:"Mini-game pre-approval passed; signed the service commitment and formally submitted the mini-program filing, entering platform review and the 12381 SMS verification stage.", link:"01_learning-journal/2026-07-20_entry-13.md"},
   {date:"2026-07-22", day:"12", ms:"M4 备案推进", result:"小程序备案通过平台初审；7月21日错过首次短信后申请重发，7月22日完成工信部核验，等待后续审核", resultEn:"Mini-program filing passed platform review; after missing the first SMS on Jul 21, requested a resend and completed MIIT verification on Jul 22; awaiting further review.", link:"01_learning-journal/2026-07-22_entry-14.md"},
   {date:"2026-07-24", day:"13", ms:"M4 提审 + 备案", result:"小程序 ICP 备案通过通信管理局审核；明确备案成功不等于上线，下一步转入正式代码上传、审核与发布", resultEn:"Mini-program ICP filing passed the communications authority review; clarified that filing approval is not launch, and moved to production upload, code review, and release.", link:"01_learning-journal/2026-07-24_entry-15.md"},
+  {date:"2026-07-26", day:"14", ms:"M4 发布准备 + 内容复利", result:"根据玩家反馈完成公平性升级与本地 QA；同日正式发布两篇公众号文章，并把内容与排版经验沉淀为可复用工作流", resultEn:"Completed and locally QA-tested a fairness-focused upgrade based on player feedback; published two WeChat articles on the same day and turned the content and layout lessons into a reusable workflow.", link:"01_learning-journal/2026-07-26_entry-16.md"},
 ];

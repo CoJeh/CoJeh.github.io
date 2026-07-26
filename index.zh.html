@@ -64,10 +64,23 @@
   nav .lang:hover{background:var(--alt);text-decoration:none}
   nav .cta{display:inline-flex;align-items:center;gap:7px;background:var(--blue);color:#fff;border-radius:99px;padding:7px 16px;font-weight:600;white-space:nowrap}
   nav .cta:hover{background:var(--blue-deep);text-decoration:none}
+  nav .section-bar{display:none}
   @media(max-width:760px){
+    nav .primary-bar{transition:opacity .18s ease,transform .18s ease}
     nav .sec{display:none}
     nav .lang-full{display:none}
     nav .lang-short{display:inline}
+    nav .section-bar{position:absolute;inset:0;display:flex;align-items:center;height:56px;visibility:hidden;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s}
+    nav .section-track{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:560px;height:100%;margin:0 auto;padding:0 10px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
+    nav .section-track::-webkit-scrollbar{display:none}
+    nav .section-link{position:relative;display:inline-flex;min-width:44px;height:42px;flex:0 0 auto;align-items:center;justify-content:center;padding:0 5px;color:var(--muted);font-size:12.5px;font-weight:700;line-height:1;white-space:nowrap}
+    nav .section-link:hover{text-decoration:none}
+    nav .section-link::after{position:absolute;right:8px;bottom:2px;left:8px;height:2px;border-radius:99px;background:var(--blue);content:"";opacity:0;transform:scaleX(.45);transition:opacity .18s ease,transform .18s ease}
+    nav .section-link[aria-current="location"]{color:var(--blue)}
+    nav .section-link[aria-current="location"]::after{opacity:1;transform:scaleX(1)}
+    nav.section-mode .primary-bar{visibility:hidden;opacity:0;transform:translateY(-6px);pointer-events:none}
+    nav.section-mode .section-bar{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition-delay:0s}
+    section[id]{scroll-margin-top:64px}
   }
   @media(max-width:420px){
     nav .bar{padding:0 12px;gap:8px}
@@ -225,13 +238,13 @@
   /* reveal on scroll */
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
   .reveal.on{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.reveal,nav .primary-bar,nav .section-bar,nav .section-link::after{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="bar">
+<nav class="site-nav">
+  <div class="bar primary-bar">
     <a class="logo" href="index.zh.html">Corrine Chen</a>
     <div class="links">
       <a class="sec" href="#story">我的故事</a>
@@ -243,6 +256,15 @@
         <a class="lang" href="index.html" title="Switch to English" aria-label="Switch to English"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg><span class="lang-full">EN</span><span class="lang-short" aria-hidden="true">EN</span></a>
         <a class="cta" href="play/index.html" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg>玩我做的游戏</a>
       </span>
+    </div>
+  </div>
+  <div class="section-bar" aria-label="页面模块">
+    <div class="section-track">
+      <a class="section-link" href="#story" aria-current="location">故事</a>
+      <a class="section-link" href="#work">项目</a>
+      <a class="section-link" href="#career">经历</a>
+      <a class="section-link" href="#contact">联系</a>
+      <a class="section-link" href="#comment">留言</a>
     </div>
   </div>
 </nav>
@@ -579,6 +601,32 @@
 <script>
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const siteNav = document.querySelector('.site-nav');
+  const hero = document.querySelector('.hero');
+  const mobileNavQuery = window.matchMedia('(max-width: 760px)');
+  const updateNavigationMode = () => {
+    const heroHasPassed = hero.getBoundingClientRect().bottom <= 66;
+    siteNav.classList.toggle('section-mode', mobileNavQuery.matches && heroHasPassed);
+  };
+  const navModeObserver = new IntersectionObserver(updateNavigationMode, { rootMargin: '-66px 0px 0px', threshold: 0 });
+  navModeObserver.observe(hero);
+  mobileNavQuery.addEventListener('change', updateNavigationMode);
+  updateNavigationMode();
+
+  const sectionLinks = [...document.querySelectorAll('.section-link')];
+  const setActiveSection = id => {
+    sectionLinks.forEach(link => {
+      if (link.getAttribute('href') === `#${id}`) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  const sectionObserver = new IntersectionObserver(entries => {
+    const current = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (current) setActiveSection(current.target.id);
+  }, { rootMargin: '-38% 0px -52% 0px', threshold: [0, .01, .1] });
+  document.querySelectorAll('section[id]').forEach(section => sectionObserver.observe(section));
+  sectionLinks.forEach(link => link.addEventListener('click', () => setActiveSection(link.hash.slice(1))));
 </script>
 </body>
 </html>

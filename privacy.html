@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Privacy Notice | 隐私说明 | Corrine Chen Portfolio</title>
+  <style>
+    :root{
+      color-scheme:light;
+      --ink:#1c1b18;
+      --muted:#6e6a61;
+      --bg:#fdfcfa;
+      --alt:#f5f3ed;
+      --line:#e7e3da;
+      --blue:#1d4fd7;
+      --blue-deep:#173fae;
+      --radius:16px;
+      --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+    a{color:var(--blue);font-weight:650;text-underline-offset:3px}
+    a:hover{color:var(--blue-deep)}
+    .topbar{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);background:rgba(253,252,250,.96)}
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;width:min(920px,calc(100% - 32px));min-height:64px;margin:0 auto}
+    .back{text-decoration:none;color:var(--ink);font-weight:700}
+    .languages{display:flex;gap:8px}
+    .languages a{border:1px solid var(--line);border-radius:999px;padding:7px 12px;text-decoration:none;font-size:13px}
+    main{width:min(920px,calc(100% - 32px));margin:0 auto;padding:54px 0 80px}
+    header{max-width:680px;padding-bottom:34px}
+    h1{margin:0 0 12px;font-size:clamp(34px,6vw,54px);line-height:1.08;letter-spacing:-.025em}
+    header p{margin:0;color:var(--muted);font-size:17px}
+    header p+p{margin-top:3px}
+    .date{margin-top:14px;font-size:13px;color:var(--muted)}
+    .notice{border-top:1px solid var(--line)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:54px;padding:32px 0;border-bottom:1px solid var(--line)}
+    .language-block{min-width:0}
+    .language-block[lang="zh-CN"]{line-height:1.85}
+    h2{margin:0 0 9px;font-size:20px;line-height:1.3}
+    p{margin:0;color:var(--muted)}
+    ul{margin:10px 0 0;padding-left:20px;color:var(--muted)}
+    li+li{margin-top:6px}
+    .contact{padding-top:32px}
+    .contact p+p{margin-top:6px}
+    :target{scroll-margin-top:88px}
+    a:focus-visible,button:focus-visible{outline:3px solid rgba(29,79,215,.28);outline-offset:3px}
+    @media(max-width:720px){
+      .topbar-inner{min-height:58px}
+      main{padding:38px 0 64px}
+      header{padding-bottom:26px}
+      .row{grid-template-columns:1fr;gap:24px;padding:26px 0}
+      .language-block[lang="zh-CN"]{padding-top:24px;border-top:1px dashed var(--line)}
+      .languages a{padding:6px 10px}
+    }
+  </style>
+</head>
+<body>
+  <nav class="topbar" aria-label="Privacy page navigation">
+    <div class="topbar-inner">
+      <a class="back" href="index.html">Back to portfolio / 返回作品集</a>
+      <div class="languages">
+        <a href="#en" lang="en">English</a>
+        <a href="#zh" lang="zh-CN">中文</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <header>
+      <h1>Privacy Notice<br><span lang="zh-CN">隐私说明</span></h1>
+      <p>This page explains the limited analytics used across Corrine's Portfolio, Dashboard, Playbook and SpotOn pages.</p>
+      <p lang="zh-CN">本页说明 Corrine 作品集、Dashboard、Playbook 与 SpotOn 页面使用的有限访问统计。</p>
+      <p class="date">Effective 26 July 2026 | 2026年7月26日生效</p>
+    </header>
+
+    <div class="notice">
+      <div class="row">
+        <section class="language-block" id="en" lang="en">
+          <h2>What this site measures</h2>
+          <p>Microsoft Clarity helps measure page visits, clicks, scrolling, session duration, device type, approximate region and referral source. This information is used to improve the portfolio experience.</p>
+        </section>
+        <section class="language-block" id="zh" lang="zh-CN">
+          <h2>本站统计什么</h2>
+          <p>本站使用 Microsoft Clarity 了解页面访问、点击、滚动、停留时间、设备类型、大致地区和访问来源。这些信息仅用于改进作品集体验。</p>
+        </section>
+      </div>
+
+      <div class="row">
+        <section class="language-block" lang="en">
+          <h2>Your choice</h2>
+          <p>Analytics cookies are used only after you select Accept. If you decline, Clarity may provide limited cookieless measurement. Your choice is stored in your browser so this notice does not appear again on that browser.</p>
+        </section>
+        <section class="language-block" lang="zh-CN">
+          <h2>你的选择</h2>
+          <p>只有在你点击“同意”后，本站才会使用分析 Cookie。如果你拒绝，Clarity 可能只提供有限的无 Cookie 统计。你的选择会保存在当前浏览器中，因此该浏览器不会再次显示此提示。</p>
+        </section>
+      </div>
+
+      <div class="row">
+        <section class="language-block" lang="en">
+          <h2>What is protected</h2>
+          <ul>
+            <li>Feedback form content and avatar areas are masked from Clarity.</li>
+            <li>Names, email addresses and direct identifiers are not intentionally sent to Clarity.</li>
+            <li>Campaign links use general labels such as LinkedIn, CV or recruiter email. They never include a recipient's name.</li>
+          </ul>
+        </section>
+        <section class="language-block" lang="zh-CN">
+          <h2>受到保护的内容</h2>
+          <ul>
+            <li>留言表单内容和头像区域会对 Clarity 进行遮罩。</li>
+            <li>本站不会有意向 Clarity 发送姓名、邮箱或其他直接身份信息。</li>
+            <li>渠道链接只使用 LinkedIn、简历、招聘邮件等通用标签，不加入收件人姓名。</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="row">
+        <section class="language-block" lang="en">
+          <h2>Service provider</h2>
+          <p>Microsoft processes Clarity data according to its <a href="https://privacy.microsoft.com/privacystatement" rel="noopener" target="_blank">Privacy Statement</a>. Standard session recordings are currently retained for 30 days, while click and heatmap data may be retained for up to 9 months.</p>
+        </section>
+        <section class="language-block" lang="zh-CN">
+          <h2>服务提供方</h2>
+          <p>Microsoft 根据其<a href="https://privacy.microsoft.com/privacystatement" rel="noopener" target="_blank">隐私声明</a>处理 Clarity 数据。目前普通会话回放数据保留 30 天，点击和热图数据最长可能保留 9 个月。</p>
+        </section>
+      </div>
+    </div>
+
+    <section class="contact">
+      <h2>Questions | 联系方式</h2>
+      <p>Questions about this site's analytics can be sent to <a href="mailto:chen-chuting@hotmail.com">chen-chuting@hotmail.com</a>.</p>
+      <p lang="zh-CN">如对本站的数据统计有疑问，请发送邮件至以上地址。</p>
+    </section>
+  </main>
+
+  <script src="portfolio-analytics.js"></script>
+</body>
+</html>

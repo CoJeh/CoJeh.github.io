@@ -402,6 +402,7 @@
     const dialog = createElement("dialog", "feedback-dialog");
     dialog.id = "feedback-dialog";
     dialog.setAttribute("aria-labelledby", "feedback-dialog-title");
+    dialog.setAttribute("data-clarity-mask", "true");
     dialog.innerHTML = `
       <div class="feedback-dialog-shell">
         <div class="feedback-dialog-main">
@@ -768,6 +769,7 @@
         form.hidden = true;
         successPanel.hidden = false;
         dialogShell.scrollTop = 0;
+        document.dispatchEvent(new CustomEvent("portfolio:feedback-submitted"));
         window.setTimeout(() => successPanel.focus(), 0);
       } catch (error) {
         console.warn("Feedback submission failed.", error);

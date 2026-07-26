@@ -55,6 +55,7 @@
 
   function loadClarity() {
     if (!/^[a-z0-9]+$/i.test(CLARITY_PROJECT_ID)) return;
+    if (document.querySelector(`script[src*="clarity.ms/tag/${CLARITY_PROJECT_ID}"]`)) return;
     const script = document.createElement("script");
     script.async = true;
     script.src = `https://www.clarity.ms/tag/${CLARITY_PROJECT_ID}`;

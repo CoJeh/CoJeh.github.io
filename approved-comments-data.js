@@ -12,6 +12,7 @@ window.APPROVED_COMMENTS = Object.freeze([
   Object.freeze({
     id: "xinjie-2026-07-24",
     displayName: "XINJIE",
+    likeCount: 3,
     comment:
       "太劲啦，小 Co 姐！我试咗下，中间退出咗，然后入嚟发觉佢有历史记录，特别好。下面的“感受”咧，我觉得你可以将它做成多选。我啱试了一下，只能选一个，但我想全选哈哈哈！而且那个排版非常好。但是我觉得，右边下面留白比较多，可以再想一想加些什么上去，或者将微信的二维码放在中间。你尝试睇下可唔可以做一个语音嘅，相当于我直接发语音就是留言啊。不过算啦，文字留言好d嘅",
     commentEn:

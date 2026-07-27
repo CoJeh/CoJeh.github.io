@@ -861,57 +861,85 @@
     return wrap;
   }
 
+  let volatileVoterToken = "";
+
+  function createVoterToken() {
+    return typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `${Date.now()}-${crypto.getRandomValues(new Uint32Array(4)).join("-")}`;
+  }
+
   function voterToken() {
     const key = "corrine-feedback-voter";
     try {
       let token = localStorage.getItem(key);
       if (!token) {
-        token =
-          typeof crypto.randomUUID === "function"
-            ? crypto.randomUUID()
-            : `${Date.now()}-${crypto.getRandomValues(new Uint32Array(4)).join("-")}`;
+        token = createVoterToken();
         localStorage.setItem(key, token);
       }
       return token;
     } catch {
-      return "";
+      try {
+        let token = sessionStorage.getItem(key);
+        if (!token) {
+          token = createVoterToken();
+          sessionStorage.setItem(key, token);
+        }
+        return token;
+      } catch {
+        if (!volatileVoterToken) volatileVoterToken = createVoterToken();
+        return volatileVoterToken;
+      }
     }
   }
 
   async function hydrateLike(button, recordId) {
     const token = voterToken();
-    if (!token) return;
     try {
+      const voterQuery = token
+        ? `&voter=${encodeURIComponent(token)}`
+        : "";
       const response = await fetch(
         `${INTERACTIONS_API}/v1/likes?ids=${encodeURIComponent(
           recordId
-        )}&voter=${encodeURIComponent(token)}`
+        )}${voterQuery}`
       );
       if (!response.ok) throw new Error("Like lookup failed");
       const result = await response.json();
-      const item = result.items?.[recordId] || { count: 0, liked: false };
-      button.dataset.count = String(item.count || 0);
+      const item = result.items?.[recordId] || {
+        count: Number(button.dataset.count) || 0,
+        liked: false,
+      };
+      const count = Number.isFinite(Number(item.count))
+        ? Math.max(0, Math.trunc(Number(item.count)))
+        : Number(button.dataset.count) || 0;
+      button.dataset.count = String(count);
       button.setAttribute("aria-pressed", item.liked ? "true" : "false");
-      button.querySelector(".feedback-like-count").textContent = String(item.count || 0);
+      button.querySelector(".feedback-like-count").textContent = String(count);
       button.title = item.liked ? t.unlikeComment : t.likeComment;
-      button.disabled = false;
+      button.disabled = !token;
     } catch (error) {
       console.warn("Shared likes are unavailable.", error);
       button.title = t.likesUnavailable;
+      button.disabled = !token;
     }
   }
 
-  function buildLikeButton(recordId) {
+  function buildLikeButton(recordId, verifiedCount = 0) {
+    const initialCount = Number.isFinite(Number(verifiedCount))
+      ? Math.max(0, Math.trunc(Number(verifiedCount)))
+      : 0;
     const button = createElement("button", "feedback-like-button");
     button.type = "button";
     button.disabled = true;
+    button.dataset.count = String(initialCount);
     button.setAttribute("aria-label", t.likeComment);
     button.setAttribute("aria-pressed", "false");
     button.innerHTML = `
       <svg aria-hidden="true" viewBox="0 0 24 24">
         <path d="M7 10v11H3V10h4Zm4-1 3.2-6.2c.4-.8 1.4-1.1 2.2-.7.6.3.9.9.9 1.5V8h3.1c1.1 0 2 .9 2 2 0 .2 0 .4-.1.6l-2.2 8c-.2.8-1 1.4-1.9 1.4H10V9h1Z"/>
       </svg>
-      <span class="feedback-like-count" aria-live="polite">0</span>`;
+      <span class="feedback-like-count" aria-live="polite">${initialCount}</span>`;
 
     button.addEventListener("click", async () => {
       const token = voterToken();
@@ -930,6 +958,7 @@
         );
         if (!response.ok) throw new Error("Like update failed");
         const result = await response.json();
+        button.dataset.count = String(result.count || 0);
         button.setAttribute("aria-pressed", result.liked ? "true" : "false");
         button.querySelector(".feedback-like-count").textContent = String(result.count || 0);
         button.title = result.liked ? t.unlikeComment : t.likeComment;
@@ -999,7 +1028,10 @@
           day: "numeric",
         }).format(date)
       : record.approvedDate;
-    detail.append(createElement("div", "", formattedDate), buildLikeButton(record.id));
+    detail.append(
+      createElement("div", "", formattedDate),
+      buildLikeButton(record.id, record.likeCount)
+    );
     header.append(identity, detail);
 
     const body = createElement("div", "feedback-comment-body");

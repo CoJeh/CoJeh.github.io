@@ -721,12 +721,87 @@ body.feedback-modal-open {
 }
 
 [data-feedback-board] {
-  width: min(66%, 720px);
+  position: relative;
+  left: 50%;
+  width: min(calc(100vw - 220px), 1280px);
   margin-inline: auto;
+  transform: translateX(-50%);
+}
+
+.feedback-carousel {
+  position: relative;
+}
+
+.feedback-carousel-viewport {
+  display: grid;
+  min-width: 0;
+}
+
+.feedback-carousel-arrow {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--feedback-blue) 62%, var(--feedback-line));
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--feedback-surface) 94%, white);
+  box-shadow: 0 8px 22px rgba(35, 42, 73, 0.12);
+  color: var(--feedback-blue-strong);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.feedback-carousel-arrow:hover {
+  border-color: var(--feedback-blue);
+  box-shadow: 0 10px 26px rgba(35, 42, 73, 0.17);
+  transform: translateY(calc(-50% - 1px));
+}
+
+.feedback-carousel-arrow-previous {
+  left: -74px;
+}
+
+.feedback-carousel-arrow-next {
+  right: -74px;
+}
+
+.feedback-carousel-arrow:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--feedback-gold) 72%, transparent);
+  outline-offset: 3px;
+}
+
+.feedback-carousel-arrow svg {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.2;
+}
+
+.feedback-carousel.is-single .feedback-carousel-arrow {
+  visibility: hidden;
+}
+
+.feedback-carousel-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .feedback-comment-card {
   position: relative;
+  grid-area: 1 / 1;
+  min-width: 0;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--feedback-blue) 16%, var(--feedback-line));
   border-radius: 22px 22px 22px 8px;
@@ -735,6 +810,14 @@ body.feedback-modal-open {
     radial-gradient(circle at 91% 8%, rgba(244, 215, 88, 0.2), transparent 28%),
     var(--feedback-surface-soft);
   box-shadow: 0 18px 48px rgba(35, 42, 73, 0.09);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.feedback-comment-card[aria-hidden="true"] {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(12px);
 }
 
 .feedback-comment-card::before {
@@ -789,6 +872,7 @@ body.feedback-modal-open {
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .feedback-comment-reactions {
@@ -820,11 +904,25 @@ body.feedback-modal-open {
 
 .feedback-comment-detail .feedback-like-button {
   margin: 8px 0 0;
+  min-width: 64px;
+  min-height: 34px;
+  border-color: color-mix(in srgb, var(--feedback-blue) 52%, var(--feedback-line));
+  background: color-mix(in srgb, var(--feedback-surface) 90%, white);
+  color: var(--feedback-blue-strong);
+  font-size: 12px;
+}
+
+.feedback-comment-meta {
+  white-space: nowrap;
 }
 
 .feedback-comment-body {
   border-top: 1px solid color-mix(in srgb, var(--feedback-line) 76%, transparent);
   padding-top: clamp(22px, 3vw, 30px);
+}
+
+.feedback-carousel .feedback-comment-body {
+  padding-top: clamp(16px, 2.4vw, 24px);
 }
 
 .feedback-comment-copy,
@@ -983,6 +1081,19 @@ body.feedback-modal-open {
   letter-spacing: 0.12em;
 }
 
+.feedback-comment-position {
+  position: absolute;
+  right: 0;
+  bottom: 12px;
+  left: 0;
+  color: color-mix(in srgb, var(--feedback-muted) 78%, transparent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-align: center;
+}
+
 .feedback-like-button {
   display: inline-flex;
   min-width: 46px;
@@ -1036,6 +1147,42 @@ body.feedback-modal-open {
   text-align: center;
 }
 
+@media (min-width: 901px) {
+  .feedback-comment-avatar {
+    width: 120px;
+    height: 120px;
+    flex-basis: 120px;
+    font-size: 52px;
+  }
+
+  .feedback-comment-identity {
+    gap: 18px;
+  }
+
+  .feedback-comment-name {
+    font-size: 20px;
+  }
+
+  .feedback-comment-reaction {
+    font-size: 14px;
+  }
+
+  .feedback-comment-detail {
+    font-size: 14px;
+  }
+
+  .feedback-comment-detail .feedback-like-button {
+    min-width: 88px;
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+  .feedback-comment-copy,
+  .feedback-comment-translation {
+    font-size: 18px;
+  }
+}
+
 @media (max-width: 900px) {
   .feedback-dialog {
     width: min(780px, calc(100vw - 24px));
@@ -1050,7 +1197,25 @@ body.feedback-modal-open {
   }
 
   [data-feedback-board] {
-    width: min(80%, 720px);
+    position: static;
+    left: auto;
+    width: 100%;
+    transform: none;
+  }
+
+  .feedback-carousel-arrow {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .feedback-carousel-arrow-previous {
+    left: -24px;
+  }
+
+  .feedback-carousel-arrow-next {
+    right: -24px;
   }
 }
 
@@ -1125,6 +1290,24 @@ body.feedback-modal-open {
     width: 100%;
   }
 
+  .feedback-carousel {
+    display: block;
+    padding-inline: 0;
+  }
+
+  .feedback-carousel-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .feedback-carousel-arrow-previous {
+    left: -20px;
+  }
+
+  .feedback-carousel-arrow-next {
+    right: -20px;
+  }
+
   .feedback-comment-card {
     padding: 26px 20px;
   }
@@ -1138,6 +1321,24 @@ body.feedback-modal-open {
 }
 
 @media (max-width: 420px) {
+  .feedback-carousel-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .feedback-carousel-arrow-previous {
+    left: -18px;
+  }
+
+  .feedback-carousel-arrow-next {
+    right: -18px;
+  }
+
+  .feedback-carousel-arrow svg {
+    width: 21px;
+    height: 21px;
+  }
+
   .feedback-label-row {
     align-items: flex-start;
     flex-direction: column;
@@ -1154,6 +1355,10 @@ body.feedback-modal-open {
     padding-left: 55px;
     text-align: left;
   }
+
+  .feedback-comment-meta {
+    white-space: normal;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1164,7 +1369,9 @@ body.feedback-modal-open {
   .feedback-reaction-card,
   .feedback-submit,
   .feedback-email-fallback,
-  .feedback-like-button {
+  .feedback-like-button,
+  .feedback-carousel-arrow,
+  .feedback-comment-card {
     transition: none;
     animation: none;
   }

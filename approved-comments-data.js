@@ -10,6 +10,26 @@
  */
 window.APPROVED_COMMENTS = Object.freeze([
   Object.freeze({
+    id: "kevin-2026-08-01",
+    displayName: "Kevin",
+    likeCount: 0,
+    comment:
+      "Co姐，你太棒了！逛了一圈你的网站，很喜欢这种干净、舒服的风格。特别开心看到你做了这么多 AI 相关的尝试，勇于探索新事物本身就是一件很棒的事情。相信这些积累都会在未来带来意想不到的收获，期待看到你继续探索更多可能性，也期待看到更多有趣的作品和分享。加油！",
+    commentEn:
+      "Co, you are amazing! I looked around your website and really like its clean, comfortable style. I was especially happy to see how many AI-related experiments you have tried. Having the courage to explore new things is valuable in itself. I believe these experiences will bring unexpected rewards in the future. I look forward to seeing you continue exploring new possibilities, along with more interesting projects and stories. Keep going!",
+    commentEnAI: true,
+    avatarType: "preset",
+    avatarKey: "robot",
+    avatarSrc: "",
+    avatarInitial: "",
+    avatarAlt: "Kevin 选择的机器人头像",
+    avatarAltEn: "Robot avatar selected by Kevin",
+    reactions: Object.freeze(["like", "celebrate", "insightful"]),
+    approvedDate: "2026-08-01",
+    locale: "zh",
+    source: "portfolio",
+  }),
+  Object.freeze({
     id: "xinjie-2026-07-24",
     displayName: "XINJIE",
     likeCount: 3,

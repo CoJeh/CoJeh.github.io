@@ -94,6 +94,11 @@
         portfolio: "Portfolio",
         "spoton-dashboard": "SpotOn Dashboard",
       },
+      sourcePrefix: "From",
+      previousComment: "Previous comment",
+      nextComment: "Next comment",
+      carouselLabel: "Visitor comments",
+      commentPosition: (current, total) => `Comment ${current} of ${total}`,
       approved: "Published",
       originalComment: "Original comment",
       translation: "English summary",
@@ -172,9 +177,14 @@
       },
       boardEmpty: "暂时还没有精选留言，欢迎成为第一位留言者。",
       sources: {
-        portfolio: "作品集",
+        portfolio: "主页",
         "spoton-dashboard": "SpotOn 项目看板",
       },
+      sourcePrefix: "来源",
+      previousComment: "上一条留言",
+      nextComment: "下一条留言",
+      carouselLabel: "访客留言",
+      commentPosition: (current, total) => `第 ${current} / ${total} 条留言`,
       approved: "发布于",
       originalComment: "原始留言",
       translation: "英文摘要",
@@ -975,31 +985,26 @@
     return button;
   }
 
-  function renderBoard() {
-    const mount = document.querySelector("[data-feedback-board]");
-    if (!mount) return;
+  function buildCarouselButton(direction) {
+    const isPrevious = direction === "previous";
+    const label = isPrevious ? t.previousComment : t.nextComment;
+    const button = createElement(
+      "button",
+      `feedback-carousel-arrow feedback-carousel-arrow-${isPrevious ? "previous" : "next"}`
+    );
+    button.type = "button";
+    button.setAttribute("aria-label", label);
+    button.title = label;
+    button.innerHTML = `
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="${isPrevious ? "M15 18l-6-6 6-6" : "M9 18l6-6-6-6"}"/>
+      </svg>`;
+    return button;
+  }
 
-    const approved = (Array.isArray(window.APPROVED_COMMENTS)
-      ? window.APPROVED_COMMENTS.slice()
-      : []
-    )
-      .filter(
-        (record) =>
-          record &&
-          typeof record.id === "string" &&
-          typeof record.displayName === "string" &&
-          typeof record.comment === "string" &&
-          typeof record.approvedDate === "string"
-      )
-      .sort((a, b) => b.approvedDate.localeCompare(a.approvedDate));
-
-    if (!approved.length) {
-      mount.replaceChildren(createElement("p", "feedback-board-empty", t.boardEmpty));
-      return;
-    }
-
-    const record = approved[0];
+  function buildCommentCard(record, index, total) {
     const card = createElement("article", "feedback-comment-card");
+    card.dataset.commentId = record.id;
     const header = createElement("header", "feedback-comment-header");
     const identity = createElement("div", "feedback-comment-identity");
     const nameWrap = createElement("div");
@@ -1028,8 +1033,14 @@
           day: "numeric",
         }).format(date)
       : record.approvedDate;
+    const source = sourceLabel(record.source);
+    const metadata = source
+      ? locale === "zh"
+        ? `${formattedDate} · ${t.sourcePrefix}：${source}`
+        : `${formattedDate} · ${t.sourcePrefix}: ${source}`
+      : formattedDate;
     detail.append(
-      createElement("div", "", formattedDate),
+      createElement("div", "feedback-comment-meta", metadata),
       buildLikeButton(record.id, record.likeCount)
     );
     header.append(identity, detail);
@@ -1093,8 +1104,114 @@
       body.append(replySection);
     }
 
-    card.append(header, body);
-    mount.replaceChildren(card);
+    card.append(
+      header,
+      body,
+      createElement("div", "feedback-comment-position", t.commentPosition(index + 1, total))
+    );
+    return card;
+  }
+
+  function renderBoard() {
+    const mount = document.querySelector("[data-feedback-board]");
+    if (!mount) return;
+
+    const approved = (Array.isArray(window.APPROVED_COMMENTS)
+      ? window.APPROVED_COMMENTS.slice()
+      : []
+    )
+      .filter(
+        (record) =>
+          record &&
+          typeof record.id === "string" &&
+          typeof record.displayName === "string" &&
+          typeof record.comment === "string" &&
+          typeof record.approvedDate === "string"
+      )
+      .sort((a, b) => a.approvedDate.localeCompare(b.approvedDate));
+
+    if (!approved.length) {
+      mount.replaceChildren(createElement("p", "feedback-board-empty", t.boardEmpty));
+      return;
+    }
+
+    const carousel = createElement("div", "feedback-carousel");
+    carousel.setAttribute("role", "region");
+    carousel.setAttribute("aria-label", t.carouselLabel);
+    if (approved.length === 1) carousel.classList.add("is-single");
+
+    const previous = buildCarouselButton("previous");
+    const next = buildCarouselButton("next");
+    const viewport = createElement("div", "feedback-carousel-viewport");
+    viewport.id = "feedback-comments-viewport";
+    previous.setAttribute("aria-controls", viewport.id);
+    next.setAttribute("aria-controls", viewport.id);
+
+    const cards = approved.map((record, index) => {
+      const card = buildCommentCard(record, index, approved.length);
+      viewport.append(card);
+      return card;
+    });
+    const liveStatus = createElement("p", "feedback-carousel-live");
+    liveStatus.setAttribute("aria-live", "polite");
+    liveStatus.setAttribute("aria-atomic", "true");
+
+    let activeIndex = cards.length - 1;
+    function showComment(nextIndex, announce = false) {
+      activeIndex = (nextIndex + cards.length) % cards.length;
+      cards.forEach((card, index) => {
+        const active = index === activeIndex;
+        card.classList.toggle("is-active", active);
+        card.setAttribute("aria-hidden", active ? "false" : "true");
+      });
+      if (announce) {
+        liveStatus.textContent = `${approved[activeIndex].displayName}. ${t.commentPosition(
+          activeIndex + 1,
+          approved.length
+        )}`;
+      }
+    }
+
+    previous.addEventListener("click", () => showComment(activeIndex - 1, true));
+    next.addEventListener("click", () => showComment(activeIndex + 1, true));
+    carousel.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        showComment(activeIndex - 1, true);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        showComment(activeIndex + 1, true);
+      }
+    });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    viewport.addEventListener(
+      "touchstart",
+      (event) => {
+        if (event.touches.length !== 1) return;
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+      },
+      { passive: true }
+    );
+    viewport.addEventListener(
+      "touchend",
+      (event) => {
+        const touch = event.changedTouches[0];
+        if (!touch) return;
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+        if (Math.abs(deltaX) >= 48 && Math.abs(deltaX) > Math.abs(deltaY)) {
+          showComment(activeIndex + (deltaX < 0 ? 1 : -1), true);
+        }
+      },
+      { passive: true }
+    );
+
+    carousel.append(previous, viewport, next, liveStatus);
+    mount.replaceChildren(carousel);
+    showComment(activeIndex);
   }
 
   buildWidget();

@@ -1156,7 +1156,7 @@
     liveStatus.setAttribute("aria-live", "polite");
     liveStatus.setAttribute("aria-atomic", "true");
 
-    let activeIndex = cards.length - 1;
+    let activeIndex = 0;
     function showComment(nextIndex, announce = false) {
       activeIndex = (nextIndex + cards.length) % cards.length;
       cards.forEach((card, index) => {

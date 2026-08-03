@@ -871,6 +871,10 @@
     return wrap;
   }
 
+  const LIKE_LOOKUP_RETRY_DELAYS_MS = [0, 800, 2400];
+  const LIKE_LOOKUP_TIMEOUT_MS = 5000;
+  const LIKE_COUNT_CACHE_KEY = "corrine-feedback-like-counts-v1";
+  const likeButtonRegistry = new Map();
   let volatileVoterToken = "";
 
   function createVoterToken() {
@@ -903,46 +907,118 @@
     }
   }
 
+  function normaliseLikeCount(value, fallback = 0) {
+    return Number.isFinite(Number(value))
+      ? Math.max(0, Math.trunc(Number(value)))
+      : fallback;
+  }
+
+  function readLikeCountCache() {
+    for (const storage of [localStorage, sessionStorage]) {
+      try {
+        const raw = storage.getItem(LIKE_COUNT_CACHE_KEY);
+        if (!raw) continue;
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+          return parsed;
+        }
+      } catch {
+        // Continue to the next browser storage option.
+      }
+    }
+    return {};
+  }
+
+  function rememberLikeCount(recordId, count) {
+    const cache = readLikeCountCache();
+    cache[recordId] = normaliseLikeCount(count);
+    const serialised = JSON.stringify(cache);
+    for (const storage of [localStorage, sessionStorage]) {
+      try {
+        storage.setItem(LIKE_COUNT_CACHE_KEY, serialised);
+        return;
+      } catch {
+        // Continue to the next browser storage option.
+      }
+    }
+  }
+
+  function lastKnownLikeCount(recordId, publishedCount) {
+    const cached = readLikeCountCache()[recordId];
+    return normaliseLikeCount(cached, normaliseLikeCount(publishedCount));
+  }
+
+  function wait(milliseconds) {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  }
+
+  async function fetchLikeItem(recordId, token) {
+    let lastError = new Error("Like lookup failed");
+    const voterQuery = token ? `&voter=${encodeURIComponent(token)}` : "";
+    const endpoint = `${INTERACTIONS_API}/v1/likes?ids=${encodeURIComponent(
+      recordId
+    )}${voterQuery}`;
+
+    for (const retryDelay of LIKE_LOOKUP_RETRY_DELAYS_MS) {
+      if (retryDelay) await wait(retryDelay);
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), LIKE_LOOKUP_TIMEOUT_MS);
+      try {
+        const response = await fetch(endpoint, {
+          headers: { Accept: "application/json" },
+          signal: controller.signal,
+        });
+        if (!response.ok) throw new Error("Like lookup failed");
+        const result = await response.json();
+        const item = result.items?.[recordId];
+        if (!item || !Number.isFinite(Number(item.count))) {
+          throw new Error("Like lookup returned incomplete data");
+        }
+        return item;
+      } catch (error) {
+        lastError = error;
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+    throw lastError;
+  }
+
   async function hydrateLike(button, recordId) {
+    if (button.dataset.hydrating === "true") return;
     const token = voterToken();
+    button.dataset.hydrating = "true";
     try {
-      const voterQuery = token
-        ? `&voter=${encodeURIComponent(token)}`
-        : "";
-      const response = await fetch(
-        `${INTERACTIONS_API}/v1/likes?ids=${encodeURIComponent(
-          recordId
-        )}${voterQuery}`
-      );
-      if (!response.ok) throw new Error("Like lookup failed");
-      const result = await response.json();
-      const item = result.items?.[recordId] || {
-        count: Number(button.dataset.count) || 0,
-        liked: false,
-      };
-      const count = Number.isFinite(Number(item.count))
-        ? Math.max(0, Math.trunc(Number(item.count)))
-        : Number(button.dataset.count) || 0;
+      const item = await fetchLikeItem(recordId, token);
+      const count = normaliseLikeCount(item.count, Number(button.dataset.count) || 0);
       button.dataset.count = String(count);
       button.setAttribute("aria-pressed", item.liked ? "true" : "false");
       button.querySelector(".feedback-like-count").textContent = String(count);
       button.title = item.liked ? t.unlikeComment : t.likeComment;
       button.disabled = !token;
+      rememberLikeCount(recordId, count);
     } catch (error) {
       console.warn("Shared likes are unavailable.", error);
       button.title = t.likesUnavailable;
       button.disabled = !token;
+    } finally {
+      delete button.dataset.hydrating;
     }
   }
 
+  function refreshLikeButtons() {
+    likeButtonRegistry.forEach((recordId, button) => {
+      void hydrateLike(button, recordId);
+    });
+  }
+
   function buildLikeButton(recordId, verifiedCount = 0) {
-    const initialCount = Number.isFinite(Number(verifiedCount))
-      ? Math.max(0, Math.trunc(Number(verifiedCount)))
-      : 0;
+    const initialCount = lastKnownLikeCount(recordId, verifiedCount);
     const button = createElement("button", "feedback-like-button");
     button.type = "button";
     button.disabled = true;
     button.dataset.count = String(initialCount);
+    button.dataset.recordId = recordId;
     button.setAttribute("aria-label", t.likeComment);
     button.setAttribute("aria-pressed", "false");
     button.innerHTML = `
@@ -972,15 +1048,18 @@
         button.setAttribute("aria-pressed", result.liked ? "true" : "false");
         button.querySelector(".feedback-like-count").textContent = String(result.count || 0);
         button.title = result.liked ? t.unlikeComment : t.likeComment;
+        rememberLikeCount(recordId, result.count || 0);
       } catch (error) {
         console.warn("Shared like update failed.", error);
         button.title = t.likesUnavailable;
+        void hydrateLike(button, recordId);
       } finally {
         button.dataset.busy = "false";
         button.disabled = false;
       }
     });
 
+    likeButtonRegistry.set(button, recordId);
     hydrateLike(button, recordId);
     return button;
   }
@@ -1216,4 +1295,11 @@
 
   buildWidget();
   renderBoard();
+  window.addEventListener("online", refreshLikeButtons);
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) refreshLikeButtons();
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) refreshLikeButtons();
+  });
 })();

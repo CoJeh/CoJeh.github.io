@@ -12,7 +12,7 @@ window.APPROVED_COMMENTS = Object.freeze([
   Object.freeze({
     id: "kevin-2026-08-01",
     displayName: "Kevin",
-    likeCount: 0,
+    likeCount: 2,
     comment:
       "Co姐，你太棒了！逛了一圈你的网站，很喜欢这种干净、舒服的风格。特别开心看到你做了这么多 AI 相关的尝试，勇于探索新事物本身就是一件很棒的事情。相信这些积累都会在未来带来意想不到的收获，期待看到你继续探索更多可能性，也期待看到更多有趣的作品和分享。加油！",
     commentEn:

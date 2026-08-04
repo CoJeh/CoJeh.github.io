@@ -222,6 +222,29 @@
     return node;
   }
 
+  function createLinkedReply(text, linkSpec) {
+    const paragraph = createElement("p");
+    const linkText = String(linkSpec?.text || "").trim();
+    const linkHref = String(linkSpec?.href || "").trim();
+    const linkStart = linkText ? text.indexOf(linkText) : -1;
+
+    if (linkStart < 0 || !linkHref.startsWith("https://")) {
+      paragraph.textContent = text;
+      return paragraph;
+    }
+
+    const link = createElement("a", "feedback-author-reply-link", linkText);
+    link.href = linkHref;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    paragraph.append(
+      document.createTextNode(text.slice(0, linkStart)),
+      link,
+      document.createTextNode(text.slice(linkStart + linkText.length))
+    );
+    return paragraph;
+  }
+
   function escapeAttribute(value) {
     return String(value)
       .replaceAll("&", "&amp;")
@@ -1175,7 +1198,7 @@
       );
       replySection.append(
         replyHeading,
-        createElement("p", "", reply)
+        createLinkedReply(reply, record.authorReplyLink)
       );
       if (localPreview && !record.authorReply && !record.authorReplyEn) {
         replySection.dataset.placeholder = "true";

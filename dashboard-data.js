@@ -34,25 +34,25 @@ const milestones = [
   {tag:"M1", name:"第一个可玩原型", nameEn:"First playable prototype", status:"done"},
   {tag:"M2", name:"完整游戏循环",   nameEn:"Complete game loop", status:"done"},
   {tag:"M3", name:"V3优化 + 广告位", nameEn:"V3 polish + ad placement", status:"done"},
-  {tag:"M4", name:"提审 + 备案",    nameEn:"Review submission + filing", status:"doing"},
-  {tag:"M5", name:"上线 + 首批数据", nameEn:"Launch + first data", status:"todo"},
+  {tag:"M4", name:"提审 + 备案",    nameEn:"Review submission + filing", status:"done"},
+  {tag:"M5", name:"上线 + 首批数据", nameEn:"Launch + first data", status:"doing"},
 ];
 
 // 上线路线图 8 步（status: done/doing/todo；here:true = 当前位置）
 const roadmap = [
-  {t:"做游戏", tEn:"Build the game", c:"设计玩法、留广告位", cEn:"Design gameplay and reserve ad slots", time:"进行中", timeEn:"Ongoing", status:"doing", here:true},
+  {t:"做游戏", tEn:"Build the game", c:"设计玩法、留广告位", cEn:"Design gameplay and reserve ad slots", time:"持续迭代", timeEn:"Continuous iteration", status:"doing"},
   {t:"账号 & 主体", tEn:"Account & entity", c:"微信小游戏「找对了大师」（个人）", cEn:"WeChat mini-game Spot On!找对了大师 (individual entity)", time:"2026-07-04 完成", timeEn:"Completed Jul 4, 2026", status:"done"},
   {t:"软著", tEn:"Software copyright", c:"办软件著作权证书", cEn:"Apply for the software copyright certificate", time:"约 10–15 天", timeEn:"Approx. 10–15 days", status:"doing", here:true},
   {t:"备案", tEn:"Government filing", c:"前置审批与小程序 ICP 备案均已通过", cEn:"Pre-approval and mini-program ICP filing both approved", time:"2026-07-24 完成", timeEn:"Completed Jul 24, 2026", status:"done"},
   {t:"接广告", tEn:"Integrate ads", c:"流量主 + 微信广告插件", cEn:"Traffic owner + WeChat ad plugin", time:"几天", timeEn:"A few days", status:"todo"},
-  {t:"提审", tEn:"Submit for review", c:"上传正式代码并提交微信审核", cEn:"Upload the production build and submit it for WeChat review", time:"当前下一步", timeEn:"Current next step", status:"doing", here:true},
-  {t:"上线", tEn:"Launch", c:"正式发布给玩家", cEn:"Publish for players", time:"即时", timeEn:"Immediate", status:"todo"},
-  {t:"运营", tEn:"Operate", c:"看数据 / 换图 / 广告收入", cEn:"Watch data / swap images / ad revenue", time:"持续", timeEn:"Ongoing", status:"todo"},
+  {t:"提审", tEn:"Submit for review", c:"1.0.0 代码审核已通过", cEn:"Version 1.0.0 passed code review", time:"2026-08-05 完成", timeEn:"Completed Aug 5, 2026", status:"done"},
+  {t:"上线", tEn:"Launch", c:"线上 1.0.0 已发布，可搜索、打开和生成分享海报", cEn:"Version 1.0.0 is live, searchable, playable, and can generate a share poster", time:"2026-08-05 13:57", timeEn:"Live Aug 5, 2026 at 13:57", status:"done"},
+  {t:"运营", tEn:"Operate", c:"收集首批反馈 / 数据 / 后续加固版本", cEn:"Collect first feedback and data; prepare the hardened update", time:"持续", timeEn:"Ongoing", status:"doing", here:true},
 ];
 
 const pillars = [
-  {icon:"📓", title:"① AI 学习日志", titleEn:"① AI Learning Journal", desc:"主线 · 文科生靠AI解决技术问题", descEn:"Mainline · humanities background solving technical problems with AI", stat:"14 个工作日 · 最新：公平性升级完成本地 QA，同日发布两篇微信文章", statEn:"14 workdays · Latest: fairness upgrade passed local QA and two WeChat articles were published on the same day"},
-  {icon:"🎮", title:"② 作品交付", titleEn:"② Shipped Proof", desc:"上线游戏 + 简历素材", descEn:"Shipped game + resume material", stat:"V3 字幕 Demo + 共五篇正式微信文章已公开；公平性升级候选版本已构建、尚未发布", statEn:"V3 captioned demo and five official WeChat articles are public; the fairness upgrade candidate is built but not yet released"},
+  {icon:"📓", title:"① AI 学习日志", titleEn:"① AI Learning Journal", desc:"主线 · 文科生靠AI解决技术问题", descEn:"Mainline · humanities background solving technical problems with AI", stat:"15 个工作日 · 最新：微信小游戏 1.0.0 正式上线，搜索、手机端首页与分享海报均已留证", statEn:"15 workdays · Latest: WeChat mini-game 1.0.0 is officially live, with search, mobile landing page, and share-poster evidence archived"},
+  {icon:"🎮", title:"② 作品交付", titleEn:"② Shipped Proof", desc:"上线游戏 + 简历素材", descEn:"Shipped game + resume material", stat:"《找对了大师》1.0.0 已于 2026-08-05 正式上线；首批真实玩家反馈记录到 44、60、80、84 分；代码加固延后至 1.0.1", statEn:"Spot On! version 1.0.0 officially launched on Aug 5, 2026; early player feedback recorded scores of 44, 60, 80, and 84; code hardening is deferred to 1.0.1"},
   {icon:"📘", title:"③ 可复制SOP", titleEn:"③ Replicable SOP", desc:"整套流程方法论", descEn:"End-to-end operating method", stat:"新增：API-first 微信发布、发布稿对照复盘、备案预填清单与 Flomo 到公开证据的 wrap-up 闭环", statEn:"Added: API-first WeChat publishing, published-vs-source review, a prefilled filing checklist, and the Flomo-to-public-evidence wrap-up loop"},
 ];
 
@@ -144,4 +144,5 @@ const journal = [
   {date:"2026-07-22", day:"12", ms:"M4 备案推进", result:"小程序备案通过平台初审；7月21日错过首次短信后申请重发，7月22日完成工信部核验，等待后续审核", resultEn:"Mini-program filing passed platform review; after missing the first SMS on Jul 21, requested a resend and completed MIIT verification on Jul 22; awaiting further review.", link:"01_learning-journal/2026-07-22_entry-14.md"},
   {date:"2026-07-24", day:"13", ms:"M4 提审 + 备案", result:"小程序 ICP 备案通过通信管理局审核；明确备案成功不等于上线，下一步转入正式代码上传、审核与发布", resultEn:"Mini-program ICP filing passed the communications authority review; clarified that filing approval is not launch, and moved to production upload, code review, and release.", link:"01_learning-journal/2026-07-24_entry-15.md"},
   {date:"2026-07-26", day:"14", ms:"M4 发布准备 + 内容复利", result:"根据玩家反馈完成公平性升级与本地 QA；同日正式发布两篇公众号文章，并把内容与排版经验沉淀为可复用工作流", resultEn:"Completed and locally QA-tested a fairness-focused upgrade based on player feedback; published two WeChat articles on the same day and turned the content and layout lessons into a reusable workflow.", link:"01_learning-journal/2026-07-26_entry-16.md"},
+  {date:"2026-08-05", day:"15", ms:"M4 完成 → M5 上线", result:"《找对了大师》线上版本 1.0.0 于 13:57:27 正式发布；搜索、手机首页、分享海报与首批玩家 44/60/80/84 分反馈均已留证。代码加固延后到 1.0.1", resultEn:"Spot On! version 1.0.0 officially launched at 13:57:27. Search visibility, the mobile landing page, share poster, and early player feedback at 44/60/80/84 points were archived. Code hardening is deferred to version 1.0.1.", link:"01_learning-journal/2026-08-05_entry-17.md"},
 ];

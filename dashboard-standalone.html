@@ -277,8 +277,15 @@
   .journal-col-day{width:74px}
   .journal-col-ms{width:90px}
   .journal-col-result{width:auto}
-  .journal-scroll{padding-bottom:0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .journal-scroll::-webkit-scrollbar{display:none}
+  .journal-scroll{max-height:360px;overflow:auto;padding-bottom:0;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--accent) rgba(154,163,199,.18);scrollbar-gutter:stable}
+  .journal-scroll::-webkit-scrollbar{width:10px;height:10px}
+  .journal-scroll::-webkit-scrollbar-track{background:rgba(154,163,199,.14);border-radius:99px}
+  .journal-scroll::-webkit-scrollbar-thumb{background:var(--accent);border:2px solid var(--card);border-radius:99px}
+  .journal-scroll::-webkit-scrollbar-thumb:hover{background:var(--done)}
+  .journal-scroll::-webkit-scrollbar:horizontal{height:0}
+  .journal-body-table tbody tr{height:64px}
+  .journal-body-table td{vertical-align:top}
+  .journal-scroll-hint{margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.5}
   .journal-scroll-top{display:none}
   .journal-scroll-track{position:absolute;inset:0;border-radius:999px;background:rgba(154,163,199,.22)}
   .journal-scroll-thumb{position:absolute;left:0;top:0;height:100%;min-width:42px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--done));box-shadow:0 0 0 2px rgba(124,131,255,.16);touch-action:none}
@@ -341,7 +348,9 @@
   .post-card:hover{transform:translateY(-3px);border-color:var(--esther-yellow);box-shadow:0 12px 30px rgba(0,0,0,.24)}
   .post-body{min-width:0;padding-left:8px}
   .post-cover{margin:0;align-self:start;justify-self:end;width:100%;max-width:320px;padding:8px;background:rgba(254,252,246,.96);border:1px solid rgba(244,215,88,.22);border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
-  .post-cover img{display:block;width:100%;aspect-ratio:2.35/1;object-fit:cover;border-radius:12px}
+  .post-cover img{display:block;width:100%;aspect-ratio:2.35/1;object-fit:contain;background:#fefcf6;border-radius:12px}
+  .post-cover.is-broken{background:#20284b;border-color:rgba(255,206,84,.45)}
+  .post-cover-fallback{display:grid;place-items:center;aspect-ratio:2.35/1;border:1px dashed rgba(244,215,88,.5);border-radius:12px;color:var(--muted);font-size:12px;text-align:center;padding:12px}
   .post-meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
   .post-chip{display:inline-flex;align-items:center;border-radius:99px;padding:4px 10px;font-size:11.5px;font-weight:700;line-height:1.2}
   .post-date{background:rgba(244,215,88,.18);color:var(--esther-yellow);border:1px solid rgba(244,215,88,.45)}
@@ -399,7 +408,7 @@
     .journal-head-table th,.journal-body-table td{font-size:12.5px!important;line-height:1.55}
     .journal-body-table td{vertical-align:middle}
     .journal-scroll-top{display:block;position:relative;max-width:100%;height:12px;margin:0 0 9px;border-radius:999px;overflow:hidden;touch-action:none;cursor:pointer}
-    .journal-scroll{overflow-x:auto}
+    .journal-scroll{max-height:380px;overflow-x:auto;overflow-y:auto}
     .journal-col-date{width:126px}
     .journal-col-day{width:72px}
     .journal-col-ms{width:92px}
@@ -688,7 +697,7 @@
         </table>
       </div>
       <div class="journal-scroll-top" aria-label="左右滚动查看完整每日工作记录"><div class="journal-scroll-track"><span class="journal-scroll-thumb"></span></div></div>
-      <div class="journal-scroll">
+      <div class="journal-scroll" role="region" aria-label="可滚动的每日工作记录">
         <table class="journal-body-table">
           <colgroup>
             <col class="journal-col-date"><col class="journal-col-day"><col class="journal-col-ms"><col class="journal-col-result">
@@ -696,6 +705,7 @@
           <tbody id="journal"></tbody>
         </table>
       </div>
+      <p class="journal-scroll-hint">滚动查看其余日志 · 当前视窗约显示 5 条记录</p>
     </div>
 
   </div>
@@ -728,6 +738,17 @@ function escapeHtml(value){
 function safeWechatUrl(value){
   const url = String(value || "");
   return /^https:\/\/mp\.weixin\.qq\.com\//.test(url) ? url : "";
+}
+
+function resolveLocalAssetUrl(value){
+  const raw = String(value || "").trim();
+  if(!raw) return "";
+  try{
+    const url = new URL(raw, document.baseURI);
+    return url.origin === window.location.origin ? url.href : "";
+  }catch(e){
+    return "";
+  }
 }
 
 // 渲染里程碑
@@ -799,8 +820,9 @@ if(publishedPostsNode){
     : [];
   publishedPostsNode.innerHTML = publicPosts.length ? publicPosts.map(post=>{
     const href = safeWechatUrl(post.url);
-    const cover = post.coverImage
-      ? `<div class="post-cover"><img src="${escapeHtml(post.coverImage)}" alt="${escapeHtml(post.coverAlt || post.title)}" loading="lazy" decoding="async"></div>`
+    const coverSrc = resolveLocalAssetUrl(post.coverImage);
+    const cover = coverSrc
+      ? `<figure class="post-cover"><img src="${escapeHtml(coverSrc)}" alt="${escapeHtml(post.coverAlt || post.title)}" width="900" height="383" loading="eager" decoding="async" data-cover-image><div class="post-cover-fallback" hidden>封面暂时无法加载</div></figure>`
       : "";
     const link = href
       ? `<a class="post-link" href="${href}" target="_blank" rel="noopener">打开微信文章 →</a>`
@@ -819,6 +841,17 @@ if(publishedPostsNode){
         ${cover}
       </article>`;
   }).join("") : `<div class="published-empty">还没有可公开展示的已发布公众号文章。</div>`;
+
+  publishedPostsNode.querySelectorAll("[data-cover-image]").forEach(image=>{
+    image.addEventListener("error", ()=>{
+      const figure = image.closest(".post-cover");
+      if(!figure) return;
+      image.hidden = true;
+      const fallback = figure.querySelector(".post-cover-fallback");
+      if(fallback) fallback.hidden = false;
+      figure.classList.add("is-broken");
+    }, {once:true});
+  });
 }
 
 // 渲染每日记录

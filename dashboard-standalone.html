@@ -347,10 +347,8 @@
   .post-card::before{content:"";position:absolute;inset:0 auto 0 0;width:7px;background:var(--esther-yellow)}
   .post-card:hover{transform:translateY(-3px);border-color:var(--esther-yellow);box-shadow:0 12px 30px rgba(0,0,0,.24)}
   .post-body{min-width:0;padding-left:8px}
-  .post-cover{margin:0;align-self:start;justify-self:end;width:100%;max-width:320px;padding:8px;background:rgba(254,252,246,.96);border:1px solid rgba(244,215,88,.22);border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
-  .post-cover img{display:block;width:100%;aspect-ratio:2.35/1;object-fit:contain;background:#fefcf6;border-radius:12px}
-  .post-cover.is-broken{background:#20284b;border-color:rgba(255,206,84,.45)}
-  .post-cover-fallback{display:grid;place-items:center;aspect-ratio:2.35/1;border:1px dashed rgba(244,215,88,.5);border-radius:12px;color:var(--muted);font-size:12px;text-align:center;padding:12px}
+  .post-cover{display:block;margin:0;align-self:start;justify-self:end;width:100%;max-width:320px;aspect-ratio:2.35/1;overflow:hidden;background:#0b0e1e;border:1px solid rgba(244,215,88,.22);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .post-cover img{display:block;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;background:#0b0e1e;border-radius:inherit}
   .post-meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
   .post-chip{display:inline-flex;align-items:center;border-radius:99px;padding:4px 10px;font-size:11.5px;font-weight:700;line-height:1.2}
   .post-date{background:rgba(244,215,88,.18);color:var(--esther-yellow);border:1px solid rgba(244,215,88,.45)}
@@ -417,7 +415,7 @@
     .workflow-panel{padding:13px}
     .post-card{grid-template-columns:1fr;gap:14px;padding:18px}
     .post-body{padding-left:0}
-    .post-cover{justify-self:start;max-width:100%}
+    .post-cover{justify-self:start;max-width:100%;width:100%}
   }
   @media(max-width:480px){
     .pillar-card{min-height:0}
@@ -751,6 +749,13 @@ function resolveLocalAssetUrl(value){
   }
 }
 
+function resolveCoverFallbackUrl(value){
+  const raw = String(value || "").trim();
+  if(!raw) return "";
+  const fallback = raw.replace(/\.card\.webp$/i, ".png").replace(/\.webp$/i, ".png");
+  return fallback === raw ? "" : resolveLocalAssetUrl(fallback);
+}
+
 // 渲染里程碑
 document.getElementById("pipe").innerHTML = milestones.map(m=>`
   <div class="step ${m.status}">
@@ -821,8 +826,9 @@ if(publishedPostsNode){
   publishedPostsNode.innerHTML = publicPosts.length ? publicPosts.map(post=>{
     const href = safeWechatUrl(post.url);
     const coverSrc = resolveLocalAssetUrl(post.coverImage);
+    const coverFallbackSrc = resolveCoverFallbackUrl(post.coverImage);
     const cover = coverSrc
-      ? `<figure class="post-cover"><img src="${escapeHtml(coverSrc)}" alt="${escapeHtml(post.coverAlt || post.title)}" width="900" height="383" loading="eager" decoding="async" data-cover-image><div class="post-cover-fallback" hidden>封面暂时无法加载</div></figure>`
+      ? `<picture class="post-cover">${coverFallbackSrc ? `<source srcset="${escapeHtml(coverSrc)}" type="image/webp">` : ""}<img src="${escapeHtml(coverFallbackSrc || coverSrc)}" alt="${escapeHtml(post.coverAlt || post.title)}" width="900" height="383" loading="eager" decoding="async" fetchpriority="high"></picture>`
       : "";
     const link = href
       ? `<a class="post-link" href="${href}" target="_blank" rel="noopener">打开微信文章 →</a>`
@@ -842,16 +848,6 @@ if(publishedPostsNode){
       </article>`;
   }).join("") : `<div class="published-empty">还没有可公开展示的已发布公众号文章。</div>`;
 
-  publishedPostsNode.querySelectorAll("[data-cover-image]").forEach(image=>{
-    image.addEventListener("error", ()=>{
-      const figure = image.closest(".post-cover");
-      if(!figure) return;
-      image.hidden = true;
-      const fallback = figure.querySelector(".post-cover-fallback");
-      if(fallback) fallback.hidden = false;
-      figure.classList.add("is-broken");
-    }, {once:true});
-  });
 }
 
 // 渲染每日记录

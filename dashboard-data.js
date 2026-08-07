@@ -42,7 +42,7 @@ const milestones = [
 const roadmap = [
   {t:"做游戏", tEn:"Build the game", c:"设计玩法、留广告位", cEn:"Design gameplay and reserve ad slots", time:"持续迭代", timeEn:"Continuous iteration", status:"doing"},
   {t:"账号 & 主体", tEn:"Account & entity", c:"微信小游戏「找对了大师」（个人）", cEn:"WeChat mini-game Spot On!找对了大师 (individual entity)", time:"2026-07-04 完成", timeEn:"Completed Jul 4, 2026", status:"done"},
-  {t:"软著", tEn:"Software copyright", c:"办软件著作权证书", cEn:"Apply for the software copyright certificate", time:"约 10–15 天", timeEn:"Approx. 10–15 days", status:"doing", here:true},
+  {t:"软著", tEn:"Software copyright", c:"已跳过，不作为当前上线阻塞项", cEn:"Closed as skipped; not a launch blocker for the current release", time:"已处理", timeEn:"Closed", status:"done"},
   {t:"备案", tEn:"Government filing", c:"前置审批与小程序 ICP 备案均已通过", cEn:"Pre-approval and mini-program ICP filing both approved", time:"2026-07-24 完成", timeEn:"Completed Jul 24, 2026", status:"done"},
   {t:"接广告", tEn:"Integrate ads", c:"流量主 + 微信广告插件", cEn:"Traffic owner + WeChat ad plugin", time:"几天", timeEn:"A few days", status:"todo"},
   {t:"提审", tEn:"Submit for review", c:"1.0.0 代码审核已通过", cEn:"Version 1.0.0 passed code review", time:"2026-08-05 完成", timeEn:"Completed Aug 5, 2026", status:"done"},

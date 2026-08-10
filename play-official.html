@@ -107,16 +107,19 @@
 
   @media(max-width:820px){
     .brand-text{display:none}
-    .launcher{display:block;min-height:auto;padding:58px 0 72px}
+    .launcher{display:flex;flex-direction:column;gap:0;min-height:auto;padding:58px 0 72px}
     .launcher>*{min-width:0;max-width:100%}
     .launcher::before{top:2%;right:-65%;width:400px;height:400px}
-    .copy-column{text-align:center}
+    .copy-column{display:contents;text-align:center}
     .eyebrow,.action-group{justify-content:center}
-    h1{max-width:100%;margin-inline:auto;font-size:clamp(40px,12.5vw,56px);line-height:1.02}
+    .eyebrow{order:1}
+    h1{order:2;max-width:100%;margin-inline:auto;font-size:clamp(40px,12.5vw,56px);line-height:1.25}
     .title-accent{font-size:.94em}
-    .subtitle,.support-note{margin-inline:auto}
+    .subtitle{order:3;margin-inline:auto}
+    .code-column{order:4;width:100%;max-width:420px;margin:28px auto 0}
+    .action-group{order:5}
+    .support-note{order:6;margin-inline:auto}
     .support-note{text-align:left}
-    .code-column{width:100%;max-width:420px;margin:44px auto 0}
     .code-card{transform:none}
     .mobile-action{display:inline-flex}
     .support-note.mobile-action{display:block}
@@ -132,17 +135,23 @@
     .topbar{height:58px}
     .topbar .back-label{display:none!important}
     .language-button{min-width:42px;justify-content:center;padding-inline:10px}
-    .launcher{padding-top:46px}
-    .copy-column{width:100%;max-width:100%;overflow:hidden}
-    h1{width:100%;max-width:100%;font-size:clamp(36px,11.5vw,45px);line-height:1.05;text-wrap:wrap;word-break:break-word}
+    .launcher{padding-top:30px}
+    h1{width:100%;max-width:100%;font-size:clamp(33px,10.8vw,42px);line-height:1.25;text-wrap:wrap;word-break:break-word}
     .title-accent{font-size:.9em}
-    .subtitle{font-size:16px}
+    .eyebrow{margin-bottom:14px}
+    .subtitle{margin-top:18px;font-size:15px;line-height:1.6}
+    .code-column{max-width:285px;margin-top:18px}
     .action-group{display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:100%}
     .button{width:100%}
     .button-text{width:auto;justify-self:center}
-    .code-card{padding:18px;border-radius:20px}
+    .code-card{padding:14px;border-radius:20px}
     .code-card::before{left:28px;width:82px;height:27px}
-    .code-label{margin-top:4px}
+    .code-label{margin-top:4px;margin-bottom:10px;font-size:10px}
+    .game-code{height:auto}
+    .code-caption{margin-top:12px}
+    .code-caption strong{font-size:19px}
+    .code-caption small{margin-top:4px;font-size:12px}
+    .code-download{margin-top:8px}
     .toast{right:14px;bottom:14px;max-width:calc(100% - 28px)}
   }
   @media(prefers-reduced-motion:reduce){

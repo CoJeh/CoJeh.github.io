@@ -277,8 +277,15 @@
   .journal-col-day{width:74px}
   .journal-col-ms{width:90px}
   .journal-col-result{width:auto}
-  .journal-scroll{padding-bottom:0;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .journal-scroll::-webkit-scrollbar{display:none}
+  .journal-scroll{max-height:360px;overflow:auto;padding-bottom:0;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--accent) rgba(154,163,199,.18);scrollbar-gutter:stable}
+  .journal-scroll::-webkit-scrollbar{width:10px;height:10px}
+  .journal-scroll::-webkit-scrollbar-track{background:rgba(154,163,199,.14);border-radius:99px}
+  .journal-scroll::-webkit-scrollbar-thumb{background:var(--accent);border:2px solid var(--card);border-radius:99px}
+  .journal-scroll::-webkit-scrollbar-thumb:hover{background:var(--done)}
+  .journal-scroll::-webkit-scrollbar:horizontal{height:0}
+  .journal-body-table tbody tr{height:64px}
+  .journal-body-table td{vertical-align:top}
+  .journal-scroll-hint{margin-top:8px;color:var(--muted);font-size:11.5px;line-height:1.5}
   .journal-scroll-top{display:none}
   .journal-scroll-track{position:absolute;inset:0;border-radius:999px;background:rgba(154,163,199,.22)}
   .journal-scroll-thumb{position:absolute;left:0;top:0;height:100%;min-width:42px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--done));box-shadow:0 0 0 2px rgba(124,131,255,.16);touch-action:none}
@@ -399,7 +406,7 @@
     .journal-head-table th,.journal-body-table td{font-size:12.5px!important;line-height:1.55}
     .journal-body-table td{vertical-align:middle}
     .journal-scroll-top{display:block;position:relative;max-width:100%;height:12px;margin:0 0 9px;border-radius:999px;overflow:hidden;touch-action:none;cursor:pointer}
-    .journal-scroll{overflow-x:auto}
+    .journal-scroll{max-height:380px;overflow-x:auto;overflow-y:auto}
     .journal-col-date{width:126px}
     .journal-col-day{width:72px}
     .journal-col-ms{width:92px}
@@ -691,7 +698,7 @@
         </table>
       </div>
       <div class="journal-scroll-top" aria-label="左右滚动查看完整每日工作记录"><div class="journal-scroll-track"><span class="journal-scroll-thumb"></span></div></div>
-      <div class="journal-scroll">
+      <div class="journal-scroll" role="region" aria-label="可滚动的每日工作记录">
         <table class="journal-body-table">
           <colgroup>
             <col class="journal-col-date"><col class="journal-col-day"><col class="journal-col-ms"><col class="journal-col-result">
@@ -699,6 +706,7 @@
           <tbody id="journal"></tbody>
         </table>
       </div>
+      <p class="journal-scroll-hint">滚动查看其余日志 · 当前视窗约显示 5 条记录</p>
     </div>
 
   </div>

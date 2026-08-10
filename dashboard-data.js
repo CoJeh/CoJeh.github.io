@@ -60,6 +60,19 @@ const pillars = [
 // not internal dashboard draft titles or local review links.
 const publishedPosts = [
   {
+    id:"wechat-20260807-spoton-official-launch",
+    date:"2026-08-07",
+    title:"《找对了大师》俏皮首发：色感达人争霸赛 等你挑战！",
+    titleEn:"SpotOn launches on WeChat: join the color-sense challenge",
+    platform:"微信公众号",
+    platformEn:"WeChat Official Account",
+    description:"玩游戏，赢奖品！色感达人，是你吗？！",
+    descriptionEn:"Play the game, chase the score, and join the color-sense challenge.",
+    url:"https://mp.weixin.qq.com/s/HJd50tPLQAtungPsYxl3TA",
+    coverImage:"assets/wechat/spoton-official-launch-20260807.png",
+    coverAlt:"《找对了大师》色感达人争霸赛微信公众号文章封面"
+  },
+  {
     id:"wechat-20260726-ai-content-system",
     date:"2026-07-26",
     title:"为什么第二篇只花了 1 小时？因为第一篇的坑都被我写成了规则",
@@ -145,4 +158,5 @@ const journal = [
   {date:"2026-07-24", day:"13", ms:"M4 提审 + 备案", result:"小程序 ICP 备案通过通信管理局审核；明确备案成功不等于上线，下一步转入正式代码上传、审核与发布", resultEn:"Mini-program ICP filing passed the communications authority review; clarified that filing approval is not launch, and moved to production upload, code review, and release.", link:"01_learning-journal/2026-07-24_entry-15.md"},
   {date:"2026-07-26", day:"14", ms:"M4 发布准备 + 内容复利", result:"根据玩家反馈完成公平性升级与本地 QA；同日正式发布两篇公众号文章，并把内容与排版经验沉淀为可复用工作流", resultEn:"Completed and locally QA-tested a fairness-focused upgrade based on player feedback; published two WeChat articles on the same day and turned the content and layout lessons into a reusable workflow.", link:"01_learning-journal/2026-07-26_entry-16.md"},
   {date:"2026-08-05", day:"15", ms:"M4 完成 → M5 上线", result:"《找对了大师》线上版本 1.0.0 于 13:57:27 正式发布；搜索、手机首页、分享海报与首批玩家 44/60/80/84 分反馈均已留证。代码加固延后到 1.0.1", resultEn:"Spot On! version 1.0.0 officially launched at 13:57:27. Search visibility, the mobile landing page, share poster, and early player feedback at 44/60/80/84 points were archived. Code hardening is deferred to version 1.0.1.", link:"01_learning-journal/2026-08-05_entry-17.md"},
+  {date:"2026-08-07", day:"16", ms:"M5 发布收口", result:"官方微信公众号文章《找对了大师》俏皮首发：色感达人争霸赛 等你挑战！已发布；线上标题、发布时间与链接已回写本地源、内部/公开 Dashboard 和发布证据包。", resultEn:"The official launch article was published on WeChat. Its live title, publication time, URL, local source, internal/public dashboards, and evidence package were reconciled.", link:"01_learning-journal/2026-08-07_entry-18.md"},
 ];

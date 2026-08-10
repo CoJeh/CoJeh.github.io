@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/co-red-star-favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/co-red-star-favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/co-red-star-favicon-180.png">
+<link rel="canonical" href="https://cojeh.github.io/play-official.html">
+<meta name="description" content="Play Corrine Chen's officially launched WeChat mini-game Spot On! 找对了大师, or try the browser demo.">
+<meta property="og:title" content="Play Spot On! · Official WeChat Mini Game">
+<meta property="og:description" content="Scan the official WeChat Mini Game code for Spot On! 找对了大师, live on WeChat since August 5, 2026.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cojeh.github.io/play-official.html">
+<meta property="og:image" content="https://cojeh.github.io/assets/spoton/spoton-wechat-game-code.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
+<title>Play Spot On! · Official WeChat Mini Game</title>
+<style>
+  :root{
+    --ink:#1c1b18;
+    --muted:#6e6a61;
+    --paper:#fdfcfa;
+    --paper-deep:#f5f3ed;
+    --line:#e7e3da;
+    --blue:#1d4fd7;
+    --blue-deep:#173fae;
+    --verm:#c0402b;
+    --gold:#b0842b;
+    --night:#17150f;
+    --serif:"Newsreader","Noto Serif SC",Georgia,"Songti SC","SimSun",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Consolas,monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--paper);scroll-behavior:smooth}
+  body{min-height:100vh;overflow-x:hidden;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
+  button,a{font:inherit}
+  button{color:inherit}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  ::selection{background:#f4d758;color:var(--ink)}
+  [data-copy="zh"]:not(.mobile-action){display:none}
+  body[data-lang="zh"] [data-copy="en"]:not(.mobile-action){display:none}
+  body[data-lang="zh"] [data-copy="zh"]:not(.mobile-action){display:revert}
+  .icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+
+  .topbar{height:64px;border-bottom:1px solid var(--line);background:var(--paper)}
+  .topbar-inner{width:min(1120px,calc(100% - 40px));height:100%;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .back-link,.language-button{min-height:40px;display:inline-flex;align-items:center;gap:8px;border:0;background:transparent;color:var(--muted);font-size:14px;font-weight:650;cursor:pointer}
+  .back-link:hover,.language-button:hover{color:var(--blue)}
+  .back-link:focus-visible,.language-button:focus-visible,.button:focus-visible{outline:3px solid rgba(29,79,215,.25);outline-offset:3px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--serif);font-size:17px;font-weight:750}
+  .seal{display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:5px;background:var(--verm);color:#fdfcfa;font-family:var(--serif);font-size:15px;font-weight:800}
+  .language-button{border:1px solid var(--line);border-radius:999px;padding:7px 13px;color:var(--ink)}
+
+  main{overflow:hidden}
+  .launcher{position:relative;width:min(1120px,calc(100% - 40px));min-height:calc(100vh - 64px);margin:0 auto;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(330px,.72fr);align-items:center;gap:clamp(48px,8vw,110px);padding:clamp(64px,9vh,110px) 0}
+  .launcher::before{position:absolute;z-index:-1;top:8%;right:-17%;width:460px;height:460px;border:40px solid rgba(29,79,215,.055);border-radius:50%;content:""}
+  .launcher::after{position:absolute;z-index:-1;bottom:8%;left:-19%;width:260px;height:260px;background:repeating-linear-gradient(0deg,transparent 0 16px,rgba(176,132,43,.11) 16px 18px);border-radius:50%;content:""}
+  .copy-column{position:relative;z-index:1;min-width:0}
+  .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:22px;color:var(--blue);font-family:var(--mono);font-size:12px;font-weight:750;letter-spacing:.13em;text-transform:uppercase}
+  .live-dot{width:9px;height:9px;border-radius:50%;background:#199b55;box-shadow:0 0 0 5px rgba(25,155,85,.11)}
+  h1{max-width:680px;overflow-wrap:anywhere;font-family:var(--serif);font-size:clamp(48px,7.2vw,82px);font-weight:750;letter-spacing:-.028em;line-height:.98;text-wrap:balance}
+  .title-accent{display:block;color:var(--blue)}
+  .subtitle{max-width:630px;margin-top:28px;color:var(--muted);font-size:clamp(17px,2vw,20px);line-height:1.7;text-wrap:pretty}
+  .highlight{background:linear-gradient(transparent 62%,rgba(244,215,88,.55) 62%);padding:0 3px;color:var(--ink);font-weight:700}
+
+  .action-group{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+  .button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid transparent;border-radius:999px;padding:12px 22px;font-weight:720;cursor:pointer;transition:transform .18s ease,background .18s ease,border-color .18s ease}
+  .button:hover{transform:translateY(-2px)}
+  .button-primary{background:var(--blue);color:#fdfcfa}
+  .button-primary:hover{background:var(--blue-deep)}
+  .button-secondary{border-color:var(--line);background:var(--paper-deep);color:var(--ink)}
+  .button-secondary:hover{border-color:#cbc5b9;background:#ece8de}
+  .button-text{padding-inline:10px;color:var(--blue)}
+  .button-text:hover{text-decoration:underline;text-underline-offset:4px}
+  .mobile-action{display:none}
+  .support-note{max-width:620px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+  .support-note b{color:var(--ink)}
+
+  .code-column{position:relative;z-index:1}
+  .code-card{position:relative;padding:clamp(22px,3vw,32px);border:1px solid var(--line);border-radius:26px;background:#fff;box-shadow:0 24px 70px rgba(28,27,24,.10);transform:rotate(1.2deg)}
+  .code-card::before{position:absolute;top:-16px;left:36px;width:98px;height:32px;background:rgba(244,215,88,.78);content:"";transform:rotate(-4deg)}
+  .code-label{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;font-family:var(--mono);font-size:11px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+  .code-label span:first-child{color:var(--blue)}
+  .code-label span:last-child{color:var(--muted)}
+  .game-code{width:100%;aspect-ratio:1;border-radius:12px;object-fit:contain;background:#fff}
+  .code-caption{margin-top:18px;text-align:center}
+  .code-caption strong{display:block;font-family:var(--serif);font-size:22px;line-height:1.25}
+  .code-caption small{display:block;margin-top:7px;color:var(--muted);font-size:13px}
+  .code-download{display:inline-flex;align-items:center;gap:7px;margin-top:14px;color:var(--blue);font-size:13px;font-weight:700}
+  .code-download:hover{text-decoration:underline;text-underline-offset:4px}
+
+  .proof-band{background:var(--night);color:#f7f3ea}
+  .proof-inner{width:min(1120px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
+  .proof-item{min-height:132px;display:flex;flex-direction:column;justify-content:center;padding:26px clamp(20px,3vw,38px);border-right:1px solid rgba(255,255,255,.13)}
+  .proof-item:last-child{border-right:0}
+  .proof-item small{color:#aaa398;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  .proof-item strong{margin-top:7px;font-family:var(--serif);font-size:clamp(21px,2.7vw,29px);line-height:1.2}
+  .proof-item:nth-child(2) strong{color:#f4d758}
+
+  footer{display:flex;align-items:center;justify-content:center;gap:9px;padding:30px 20px;background:var(--paper);color:var(--muted);font-size:13px;text-align:center}
+  .toast{position:fixed;z-index:20;right:24px;bottom:24px;max-width:calc(100% - 48px);padding:12px 18px;border-radius:10px;background:var(--night);color:#f7f3ea;font-size:14px;font-weight:650;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+  .toast.show{opacity:1;transform:none}
+
+  @media(max-width:820px){
+    .brand-text{display:none}
+    .launcher{display:block;min-height:auto;padding:58px 0 72px}
+    .launcher>*{min-width:0;max-width:100%}
+    .launcher::before{top:2%;right:-65%;width:400px;height:400px}
+    .copy-column{text-align:center}
+    .eyebrow,.action-group{justify-content:center}
+    h1{max-width:100%;margin-inline:auto;font-size:clamp(40px,12.5vw,56px);line-height:1.02}
+    .title-accent{font-size:.94em}
+    .subtitle,.support-note{margin-inline:auto}
+    .support-note{text-align:left}
+    .code-column{width:100%;max-width:420px;margin:44px auto 0}
+    .code-card{transform:none}
+    .mobile-action{display:inline-flex}
+    .support-note.mobile-action{display:block}
+    body:not([data-lang="zh"]) .mobile-action[data-copy="zh"]{display:none}
+    body[data-lang="zh"] .mobile-action[data-copy="en"]{display:none}
+    .desktop-only{display:none}
+    .proof-inner{grid-template-columns:1fr}
+    .proof-item{min-height:104px;border-right:0;border-bottom:1px solid rgba(255,255,255,.13);text-align:center}
+    .proof-item:last-child{border-bottom:0}
+  }
+  @media(max-width:520px){
+    .topbar-inner,.launcher,.proof-inner{width:calc(100% - 28px);max-width:1120px}
+    .topbar{height:58px}
+    .topbar .back-label{display:none!important}
+    .language-button{min-width:42px;justify-content:center;padding-inline:10px}
+    .launcher{padding-top:46px}
+    .copy-column{width:100%;max-width:100%;overflow:hidden}
+    h1{width:100%;max-width:100%;font-size:clamp(36px,11.5vw,45px);line-height:1.05;text-wrap:wrap;word-break:break-word}
+    .title-accent{font-size:.9em}
+    .subtitle{font-size:16px}
+    .action-group{display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:100%}
+    .button{width:100%}
+    .button-text{width:auto;justify-self:center}
+    .code-card{padding:18px;border-radius:20px}
+    .code-card::before{left:28px;width:82px;height:27px}
+    .code-label{margin-top:4px}
+    .toast{right:14px;bottom:14px;max-width:calc(100% - 28px)}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .button,.toast{transition:none}
+    .button:hover{transform:none}
+  }
+</style>
+</head>
+<body data-lang="en">
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="back-link" id="backLink" href="index.html">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/><path d="M9 12h11"/></svg>
+      <span class="back-label" data-copy="en">Back to portfolio</span>
+      <span class="back-label" data-copy="zh">返回作品集</span>
+    </a>
+    <div class="brand" aria-label="Corrine Chen">
+      <span class="seal">陳</span><span class="brand-text">Corrine Chen</span>
+    </div>
+    <button class="language-button" id="languageButton" type="button" aria-label="切换到中文">中文</button>
+  </div>
+</header>
+
+<main>
+  <section class="launcher" aria-labelledby="pageTitle">
+    <div class="copy-column">
+      <p class="eyebrow"><span class="live-dot" aria-hidden="true"></span><span data-copy="en">Official release · live on WeChat</span><span data-copy="zh">正式版本 · 微信已上线</span></p>
+      <h1 id="pageTitle">
+        <span data-copy="en">Play my game</span><span data-copy="zh">玩我做的小游戏</span>
+        <span class="title-accent">Spot On! <span lang="zh-CN">找对了大师</span></span>
+      </h1>
+      <p class="subtitle" data-copy="en">Open WeChat and scan the official Mini Game code to play version 1.0.0. On a phone, copy the game name or save the code, then open it from WeChat.</p>
+      <p class="subtitle" data-copy="zh">打开微信扫描官方小游戏码，即可体验 <span class="highlight">1.0.0 正式版</span>。如果你正在使用手机，可以复制游戏名，或保存小游戏码后从微信打开。</p>
+
+      <div class="action-group" aria-label="Game options">
+        <button class="button button-primary mobile-action" id="copyGameName" type="button">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <span data-copy="en">Copy game name</span><span data-copy="zh">复制游戏名</span>
+        </button>
+        <a class="button button-secondary mobile-action" href="assets/spoton/spoton-wechat-game-code.png" download="SpotOn-WeChat-Mini-Game-Code.png">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+          <span data-copy="en">Save game code</span><span data-copy="zh">保存小游戏码</span>
+        </a>
+        <a class="button button-secondary" href="play/index.html" target="_blank" rel="noopener">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.98 3.59C2.6 9.42 2 14.46 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.41-1.41A2 2 0 0 1 9.83 16h4.34a2 2 0 0 1 1.42.59L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.55-.6-6.58-.69-7.26A4 4 0 0 0 17.32 5Z"/></svg>
+          <span data-copy="en">Try browser demo</span><span data-copy="zh">试玩网页 Demo</span>
+        </a>
+        <a class="button button-text" id="caseStudyLink" href="dashboard.en.html">
+          <span data-copy="en">How it was built</span><span data-copy="zh">了解它如何做出来</span>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <p class="support-note desktop-only" data-copy="en"><b>Desktop:</b> open WeChat → Scan, then point your phone at the code. The browser demo remains available for visitors without WeChat.</p>
+      <p class="support-note desktop-only" data-copy="zh"><b>电脑端：</b>打开微信 → 扫一扫，用手机扫描右侧小游戏码。没有微信的访客仍可使用网页 Demo。</p>
+      <p class="support-note mobile-action" data-copy="en"><b>Phone:</b> copy “找对了大师” and paste it into WeChat search, or save the code and choose it from WeChat → Scan → Album.</p>
+      <p class="support-note mobile-action" data-copy="zh"><b>手机端：</b>复制“找对了大师”并粘贴到微信搜索；也可以保存小游戏码，再进入微信 → 扫一扫 → 相册选择。</p>
+    </div>
+
+    <figure class="code-column">
+      <div class="code-card">
+        <div class="code-label"><span data-copy="en">Official Mini Game code</span><span data-copy="zh">官方小游戏码</span><span>v1.0.0</span></div>
+        <img class="game-code" src="assets/spoton/spoton-wechat-game-code.png" width="430" height="430" alt="Official WeChat Mini Game code for Spot On! 找对了大师">
+        <figcaption class="code-caption">
+          <strong lang="zh-CN">找对了大师</strong>
+          <small data-copy="en">Scan with WeChat to play my game</small>
+          <small data-copy="zh">使用微信扫码，玩我做的小游戏</small>
+          <a class="code-download" href="assets/spoton/spoton-wechat-game-code.png" download="SpotOn-WeChat-Mini-Game-Code.png">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+            <span data-copy="en">Download code</span><span data-copy="zh">下载小游戏码</span>
+          </a>
+        </figcaption>
+      </div>
+    </figure>
+  </section>
+
+  <section class="proof-band" aria-label="Launch facts">
+    <div class="proof-inner">
+      <div class="proof-item"><small data-copy="en">Release status</small><small data-copy="zh">发布状态</small><strong data-copy="en">Officially live</strong><strong data-copy="zh">正式上线</strong></div>
+      <div class="proof-item"><small data-copy="en">Published</small><small data-copy="zh">上线时间</small><strong>Aug 5, 2026</strong></div>
+      <div class="proof-item"><small data-copy="en">Search in WeChat</small><small data-copy="zh">微信搜索</small><strong lang="zh-CN">找对了大师</strong></div>
+    </div>
+  </section>
+</main>
+
+<footer><span class="seal">陳</span><span data-copy="en">A real product shipped with AI orchestration.</span><span data-copy="zh">一个由 AI 编排推动、真正上线的产品。</span></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  const body = document.body;
+  const languageButton = document.getElementById('languageButton');
+  const backLink = document.getElementById('backLink');
+  const caseStudyLink = document.getElementById('caseStudyLink');
+  const copyGameName = document.getElementById('copyGameName');
+  const toast = document.getElementById('toast');
+  const params = new URLSearchParams(window.location.search);
+
+  function setLanguage(language) {
+    const lang = language === 'zh' ? 'zh' : 'en';
+    body.dataset.lang = lang;
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    languageButton.textContent = lang === 'zh' ? 'EN' : '中文';
+    languageButton.setAttribute('aria-label', lang === 'zh' ? 'Switch to English' : '切换到中文');
+    backLink.href = lang === 'zh' ? 'index.zh.html' : 'index.html';
+    caseStudyLink.href = lang === 'zh' ? 'dashboard.html' : 'dashboard.en.html';
+    document.title = lang === 'zh' ? '玩《找对了大师》· 正式微信小游戏' : 'Play Spot On! · Official WeChat Mini Game';
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set('lang', lang);
+    window.history.replaceState({}, '', nextUrl);
+  }
+
+  async function copyName() {
+    const gameName = '找对了大师';
+    try {
+      await navigator.clipboard.writeText(gameName);
+    } catch (error) {
+      const input = document.createElement('textarea');
+      input.value = gameName;
+      input.setAttribute('readonly', '');
+      input.style.position = 'fixed';
+      input.style.opacity = '0';
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      input.remove();
+    }
+    toast.textContent = body.dataset.lang === 'zh' ? '已复制：找对了大师' : 'Copied: 找对了大师';
+    toast.classList.add('show');
+    window.clearTimeout(copyName.toastTimer);
+    copyName.toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+
+  languageButton.addEventListener('click', () => setLanguage(body.dataset.lang === 'zh' ? 'en' : 'zh'));
+  copyGameName.addEventListener('click', copyName);
+  setLanguage(params.get('lang'));
+</script>
+<script src="portfolio-analytics.js"></script>
+</body>
+</html>

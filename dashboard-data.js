@@ -35,7 +35,7 @@ const milestones = [
   {tag:"M2", name:"完整游戏循环",   nameEn:"Complete game loop", status:"done"},
   {tag:"M3", name:"V3优化 + 广告位", nameEn:"V3 polish + ad placement", status:"done"},
   {tag:"M4", name:"提审 + 备案",    nameEn:"Review submission + filing", status:"done"},
-  {tag:"M5", name:"上线 + 首批数据", nameEn:"Launch + first data", status:"doing"},
+  {tag:"M5", name:"上线 + 首批数据", nameEn:"Launch + first data", status:"done"},
 ];
 
 // 上线路线图 8 步（status: done/doing/todo；here:true = 当前位置）
@@ -51,7 +51,7 @@ const roadmap = [
 ];
 
 const pillars = [
-  {icon:"📓", title:"① AI 学习日志", titleEn:"① AI Learning Journal", desc:"主线 · 文科生靠AI解决技术问题", descEn:"Mainline · humanities background solving technical problems with AI", stat:"15 个工作日 · 最新：微信小游戏 1.0.0 正式上线，搜索、手机端首页与分享海报均已留证", statEn:"15 workdays · Latest: WeChat mini-game 1.0.0 is officially live, with search, mobile landing page, and share-poster evidence archived"},
+  {icon:"📓", title:"① AI 学习日志", titleEn:"① AI Learning Journal", desc:"主线 · 文科生靠AI解决技术问题", descEn:"Mainline · humanities background solving technical problems with AI", stat:"16 个工作日 · 最新：正式上线文章已发布，并完成文章、Dashboard 与证据包的状态对齐", statEn:"16 workdays · Latest: the official launch article was published, with its status reconciled across the article, dashboards, and evidence package"},
   {icon:"🎮", title:"② 作品交付", titleEn:"② Shipped Proof", desc:"上线游戏 + 简历素材", descEn:"Shipped game + resume material", stat:"《找对了大师》1.0.0 已于 2026-08-05 正式上线；首批真实玩家反馈记录到 44、60、80、84 分；代码加固延后至 1.0.1", statEn:"Spot On! version 1.0.0 officially launched on Aug 5, 2026; early player feedback recorded scores of 44, 60, 80, and 84; code hardening is deferred to 1.0.1"},
   {icon:"📘", title:"③ 可复制SOP", titleEn:"③ Replicable SOP", desc:"整套流程方法论", descEn:"End-to-end operating method", stat:"新增：API-first 微信发布、发布稿对照复盘、备案预填清单与 Flomo 到公开证据的 wrap-up 闭环", statEn:"Added: API-first WeChat publishing, published-vs-source review, a prefilled filing checklist, and the Flomo-to-public-evidence wrap-up loop"},
 ];
